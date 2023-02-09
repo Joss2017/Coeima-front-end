@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import '../navbar/Navbar.css';
 
@@ -30,19 +30,19 @@ export const Navbar = () => {
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
             <li className='nav-item'>
-              <NavLink to='/services' className='navlink-button'>
+              <Link to='/services' className='navlink-button'>
                 Services
-              </NavLink>
+              </Link>
             </li>
             <li className='nav-item'>
-              <NavLink to='/forum' className='navlink-button'>
+              <Link to='/forum' className='navlink-button'>
                 Forum
-              </NavLink>
+              </Link>
             </li>
-            <li className='nav-item dropdown'>
-              <NavLink to='/Account' className='navlink-button'>
+            <li className='nav-item'>
+              <Link to='/signIn' className='navlink-button'>
                 Mon Compte
-              </NavLink>
+              </Link>
             </li>
           </ul>
         </div>

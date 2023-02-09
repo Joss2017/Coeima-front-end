@@ -1,0 +1,16 @@
+.Login {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.form-login {
+  border-color: 20px black;
+  width: 70%;
+}
+
+.title-login {
+  font-size: larger;
+  font-weight: bold;
+  color: var(--primary);
+}

@@ -1,25 +1,40 @@
 .footer-container {
   display: flex;
   justify-content: space-around;
-  background-color: #2a5360;
+  background-color: var(--duckBlue);
   color: #ffc519;
-  border: black;
   width: 100%;
   position: fixed;
   bottom: 0;
 }
 
 .container-1 {
-  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100px;
+  width: 10em;
   font-weight: bold;
 }
 
 .container-2 {
+  display: flex;
+  align-items: center;
+  width: 10em;
   font-weight: lighter;
-  padding-top: 70px;
+  height: 100px;
 }
 .container-3 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100px;
+  width: 10em;
   font-weight: bold;
+}
+
+.copyright {
+  align-self: flex-end;
 }
 
 @media (min-width: 768px) {

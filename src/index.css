@@ -1,7 +1,4 @@
-body html {
-  margin: 0;
-  background-color: whitesmoke;
-  height: 100vh;
+body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -14,14 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-ul li {
-  text-decoration: none;
-}
-
 :root {
-  --background-primary: rgb(42, 83, 96);
-  --background-green: rgb(243, 243, 243);
-  --background-green: rgb(255, 197, 25);
-  --background-green: rgb(162, 139, 87);
+  --duckBlue: #2a5360;
+  --white: #f3f3f3;
+  --gold: #ffc519;
+  --chestnut: #a28b57;
 }
