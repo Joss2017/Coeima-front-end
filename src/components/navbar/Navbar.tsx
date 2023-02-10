@@ -25,7 +25,7 @@ export const Navbar = () => {
           </div>
 
           <div className='nav-item-3'>
-            <NavLink to='/services'>
+            <NavLink to='/service'>
               <LocalOfferIcon className='logo-NB' />
             </NavLink>
           </div>
@@ -35,7 +35,7 @@ export const Navbar = () => {
             </NavLink>
           </div>
           <div className='nav-item-5'>
-            <NavLink to='/signIn'>
+            <NavLink to='/login'>
               <AccountCircleIcon className='logo-NB' />
             </NavLink>
           </div>
