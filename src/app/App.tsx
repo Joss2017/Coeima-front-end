@@ -8,8 +8,8 @@ import { Forum } from '../pages/forum/Forum';
 import { Home } from '../pages/home/Home';
 import { Service } from '../pages/service/Service';
 import { Login } from '../pages/login/Login';
-import SignUp from '../pages/signUp/SignUp';
-import './App.css';
+import { Register } from '../pages/register/Register';
+
 
 // npm i react router dom=>Import BrowserRouter/react-router-dom;Route,Routes/react-router-dom' permettant de créer les routes du site-----------//
 
@@ -20,11 +20,11 @@ export const App = () => {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/services' element={<Service />} />
+          <Route path='/service' element={<Service />} />
           <Route path='/forum' element={<Forum />} />
-          <Route path='/signIn' element={<Login />} />
-          <Route path='/signUp' element={<SignUp />} />
-          <Route path='/Account' element={<Account />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/account' element={<Account />} />
         </Routes>
       </BrowserRouter>
       <Footer />
