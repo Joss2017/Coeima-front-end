@@ -1,7 +1,7 @@
 .footer-container {
   display: flex;
   justify-content: space-around;
-  background-color: var(--duckBlue);
+  background-color: #2a5360;
   color: #ffc519;
   width: 100%;
   position: fixed;
@@ -21,10 +21,11 @@
   display: flex;
   align-items: center;
   width: 10em;
-  font-weight: lighter;
   height: 100px;
+  font-weight: lighter;
 }
-.container-3 {
+
+.container-3  {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -33,12 +34,24 @@
   font-weight: bold;
 }
 
+.logo-footer {
+  width: 150%;
+  font-size: 3em !important;
+}
+
 .copyright {
   align-self: flex-end;
 }
 
 @media (min-width: 768px) {
   .footer-container {
+    height: 150px;
     font-size: 2em;
+  }
+
+  .container-2 {
+    margin-top: 50px;
+    height: 100px;
+    font-weight: lighter;
   }
 }

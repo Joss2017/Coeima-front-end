@@ -1,59 +1,53 @@
 .navbar {
-  display: flex;
-  flex-direction: row;
   width: 100%;
-  background-color: var(--white);
+  background-color: #f3f3f3;
   box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
 }
 
 .rounded-circle {
-  height: 75px;
+  height: 10vh;
+
   box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
-  width: 80px;
+  width: 70px;
   margin-left: 20px;
-  background-color: var(--duckBlue);
+  background-color: #2a5360;
 }
 
-.nav-link {
-  border-right-width: 1px;
-}
-
-.navlink-button {
+.container-nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 280px;
+  margin-right: 15px;
+}
+
+.logo-NB {
   font-weight: bold;
   text-decoration: none;
-  background-color: var(--white);
-  color: var(--duckBlue);
+  color: #2a5360;
+  font-size: 2.5em !important;
 }
 
-.button-nav {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 100px;
-  width: 10em;
-  font-weight: bold;
-  list-style: none;
+.logo-NB:hover {
+  color: #a28b57;
+  font-size: 3em !important;
 }
 
 @media (min-width: 800px) {
   .navbar {
-    font-size: 1.5em;
-  }
-  .collapse {
-    align-items: center;
-    justify-content: flex-end;
+    display: flex;
+    height: 10vh;
+    font-size: 2em;
   }
 
-  .navlink-button {
+  .rounded-circle {
+    height: 9vh;
+    width: 8vh;
+  }
+
+  .container-nav {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 80px;
-    margin-left: auto;
-    width: 10em;
-    font-weight: bold;
-    list-style: none;
+    justify-content: space-between;
+    width: 40vh;
+    margin-right: 10vh;
   }
 }

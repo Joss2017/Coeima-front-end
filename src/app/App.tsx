@@ -7,7 +7,7 @@ import { Account } from '../pages/account/Account';
 import { Forum } from '../pages/forum/Forum';
 import { Home } from '../pages/home/Home';
 import { Service } from '../pages/service/Service';
-import { SignIn } from '../pages/signIn/SignIn';
+import { Login } from '../pages/login/Login';
 import SignUp from '../pages/signUp/SignUp';
 import './App.css';
 
@@ -22,7 +22,7 @@ export const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/services' element={<Service />} />
           <Route path='/forum' element={<Forum />} />
-          <Route path='/signIn' element={<SignIn />} />
+          <Route path='/signIn' element={<Login />} />
           <Route path='/signUp' element={<SignUp />} />
           <Route path='/Account' element={<Account />} />
         </Routes>
