@@ -84,9 +84,11 @@ export const Login = () => {
           <button className='mt-3  btn btn-primary' type='submit'>
             Se connecter
           </button>
-          <Link to='/register' className='link-register'>
-            {'  Pas encore inscrit ? cliquez ici'}
-          </Link>
+          <div className='alert alert-warning' role='alert'>
+            <Link to='/register' className='link-register'>
+               Pas encore inscrit ? cliquez ici
+            </Link>
+          </div>
         </div>
       </form>
     </div>

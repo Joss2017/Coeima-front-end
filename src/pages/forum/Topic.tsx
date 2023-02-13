@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { CardService } from '../../components/cardService/CardService';
+import { CardTopic } from '../../components/cardTopic/CardTopic';
 import './Topic.css';
 
 export interface TopicProps {
   id: string;
   title: string;
   body: string;
-  picture: string;
+  url: string;
 }
 
 /**
@@ -17,7 +17,7 @@ export interface TopicProps {
 let listeTopics: TopicProps[] = [];
 
 export const Topic = () => {
-  const [displayedTopics, setDisplayedTopics] = useState<TopicProps[]>([
+  const [listCardTopics, setListCardTopics] = useState<TopicProps[]>([
     ...listeTopics,
   ]);
 
@@ -28,31 +28,19 @@ export const Topic = () => {
       .get('http://localhost:8087/api/topic')
       .then((response) => {
         listeTopics = response.data;
-        setDisplayedTopics(listeTopics);
+        setListCardTopics(listeTopics);
       })
       .catch((error) => {
         console.log(error);
       });
-    //  console.log(listPlantDisplayed);
+    console.log(listCardTopics);
   }, []);
+
   return (
-    <div className='card-wrapper'>
-      {/* <CardService newCardService={setListCardServices()} /> */}
-      <div className='container-fluid custom-main'>
-        {displayedTopics.map((topic) => (
-          <li className='card-offer' key={topic.id}>
-            <div className='card' style={{ width: '18rem' }}>
-              <div className='card-body'>
-                <h5 className='card-title'>{topic.title}</h5>
-                <p className='card-text'>{topic.body}</p>
-              </div>
-              <ul className='list-group list-group-flush'>
-                <li className='list-group-item'>Cras justo odio</li>
-              </ul>
-            </div>
-          </li>
-        ))}
-      </div>
+    <div>
+      {listCardTopics.map((topic) => (
+        <CardTopic key={topic.id} cardTopic={topic} />
+      ))}
     </div>
   );
 };
