@@ -1,6 +1,6 @@
 import React from 'react';
-import './Forum.css';
+import './Topic.css';
 
-export const Forum = () => {
+export const Topic = () => {
   return <div></div>;
 };
