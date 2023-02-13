@@ -44,7 +44,7 @@ export const Login = () => {
   };
 
   return (
-    <div className='login-wrapper '>
+    <div className='login-wrapper'>
       {isUserLogged ? (
         <div className='alert alert-success' role='alert'>
           Bienvenue!
@@ -64,6 +64,7 @@ export const Login = () => {
             className='form-control'
             id='emailUser'
             placeholder='name@example.com'
+            autoComplete='current-email'
             ref={emailElement}
           />
           <label htmlFor='emailUser'>Email</label>
@@ -74,6 +75,7 @@ export const Login = () => {
             className='form-control'
             id='passwordUser'
             placeholder='Password'
+            autoComplete='current-password'
             ref={passwordElement}
           />
           <label htmlFor='passwordUser'>Mot de passe</label>

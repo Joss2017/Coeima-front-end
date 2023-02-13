@@ -1,12 +1,7 @@
 .register-wrapper {
-  background-color: #f3f3f3;
   flex-direction: column;
   text-align: center;
-  margin-top: 10vh;
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0.01),
-    rgb(255, 255, 255) 85%
-  );
+  margin-top: 15vh;
 }
 
 .container-form-register {

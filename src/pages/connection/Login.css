@@ -1,4 +1,4 @@
-.login-wrapper {
+.login-wrapper{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,6 +18,6 @@
  
 }
 
-.link-register {
+a,.link-register {
   text-decoration: none;
 }

@@ -31,9 +31,9 @@
   font-size: 3em !important;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
   .navbar {
-    display: flex;
+   
     height: 10vh;
     font-size: 2em;
   }

@@ -33,17 +33,20 @@ export const Register = () => {
     if (nickname.length < 4) {
       setError('la taille du pseudo doit être au minimum de 4 caractères');
       return;
-    } else if (password.length < 8) {
+    }
+    if (password.length < 8) {
       setError(
         'la taille du mot de passe doit être au minimum de 8 caractères'
       );
       return;
-    } else if (!email || !passwordElement) {
+    }
+    if (!email || !passwordElement) {
       setError(
         "Veuillez entrer un nom d'utilisateur et un mot de passe valide"
       );
       return;
-    } else if (password !== confirmPassword) {
+    }
+    if (password !== confirmPassword) {
       setError(
         'votre confirmation de mot de passe doit être la même que votre mot de passe'
       );
@@ -100,18 +103,20 @@ export const Register = () => {
               className='form-control'
               id='nicknameUser'
               placeholder='pseudo'
-              autoComplete='username'
+              autoComplete='new nickname'
               onChange={(event) => setNickname(event.currentTarget.value)}
               ref={nicknameElement}
             />
-            <label htmlFor='nicknameUser'>Pseudo *</label>
+            <label htmlFor='nicknameUser'>
+              Pseudo * (4 caractères minimum)
+            </label>
           </div>
           <div className='form-floating mb-3'>
             <input
               type='email'
               className='form-control'
               id='emailUser'
-              autoComplete='email'
+              autoComplete='new-email'
               placeholder='name@example.com'
               onChange={(event) => setEmail(event.currentTarget.value)}
               ref={emailElement}
@@ -128,7 +133,9 @@ export const Register = () => {
               onChange={(event) => setPassword(event.currentTarget.value)}
               ref={passwordElement}
             />
-            <label htmlFor='passwordUser'>Mot de passe *</label>
+            <label htmlFor='passwordUser'>
+              Mot de passe * (8 caractères minimum)
+            </label>
           </div>
           <div className='form-floating mb-3'>
             <input
@@ -152,6 +159,7 @@ export const Register = () => {
               className='form-control'
               id='phoneUser'
               placeholder='téléphone'
+              autoComplete='new-phone'
               ref={phoneElement}
             />
             <label htmlFor='confirmPasswordUser'>Numéro de téléphone</label>
