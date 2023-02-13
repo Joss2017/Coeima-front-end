@@ -7,8 +7,8 @@ import { Account } from '../pages/account/Account';
 import { Forum } from '../pages/forum/Forum';
 import { Home } from '../pages/home/Home';
 import { Service } from '../pages/service/Service';
-import { Login } from '../pages/login/Login';
-import { Register } from '../pages/register/Register';
+import { Login } from '../pages/connection/Login';
+import { Register } from '../pages/connection/Register';
 
 
 // npm i react router dom=>Import BrowserRouter/react-router-dom;Route,Routes/react-router-dom' permettant de créer les routes du site-----------//

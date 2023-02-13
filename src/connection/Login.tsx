@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 

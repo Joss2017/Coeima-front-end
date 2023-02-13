@@ -1,0 +1,16 @@
+.register-wrapper {
+  background-color: #f3f3f3;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 10vh;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.01),
+    rgb(255, 255, 255) 85%
+  );
+}
+
+.container-form-register {
+  color: #2a5360;
+  margin-left: 5vh;
+  width: 80%;
+}

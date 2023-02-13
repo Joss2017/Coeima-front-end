@@ -5,14 +5,19 @@
   margin-top: 15vh;
 }
 
-.form-login {
+.container-form-login {
+  width: 80%;
 }
 
+.submit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .btn {
-  margin-left: 10vh;
+ 
 }
 
-.link-login {
-  margin-bottom: 10vh;
+.link-register {
   text-decoration: none;
 }
