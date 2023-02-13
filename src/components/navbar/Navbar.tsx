@@ -2,6 +2,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ForumIcon from '@mui/icons-material/Forum';
 import HomeIcon from '@mui/icons-material/Home';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 import '../navbar/Navbar.css';
@@ -25,12 +26,12 @@ export const Navbar = () => {
           </div>
 
           <div className='nav-item-3'>
-            <NavLink to='/service'>
+            <NavLink to='/offer'>
               <LocalOfferIcon className='logo-NB' />
             </NavLink>
           </div>
           <div className='nav-item-4'>
-            <NavLink to='/forum'>
+            <NavLink to='/topic'>
               <ForumIcon className='logo-NB' />
             </NavLink>
           </div>
