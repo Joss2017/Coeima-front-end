@@ -1,11 +1,16 @@
 .register-wrapper {
   flex-direction: column;
   text-align: center;
-  margin-top: 15vh;
+  margin-top: 5vh;
 }
 
 .container-form-register {
   color: #2a5360;
   margin-left: 5vh;
   width: 80%;
+}
+
+.form-label {
+  font-weight: 500;
+  font-style: italic;
 }

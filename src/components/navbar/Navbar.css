@@ -12,41 +12,34 @@
   background-color: #2a5360;
 }
 
-.container-nav {
-  display: flex;
-  justify-content: space-between;
-  width: 280px;
-  margin-right: 15px;
+
+
+.navbar-nav .nav-item:hover {
+  background-color: rgba(180, 190, 203, 0.4);
 }
 
-.logo-NB {
+.link-NB {
   font-weight: bold;
   text-decoration: none;
+  color: #2a5360;
+  font-style: italic;
+}
+.logo-NB {
+  font-weight: bold;
   color: #2a5360;
   font-size: 2.5em !important;
 }
 
-.logo-NB:hover {
-  color: #a28b57;
-  font-size: 3em !important;
-}
-
 @media (min-width: 768px) {
   .navbar {
-   
     height: 10vh;
-    font-size: 2em;
+    font-size: 1.7em;
   }
 
   .rounded-circle {
     height: 9vh;
     width: 8vh;
   }
-
-  .container-nav {
-    display: flex;
-    justify-content: space-between;
-    width: 40vh;
-    margin-right: 10vh;
-  }
+ 
 }
+

@@ -4,173 +4,211 @@ import { useNavigate } from 'react-router';
 import './Register.css';
 
 export const Register = () => {
+  //---------------------------------------useRef permets de recupérer les valeurs des données entrantes---------------------//
+
   const nicknameElement = useRef<HTMLInputElement>(null);
   const emailElement = useRef<HTMLInputElement>(null);
   const passwordElement = useRef<HTMLInputElement>(null);
-  const ConfirmPasswordElement = useRef<HTMLInputElement>(null);
+  const confirmPasswordElement = useRef<HTMLInputElement>(null);
   const phoneElement = useRef<HTMLInputElement>(null);
+
+  //---------------------------------------useNavigate permets de naviguer sur une autre page après condition---------------//
 
   const navigate = useNavigate();
 
-  // useState permets de gérer l'état si user est conecté ou pas
-  const [nickname, setNickname] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  //--------------------------------------useState permets de gérer l'état si user est conecté ou pas----------------------//
+
   const [error, setError] = useState<string | null>(null);
-  const [isUserRegister, setisUserRegister] = useState<string | null>(null);
+  const [isUserRegistered, setIsUserRegistered] = useState<string | null>(null);
+
+  //--------------------------------------Fonction rattachée aux Inputs pour la gestion des erreurs------------------------//
+
+  const handleChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    if (nicknameElement.current && nicknameElement.current.value.length < 4) {
+      setError("La taille du pseudo doit être d'au moins 4 caractères");
+      return;
+    } else if (
+      !emailElement.current?.value ||
+      !passwordElement.current?.value
+    ) {
+      setError('Veuillez renseigner les champs  email et  mot de passe');
+      return;
+    } else if (
+      passwordElement.current &&
+      passwordElement.current.value.length < 8
+    ) {
+      setError(
+        'Le mot de passe doit contenir au moins 8 caractères, une lettre minuscule, une lettre majuscule, et un chiffre ou un caractère spécial'
+      );
+
+      return;
+    } else if (
+      passwordElement.current?.value !== confirmPasswordElement.current?.value
+    ) {
+      setError(
+        'La confirmation de mot de passe doit être identique au mot de passe'
+      );
+      return;
+    } else if (phoneElement.current && phoneElement.current.value.length < 10) {
+      setError('10 chiffres minimum');
+      return;
+    }
+  };
+
+  //--------------------------------------Axios.post Auth avec les valeurs réxupérées par useRef------------------------//
 
   const handleSubmitForm = async (e: FormEvent) => {
-    console.log('handleSubmitForm');
     e.preventDefault();
 
     console.log(nicknameElement.current?.value);
     console.log(emailElement.current?.value);
     console.log(passwordElement.current?.value);
-    console.log(ConfirmPasswordElement.current?.value);
+    console.log(confirmPasswordElement.current?.value);
     console.log(phoneElement.current?.value);
 
-    if (nickname.length < 4) {
-      setError('la taille du pseudo doit être au minimum de 4 caractères');
-      return;
-    }
-    if (password.length < 8) {
-      setError(
-        'la taille du mot de passe doit être au minimum de 8 caractères'
-      );
-      return;
-    }
-    if (!email || !passwordElement) {
-      setError(
-        "Veuillez entrer un nom d'utilisateur et un mot de passe valide"
-      );
-      return;
-    }
-    if (password !== confirmPassword) {
-      setError(
-        'votre confirmation de mot de passe doit être la même que votre mot de passe'
-      );
-      return;
-    }
-
     try {
-      axios
+      await axios
         .post('http://localhost:8087/api/auth/register', {
           nickname: nicknameElement.current?.value,
           email: emailElement.current?.value,
           password: passwordElement.current?.value,
-          ConfirmPassword: ConfirmPasswordElement.current?.value,
+          confirmPassword: confirmPasswordElement.current?.value,
           phone: phoneElement.current?.value,
         })
         .then((response: AxiosResponse) => {
-          console.log('réponde de axios', response.data);
-
+          console.log('réponse de axios', response.data);
           if (response.status === 201) {
-            setisUserRegister(response.data.message || 'Inscription réussie');
+            setIsUserRegistered('Inscription réussie');
             setTimeout(() => navigate('/login'), 1000);
           } else {
-            setError(
-              response.data.message ||
-                "Une erreur s'est produite lors de l'inscriprion"
-            );
+            setIsUserRegistered(response.data.message);
           }
         });
     } catch (error) {
-      setError('erreur dans le formulaire');
+        console.log(error);
+      setError('Erreur lors de la soumission du formulaire');
     }
   };
 
   return (
-    <div className='register-wrapper'>
-      {isUserRegister ? (
-        <div className='alert alert-success' role='alert'>
-          {isUserRegister}
-        </div>
-      ) : (
-        error && (
-          <div className='alert alert-danger' role='alert'>
-            {error}
+    <>
+      <div className='register-wrapper'>
+        {isUserRegistered && (
+          <div className='alert alert-success' role='alert'>
+            {isUserRegistered}
           </div>
-        )
+        )}
+      </div>
+      {error && (
+        <div className='alert alert-warning' role='alert'>
+          {error}
+        </div>
       )}
-
       <div className='container-form-register '>
         <h1>Inscription</h1>
         <form onSubmit={handleSubmitForm}>
-          <div className='form-floating mb-3'>
+          <div className='form-outline mb-1'>
             <input
               type='text'
               className='form-control'
               id='nicknameUser'
-              placeholder='pseudo'
+              placeholder='4 caractères mini'
               autoComplete='new nickname'
-              onChange={(event) => setNickname(event.currentTarget.value)}
+              onChange={handleChange}
               ref={nicknameElement}
             />
-            <label htmlFor='nicknameUser'>
-              Pseudo * (4 caractères minimum)
+            <label className='form-label' htmlFor='form3Example1cg'>
+              Ton Pseudo *
             </label>
           </div>
-          <div className='form-floating mb-3'>
+
+          <div className='form-outline mb-1'>
             <input
               type='email'
               className='form-control'
               id='emailUser'
               autoComplete='new-email'
               placeholder='name@example.com'
-              onChange={(event) => setEmail(event.currentTarget.value)}
+              onChange={handleChange}
               ref={emailElement}
             />
-            <label htmlFor='emailUser'>Email *</label>
+            <label className='form-label' htmlFor='form3Example3cg'>
+              Ton Email *
+            </label>
           </div>
-          <div className='form-floating mb-3'>
+
+          <div className='form-outline mb-1'>
             <input
               type='password'
               className='form-control'
               id='passwordUser'
-              placeholder='Password'
+              placeholder='8 caractères mini,une maj et un caractère'
               autoComplete='new-password'
-              onChange={(event) => setPassword(event.currentTarget.value)}
+              onChange={handleChange}
               ref={passwordElement}
             />
-            <label htmlFor='passwordUser'>
-              Mot de passe * (8 caractères minimum)
+            <label className='form-label' htmlFor='form3Example4cg'>
+              Mot de Passe *
             </label>
           </div>
-          <div className='form-floating mb-3'>
+
+          <div className='form-outline mb-1'>
             <input
               type='password'
               className='form-control'
               id='confirmPasswordUser'
               placeholder='Password'
               autoComplete='new-password'
-              onChange={(event) =>
-                setConfirmPassword(event.currentTarget.value)
-              }
-              ref={ConfirmPasswordElement}
+              onChange={handleChange}
+              ref={confirmPasswordElement}
             />
-            <label htmlFor='confirmPasswordUser'>
-              Confirmation mot de passe *
+            <label className='form-label' htmlFor='form3Example4cdg'>
+              Confirmation Mot de Passe *
             </label>
           </div>
-          <div className='form-floating '>
+
+          <div className='form-outline mb-1'>
             <input
-              type='number'
-              className='form-control'
-              id='phoneUser'
+              type='tel'
+              id='typePhone'
+              className='form-control form-control-lg'
               placeholder='téléphone'
               autoComplete='new-phone'
+              onChange={handleChange}
               ref={phoneElement}
             />
-            <label htmlFor='confirmPasswordUser'>Numéro de téléphone</label>
+            <label className='form-label' htmlFor='form3Example4cdg'>
+              Numéro de téléphone
+            </label>
           </div>
-          <div className='submit'>
-            <button className='mt-3  btn btn-primary' type='submit'>
+
+          <div className='form-check d-flex justify-content-center mb-5'>
+            <input
+              className='form-check-input me-2'
+              type='checkbox'
+              value=''
+              id='form2Example3cg'
+            />
+            <label className='form-check-label' htmlFor='form2Example3g'>
+              I agree all statements in{' '}
+              <a href='#!' className='text-body'>
+                <u>Terms of service</u>
+              </a>
+            </label>
+          </div>
+
+          <div className='d-flex justify-content-center'>
+            <button type='submit' className='btn btn-danger btn-block '>
               S'inscrire
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 };
+function then(arg0: (response: AxiosResponse) => void) {
+  throw new Error('Function not implemented.');
+}

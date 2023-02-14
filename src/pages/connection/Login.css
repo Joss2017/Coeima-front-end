@@ -1,7 +1,8 @@
-.login-wrapper{
+.login-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   margin-top: 15vh;
 }
 
@@ -9,15 +10,21 @@
   width: 80%;
 }
 
+.title-login {
+  text-align: center;
+}
+
 .submit {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.btn {
- 
+
+a,
+.link-register {
+  text-decoration: none;
 }
 
-a,.link-register {
-  text-decoration: none;
+.btn {
+  font-weight: bold;
 }
