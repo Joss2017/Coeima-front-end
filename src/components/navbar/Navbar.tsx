@@ -9,7 +9,7 @@ import '../navbar/Navbar.css';
 export const Navbar = () => {
   return (
     <>
-      <nav className='navbar navbar-expand-lg '>
+      <nav className='navbar sticky-top navbar-expand-lg '>
         <div className='container-fluid'>
           <img
             className='rounded-circle '

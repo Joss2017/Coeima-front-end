@@ -1,44 +1,33 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
+import  { useEffect, useState } from 'react';
 import { CardTopic } from '../../components/cardTopic/CardTopic';
+import { TopicProps } from '../../interface/Interface';
 import './Topic.css';
 
-export interface TopicProps {
-  id: string;
-  title: string;
-  body: string;
-  url: string;
-}
 
-/**
- * Ici les constantes ou variables dont la modification de valeur ne provoquera pas directement de re-render
- */
-
-let listeTopics: TopicProps[] = [];
 
 export const Topic = () => {
-  const [listCardTopics, setListCardTopics] = useState<TopicProps[]>([
-    ...listeTopics,
-  ]);
-
-  console.log(listeTopics);
+  const [listCardTopics, setListCardTopics] = useState<TopicProps[] | null>(
+    null
+  );
 
   useEffect(() => {
     axios
       .get('http://localhost:8087/api/topic')
-      .then((response) => {
-        listeTopics = response.data;
-        setListCardTopics(listeTopics);
+      .then((response: AxiosResponse) => {
+        setListCardTopics([...response.data]);
+
+        console.log(response.data);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.log(error);
       });
     console.log(listCardTopics);
   }, []);
 
   return (
-    <div>
-      {listCardTopics.map((topic) => (
+    <div className='card-topics'>
+      {listCardTopics?.map((topic: TopicProps) => (
         <CardTopic key={topic.id} cardTopic={topic} />
       ))}
     </div>

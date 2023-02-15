@@ -1,0 +1,4 @@
+.card-topics {
+  display: flex;
+  flex-direction: column;
+}

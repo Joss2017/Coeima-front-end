@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
-import { useRef, useState } from 'react';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { response } from 'express';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import './Login.css';
@@ -16,13 +17,18 @@ export const Login = () => {
 
   //--------------------------------------useState permets de gérer l'état si user est conecté ou pas----------------------//
 
-  const [error, setError] = useState<string | null>('');
-  const [isUserLogged, setisUserLogged] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [isUserLogged, setisUserLogged] = useState<boolean>(false);
 
-  //--------------------------------------Fonction rattachée aux Inputs pour la gestion des erreurs------------------------//
+  //--------------------------------------Axios.post Auth avec les valeurs réxupérées par useRef------------------------//
 
-  const handleChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  const handleSubmitForm = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    console.log(emailElement.current?.value);
+    console.log(passwordElement.current?.value);
+
+    //--------------------------------------condition rattachée aux Inputs par useRef pour la gestion des erreurs------------------------//
 
     if (
       !emailElement.current?.value ||
@@ -35,21 +41,9 @@ export const Login = () => {
       passwordElement.current &&
       passwordElement.current?.value.length < 8
     ) {
-      setError(
-        'le mot de passe doit contenir 1 lettre minuscule, 1 lettre majuscule et 1 chiffre ou caractère spécial'
-      );
+      setError('erreur de mot de passe');
       return;
     }
-  };
-
-  //--------------------------------------Axios.post Auth avec les valeurs réxupérées par useRef------------------------//
-
-  const handleSubmitForm = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    console.log(emailElement.current?.value);
-    console.log(passwordElement.current?.value);
-
     try {
       await axios
         .post('http://localhost:8087/api/auth/login', {
@@ -58,33 +52,41 @@ export const Login = () => {
         })
         .then((response: AxiosResponse) => {
           console.log('réponse de axios', response.data);
-          console.log('message axios', response.statusText);
+
           const token = response.data.accessToken;
           if (token) {
             localStorage.setItem('token', token);
-            setisUserLogged(response.data.message);
+
+            setisUserLogged(true);
             setTimeout(() => navigate('/account'), 1000);
+          } else {
+            setError(response.data);
           }
         });
-    } catch (error) {
-      console.log(error);
-      setError('erreur dans la connexion');
+    } catch (error: any) {
+      console.log('error valeur', error.response.data.message);
+      if (error.response) {
+        setError(error.response.data.message);
+        console.log(
+          'error.response.data.message valeur',
+          error.response.data.message
+        );
+      }
     }
   };
 
   return (
     <>
       <div className='login-wrapper'>
-        {isUserLogged ? (
-          <div className='alert alert-success' role='alert'>
-            {isUserLogged}
+        {error && (
+          <div className='alert alert-danger' role='alert'>
+            {error}
           </div>
-        ) : (
-          error && (
-            <div className='alert alert-danger' role='alert'>
-              {error}
-            </div>
-          )
+        )}
+        {isUserLogged === true && (
+          <div className='alert alert-success' role='alert'>
+            "Connexion réussie"
+          </div>
         )}
       </div>
       <div className='container-form-login '>
@@ -97,7 +99,7 @@ export const Login = () => {
               id='emailUser'
               autoComplete='new-email'
               placeholder='name@example.com'
-              onChange={handleChange}
+              // onChange={handleChange}
               ref={emailElement}
             />
             <label className='form-label' htmlFor='form3Example3cg'>
@@ -112,7 +114,7 @@ export const Login = () => {
               id='passwordUser'
               placeholder='mot de passe'
               autoComplete='new-password'
-              onChange={handleChange}
+              // onChange={handleChange}
               ref={passwordElement}
             />
             <label className='form-label' htmlFor='form3Example4cg'>

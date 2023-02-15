@@ -1,12 +1,12 @@
 .login-wrapper {
-  display: flex;
   flex-direction: column;
-  align-items: center;
   text-align: center;
-  margin-top: 15vh;
+  margin-top: 5vh;
 }
 
 .container-form-login {
+  color: #2a5360;
+  margin-left: 5vh;
   width: 80%;
 }
 
@@ -27,4 +27,8 @@ a,
 
 .btn {
   font-weight: bold;
+}
+
+.title-login {
+  text-align: center;
 }

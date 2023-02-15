@@ -21,10 +21,18 @@ export const Register = () => {
   const [error, setError] = useState<string | null>(null);
   const [isUserRegistered, setIsUserRegistered] = useState<string | null>(null);
 
-  //--------------------------------------Fonction rattachée aux Inputs pour la gestion des erreurs------------------------//
+  //--------------------------------------Axios.post Auth avec les valeurs réxupérées par useRef------------------------//
 
-  const handleChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  const handleSubmitForm = async (e: FormEvent) => {
     e.preventDefault();
+
+    console.log(nicknameElement.current?.value);
+    console.log(emailElement.current?.value);
+    console.log(passwordElement.current?.value);
+    console.log(confirmPasswordElement.current?.value);
+    console.log(phoneElement.current?.value);
+
+    //--------------------------------------condition rattachée aux Inputs par useRef pour la gestion des erreurs------------------------//
 
     if (nicknameElement.current && nicknameElement.current.value.length < 4) {
       setError("La taille du pseudo doit être d'au moins 4 caractères");
@@ -55,18 +63,6 @@ export const Register = () => {
       setError('10 chiffres minimum');
       return;
     }
-  };
-
-  //--------------------------------------Axios.post Auth avec les valeurs réxupérées par useRef------------------------//
-
-  const handleSubmitForm = async (e: FormEvent) => {
-    e.preventDefault();
-
-    console.log(nicknameElement.current?.value);
-    console.log(emailElement.current?.value);
-    console.log(passwordElement.current?.value);
-    console.log(confirmPasswordElement.current?.value);
-    console.log(phoneElement.current?.value);
 
     try {
       await axios
@@ -86,9 +82,15 @@ export const Register = () => {
             setIsUserRegistered(response.data.message);
           }
         });
-    } catch (error) {
-        console.log(error);
-      setError('Erreur lors de la soumission du formulaire');
+    } catch (error: any) {
+      console.log('error valeur', error.response.data.message);
+      if (error.response) {
+        setError(error.response.data.message);
+        console.log(
+          'error.response.data.message valeur',
+          error.response.data.message
+        );
+      }
     }
   };
 
@@ -107,7 +109,7 @@ export const Register = () => {
         </div>
       )}
       <div className='container-form-register '>
-        <h1>Inscription</h1>
+        <h1 className='title-register'>Inscription</h1>
         <form onSubmit={handleSubmitForm}>
           <div className='form-outline mb-1'>
             <input
@@ -116,7 +118,6 @@ export const Register = () => {
               id='nicknameUser'
               placeholder='4 caractères mini'
               autoComplete='new nickname'
-              onChange={handleChange}
               ref={nicknameElement}
             />
             <label className='form-label' htmlFor='form3Example1cg'>
@@ -131,7 +132,6 @@ export const Register = () => {
               id='emailUser'
               autoComplete='new-email'
               placeholder='name@example.com'
-              onChange={handleChange}
               ref={emailElement}
             />
             <label className='form-label' htmlFor='form3Example3cg'>
@@ -146,7 +146,6 @@ export const Register = () => {
               id='passwordUser'
               placeholder='8 caractères mini,une maj et un caractère'
               autoComplete='new-password'
-              onChange={handleChange}
               ref={passwordElement}
             />
             <label className='form-label' htmlFor='form3Example4cg'>
@@ -161,7 +160,6 @@ export const Register = () => {
               id='confirmPasswordUser'
               placeholder='Password'
               autoComplete='new-password'
-              onChange={handleChange}
               ref={confirmPasswordElement}
             />
             <label className='form-label' htmlFor='form3Example4cdg'>
@@ -176,7 +174,6 @@ export const Register = () => {
               className='form-control form-control-lg'
               placeholder='téléphone'
               autoComplete='new-phone'
-              onChange={handleChange}
               ref={phoneElement}
             />
             <label className='form-label' htmlFor='form3Example4cdg'>

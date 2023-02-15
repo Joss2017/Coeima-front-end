@@ -1,9 +1,7 @@
-import { OfferProps } from '../../pages/offer/Offer';
+import { CardOfferProps } from '../../interface/Interface';
 import './CardOffer.css';
 
-export interface CardOfferProps {
-  cardOffer: OfferProps;
-}
+
 
 export const CardOffer = ({ cardOffer }: CardOfferProps) => {
   return (

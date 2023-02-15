@@ -1,15 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardOffer } from '../../components/cardOffer/CardOffer';
+import { OfferProps } from '../../interface/Interface';
 import './Offer.css';
-
-export interface OfferProps {
-  id: string;
-  picture: string;
-  title: string;
-  body: string;
-  price: string;
-}
 
 let tabCardOffers: OfferProps[] = [];
 
