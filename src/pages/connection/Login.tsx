@@ -1,8 +1,8 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { response } from 'express';
-import { useEffect, useRef, useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/auth-context';
 import './Login.css';
 
 export const Login = () => {
@@ -16,6 +16,8 @@ export const Login = () => {
   const navigate = useNavigate();
 
   //--------------------------------------useState permets de gérer l'état si user est conecté ou pas----------------------//
+  const { onAuthChange } = useContext(AuthContext);
+  const { savedToken } = useContext(AuthContext);
 
   const [error, setError] = useState<string>('');
   const [isUserLogged, setisUserLogged] = useState<boolean>(false);
@@ -56,8 +58,8 @@ export const Login = () => {
           const token = response.data.accessToken;
           if (token) {
             localStorage.setItem('token', token);
-
             setisUserLogged(true);
+            onAuthChange(token);
             setTimeout(() => navigate('/account'), 1000);
           } else {
             setError(response.data);
@@ -74,6 +76,10 @@ export const Login = () => {
       }
     }
   };
+
+  useEffect(() => {
+    onAuthChange(savedToken);
+  });
 
   return (
     <>

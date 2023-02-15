@@ -1,4 +1,13 @@
-.card-topics {
+.card-topic {
   display: flex;
-  flex-direction: column;
+ flex-wrap: wrap;
+}
+
+/* .list-card-topics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+} */
+
+@media (min-width: 768px) {
 }

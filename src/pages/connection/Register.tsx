@@ -35,7 +35,7 @@ export const Register = () => {
     //--------------------------------------condition rattachée aux Inputs par useRef pour la gestion des erreurs------------------------//
 
     if (nicknameElement.current && nicknameElement.current.value.length < 4) {
-      setError("La taille du pseudo doit être d'au moins 4 caractères");
+      setError("La taille du pseudo doit être d'au moins de 4 caractères");
       return;
     } else if (
       !emailElement.current?.value ||
@@ -206,6 +206,4 @@ export const Register = () => {
     </>
   );
 };
-function then(arg0: (response: AxiosResponse) => void) {
-  throw new Error('Function not implemented.');
-}
+

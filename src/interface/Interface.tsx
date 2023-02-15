@@ -36,3 +36,13 @@ export interface TopicProps {
 export interface CardTopicPtops {
   cardTopic: TopicProps;
 }
+
+//---------------------------------------Interface PayloadToken-------------------------------//
+
+export interface PayLoadTokenProps {
+  exp: number;
+  iat: number;
+  id: string;
+  email: string;
+  role: string;
+}
