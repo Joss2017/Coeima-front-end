@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { axiosPrivate } from '../../api/Axios';
 import { AuthContext } from '../../context/auth-context';
 import './Login.css';
 
@@ -48,8 +49,8 @@ export const Login = () => {
       return;
     }
     try {
-      await axios
-        .post('http://localhost:8087/api/auth/login', {
+      await axiosPrivate
+        .post('auth/login', {
           email: emailElement.current?.value,
           password: passwordElement.current?.value,
         })

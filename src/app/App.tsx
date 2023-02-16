@@ -15,6 +15,7 @@ import { AuthContext } from '../context/auth-context';
 
 export const App = () => {
   const { savedToken } = useContext(AuthContext);
+  console.log('valeur de savedtoken', savedToken);
   return (
     <>
       <BrowserRouter>

@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
+import { axiosPrivate } from '../../api/Axios';
 import { CardOffer } from '../../components/cardOffer/CardOffer';
 import { OfferProps } from '../../interface/Interface';
 import './Offer.css';
@@ -10,8 +11,8 @@ export const Offer = () => {
   const [listCardOffers, setListCardOffers] = useState<OfferProps[]>([]);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8087/api/offer')
+    axiosPrivate
+      .get('/offer')
       .then((response: AxiosResponse) => {
         tabCardOffers = response.data;
         setListCardOffers(tabCardOffers);

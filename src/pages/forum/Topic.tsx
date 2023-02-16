@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
+import { axiosPrivate } from '../../api/Axios';
 import { CardTopic } from '../../components/cardTopic/CardTopic';
 import { TopicProps } from '../../interface/Interface';
 import './Topic.css';
@@ -10,8 +11,8 @@ export const Topic = () => {
   );
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8087/api/topic')
+    axiosPrivate
+      .get('/topic')
       .then((response: AxiosResponse) => {
         setListCardTopics([...response.data]);
 

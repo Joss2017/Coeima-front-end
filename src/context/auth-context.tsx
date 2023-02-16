@@ -39,10 +39,13 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
 
   //----------------------------------------Fonction contextuelle permettant de vérifier l'expiration d'un token-------//
 
+  console.log('valeur du token avant tokenFunction', token);
   const tokenFunction = (token: string | null) => {
     if (token) {
+      console.log('valeur du token avant tokenFunction');
+
       const decoded: PayLoadTokenProps = jwtDecode(token);
-      if (Date.now() <= decoded.exp * 1000) {
+      if (decoded.exp * 1000 <= Date.now()) {
         setTokenExpired('token valide');
         return true;
       } else {
@@ -51,6 +54,8 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
       }
     }
   };
+
+  console.log()
 
   //--------------------------------Récupération d'une variable utilisable de token expiré-----------------------------------------//
 

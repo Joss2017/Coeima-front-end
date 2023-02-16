@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { FormEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { axiosPrivate } from '../../api/Axios';
 import './Register.css';
 
 export const Register = () => {
@@ -65,8 +66,8 @@ export const Register = () => {
     }
 
     try {
-      await axios
-        .post('http://localhost:8087/api/auth/register', {
+      await axiosPrivate
+        .post('/auth/register', {
           nickname: nicknameElement.current?.value,
           email: emailElement.current?.value,
           password: passwordElement.current?.value,
