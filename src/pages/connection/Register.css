@@ -1,13 +1,30 @@
 .register-wrapper {
   flex-direction: column;
   text-align: center;
-  margin-top: 5vh;
+  height: 6vh;
+}
+
+.container-alert {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#alert-success,
+#alert-warning {
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 .container-form-register {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f3f3f3;
   color: #2a5360;
-  margin-left: 5vh;
-  width: 80%;
 }
 
 .form-label {
@@ -17,4 +34,7 @@
 
 .title-register {
   text-align: center;
+}
+
+@media (min-width: 768px) {
 }

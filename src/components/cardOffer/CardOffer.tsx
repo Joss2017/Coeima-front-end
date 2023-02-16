@@ -1,8 +1,6 @@
 import { CardOfferProps } from '../../interface/Interface';
 import './CardOffer.css';
 
-
-
 export const CardOffer = ({ cardOffer }: CardOfferProps) => {
   return (
     <div className='card' style={{ width: '18rem' }}>
@@ -22,7 +20,7 @@ export const CardOffer = ({ cardOffer }: CardOfferProps) => {
           data-bs-target='#exampleModal'
           data-bs-whatever='@getbootstrap'
         >
-          Open modal for @getbootstrap
+          Je suis intéréssé
         </button>
 
         <div
@@ -36,7 +34,7 @@ export const CardOffer = ({ cardOffer }: CardOfferProps) => {
             <div className='modal-content'>
               <div className='modal-header'>
                 <h1 className='modal-title fs-5' id='exampleModalLabel'>
-                  New message
+                  Nouveau message
                 </h1>
                 <button
                   type='button'
@@ -49,12 +47,38 @@ export const CardOffer = ({ cardOffer }: CardOfferProps) => {
                 <form>
                   <div className='mb-3'>
                     <label htmlFor='recipient-name' className='col-form-label'>
-                      Recipient:
+                      Nom:
                     </label>
                     <input
                       type='text'
                       className='form-control'
-                      id='recipient-name'
+                      id='nicknameUser'
+                      placeholder='nom'
+                      autoComplete='new nickname'
+                    />
+                  </div>
+                  <div className='mb-3'>
+                    <label htmlFor='emailUser' className='col-form-label'>
+                      Email:
+                    </label>
+                    <input
+                      type='email'
+                      className='form-control'
+                      id='emailUser'
+                      placeholder='nom'
+                      autoComplete='new nickname'
+                    />
+                  </div>
+                  <div className='mb-3'>
+                    <label htmlFor='emailUser' className='col-form-label'>
+                      Téléphone:
+                    </label>
+                    <input
+                      type='number'
+                      className='form-control'
+                      id='emailUser'
+                      placeholder='nom'
+                      autoComplete='new nickname'
                     />
                   </div>
                   <div className='mb-3'>

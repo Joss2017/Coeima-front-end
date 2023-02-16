@@ -97,113 +97,123 @@ export const Register = () => {
   return (
     <>
       <div className='register-wrapper'>
-        {isUserRegistered && (
-          <div className='alert alert-success' role='alert'>
-            {isUserRegistered}
-          </div>
-        )}
-      </div>
-      {error && (
-        <div className='alert alert-warning' role='alert'>
-          {error}
+        <div className='container-alert'>
+          {isUserRegistered && (
+            <div
+              className='alert alert-success'
+              id='alert-success'
+              role='alert'
+            >
+              {isUserRegistered}
+            </div>
+          )}
+
+          {error && (
+            <div
+              className='alert alert-warning'
+              id='alert-warning'
+              role='alert'
+            >
+              {error}
+            </div>
+          )}
         </div>
-      )}
-      <div className='container-form-register '>
-        <h1 className='title-register'>Inscription</h1>
-        <form onSubmit={handleSubmitForm}>
-          <div className='form-outline mb-1'>
-            <input
-              type='text'
-              className='form-control'
-              id='nicknameUser'
-              placeholder='4 caractères mini'
-              autoComplete='new nickname'
-              ref={nicknameElement}
-            />
-            <label className='form-label' htmlFor='form3Example1cg'>
-              Ton Pseudo *
-            </label>
-          </div>
+        <div className='container-form-register '>
+          <h1 className='title-register'>Inscription</h1>
+          <form onSubmit={handleSubmitForm}>
+            <div className='form-outline mb-1'>
+              <input
+                type='text'
+                className='form-control'
+                id='nicknameUser'
+                placeholder='4 caractères mini'
+                autoComplete='new nickname'
+                ref={nicknameElement}
+              />
+              <label className='form-label' htmlFor='nicknameUser'>
+                Ton Pseudo *
+              </label>
+            </div>
 
-          <div className='form-outline mb-1'>
-            <input
-              type='email'
-              className='form-control'
-              id='emailUser'
-              autoComplete='new-email'
-              placeholder='name@example.com'
-              ref={emailElement}
-            />
-            <label className='form-label' htmlFor='form3Example3cg'>
-              Ton Email *
-            </label>
-          </div>
+            <div className='form-outline mb-1'>
+              <input
+                type='email'
+                className='form-control'
+                id='emailUser'
+                autoComplete='new-email'
+                placeholder='name@example.com'
+                ref={emailElement}
+              />
+              <label className='form-label' htmlFor='emailUser'>
+                Ton Email *
+              </label>
+            </div>
 
-          <div className='form-outline mb-1'>
-            <input
-              type='password'
-              className='form-control'
-              id='passwordUser'
-              placeholder='8 caractères mini,une maj et un caractère'
-              autoComplete='new-password'
-              ref={passwordElement}
-            />
-            <label className='form-label' htmlFor='form3Example4cg'>
-              Mot de Passe *
-            </label>
-          </div>
+            <div className='form-outline mb-1'>
+              <input
+                type='password'
+                className='form-control'
+                id='passwordUser'
+                placeholder='8 caractères mini,une maj et un caractère'
+                autoComplete='new-password'
+                ref={passwordElement}
+              />
+              <label className='form-label' htmlFor='passwordUser'>
+                Mot de Passe *
+              </label>
+            </div>
 
-          <div className='form-outline mb-1'>
-            <input
-              type='password'
-              className='form-control'
-              id='confirmPasswordUser'
-              placeholder='Password'
-              autoComplete='new-password'
-              ref={confirmPasswordElement}
-            />
-            <label className='form-label' htmlFor='form3Example4cdg'>
-              Confirmation Mot de Passe *
-            </label>
-          </div>
+            <div className='form-outline mb-1'>
+              <input
+                type='password'
+                className='form-control'
+                id='confirmPasswordUser'
+                placeholder='Password'
+                autoComplete='new-password'
+                ref={confirmPasswordElement}
+              />
+              <label className='form-label' htmlFor='confirmPasswordUser'>
+                Confirmation Mot de Passe *
+              </label>
+            </div>
 
-          <div className='form-outline mb-1'>
-            <input
-              type='tel'
-              id='typePhone'
-              className='form-control form-control-lg'
-              placeholder='téléphone'
-              autoComplete='new-phone'
-              ref={phoneElement}
-            />
-            <label className='form-label' htmlFor='form3Example4cdg'>
-              Numéro de téléphone
-            </label>
-          </div>
+            <div className='form-outline mb-1'>
+              <input
+                type='number'
+                id='typePhone'
+                className='form-control form-control-lg'
+                placeholder='téléphone'
+                autoComplete='new-phone'
+                ref={phoneElement}
+              />
+              <label className='form-label' htmlFor='typePhone'>
+                Numéro de téléphone
+              </label>
+            </div>
 
-          <div className='form-check d-flex justify-content-center mb-5'>
-            <input
-              className='form-check-input me-2'
-              type='checkbox'
-              value=''
-              id='form2Example3cg'
-            />
-            <label className='form-check-label' htmlFor='form2Example3g'>
-              I agree all statements in{' '}
-              <a href='#!' className='text-body'>
-                <u>Terms of service</u>
-              </a>
-            </label>
-          </div>
+            <div className='form-check d-flex justify-content-center mb-5'>
+              <input
+                className='form-check-input me-2'
+                type='checkbox'
+                value=''
+                id='form2Example3cg'
+              />
+              <label className='form-check-label' htmlFor='form2Example3g'>
+                I agree all statements in{' '}
+                <a href='#!' className='text-body'>
+                  <u>Terms of service</u>
+                </a>
+              </label>
+            </div>
 
-          <div className='d-flex justify-content-center'>
-            <button type='submit' className='btn btn-danger btn-block '>
-              S'inscrire
-            </button>
-          </div>
-        </form>
+            <div className='d-flex justify-content-center'>
+              <button type='submit' className='btn btn-danger btn-block '>
+                S'inscrire
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
 };
-

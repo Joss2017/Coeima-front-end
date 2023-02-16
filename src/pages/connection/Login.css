@@ -1,13 +1,32 @@
 .login-wrapper {
-  flex-direction: column;
   text-align: center;
-  margin-top: 5vh;
+  height: 6vh;
+}
+
+.container-alert {
+  height: 100%;
+  justify-content: center;
+  background-color: #f3f3f3;
+}
+
+#alert-success,
+#alert-danger {
+  height: 100%;
+  width: 60%;
+  text-align: center;
+  margin: 0;
 }
 
 .container-form-login {
+  display: flex;
+  border: #2a5360;
+  justify-content: center;
+  margin-top: 5vh;
   color: #2a5360;
-  margin-left: 5vh;
-  width: 80%;
+}
+
+.form-login {
+  flex-direction: column;
 }
 
 .title-login {
@@ -23,6 +42,8 @@
 a,
 .link-register {
   text-decoration: none;
+  font-weight: 600;
+  color: rgb(4, 31, 63);
 }
 
 .btn {
@@ -31,4 +52,7 @@ a,
 
 .title-login {
   text-align: center;
+}
+
+@media (min-width: 768px) {
 }

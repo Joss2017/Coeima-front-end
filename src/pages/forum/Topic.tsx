@@ -24,7 +24,7 @@ export const Topic = () => {
   }, []);
 
   return (
-    <div className='card-topic'>
+    <div className='list-cardsTopics'>
       {listCardTopics?.map((topic: TopicProps) => (
         <CardTopic key={topic.id} cardTopic={topic} />
       ))}

@@ -1,8 +1,7 @@
-* {
-  margin: auto;
-}
+html,
+body {
+  margin: 0;
 
- #root, html, body{
   background-color: #f3f3f3;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

@@ -1,5 +1,6 @@
 //---------------------------------------Interface User-------------------------------------//
 export interface UserProps {
+  role: string;
   nickname: string;
   email: string;
   password: string;
