@@ -9,13 +9,12 @@ import { Home } from '../pages/home/Home';
 import { Offer } from '../pages/offer/Offer';
 import { Login } from '../pages/connection/Login';
 import { Register } from '../pages/connection/Register';
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from '../context/AuthContext';
 
 // npm i react router dom=>Import BrowserRouter/react-router-dom;Route,Routes/react-router-dom' permettant de créer les routes du site-----------//
 
 export const App = () => {
   const { savedToken } = useContext(AuthContext);
-  console.log('valeur de savedtoken', savedToken);
   return (
     <>
       <BrowserRouter>

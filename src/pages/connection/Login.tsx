@@ -2,11 +2,12 @@ import axios, { AxiosResponse } from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { axiosPrivate } from '../../api/Axios';
-import { AuthContext } from '../../context/auth-context';
+import { axiosPrivate, axiosPublic } from '../../api/Axios';
+import { AuthContext } from '../../context/AuthContext';
 import './Login.css';
 
 export const Login = () => {
+  const { setAuthChange } = useContext(AuthContext);
   //---------------------------------------useRef permets de recupérer les valeurs des données entrantes---------------------//
 
   const emailElement = useRef<HTMLInputElement>(null);
@@ -17,8 +18,8 @@ export const Login = () => {
   const navigate = useNavigate();
   //--------------------------------------AuthContext permets de gérer si token dans localstorage si user est connecté ou pas----------------------//
 
-  const { onAuthChange } = useContext(AuthContext);
-  const { savedToken } = useContext(AuthContext);
+  // const { onAuthChange } = useContext(AuthContext);
+  // const { savedToken } = useContext(AuthContext);
 
   //--------------------------------------useState permets de gérer l'état si user est conecté ou pas----------------------//
   const [error, setError] = useState<string>('');
@@ -49,7 +50,7 @@ export const Login = () => {
       return;
     }
     try {
-      await axiosPrivate
+      await axiosPublic
         .post('auth/login', {
           email: emailElement.current?.value,
           password: passwordElement.current?.value,
@@ -60,8 +61,8 @@ export const Login = () => {
           const token = response.data.accessToken;
           if (token) {
             localStorage.setItem('token', token);
+            setAuthChange(token);
             setisUserLogged(true);
-            onAuthChange(token);
             setTimeout(() => navigate('/account'), 1000);
           } else {
             setError(response.data);
@@ -78,10 +79,6 @@ export const Login = () => {
       }
     }
   };
-
-  useEffect(() => {
-    onAuthChange(savedToken);
-  });
 
   return (
     <>

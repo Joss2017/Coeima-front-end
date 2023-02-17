@@ -2,36 +2,19 @@ import { AxiosResponse } from 'axios';
 import jwtDecode from 'jwt-decode';
 import { useEffect, useState, useContext } from 'react';
 import { axiosPrivate } from '../../../api/Axios';
-import { AuthContext } from '../../../context/auth-context';
 import { PayLoadTokenProps } from '../../../interface/Interface';
 import './UserProfil.css';
 
 export const UserProfil = () => {
   //--contexte pour déterminer si l'utilisateur est authentifié ou non. Il récupère les propriétés par onAuthChange et savedToken---//
 
-  const { savedToken, onAuthChange } = useContext(AuthContext);
   const [tokenUserId, settokenUserId] = useState<string | null>(null);
   const [userFound, setUserFound] = useState<string[]>([]);
 
   //-- useEffect prend une fonction de rappel comme premier paramètre, qui est exécutée après chaque rendu du composant.---//
 
   //--S'il savedToken existe, le code passe à la ligne suivante, qui utilise la jwtDecodefonction pour décoder le jeton.--//
-  useEffect(() => {
-    onAuthChange(savedToken);
-    if (savedToken) {
-      const decoded: PayLoadTokenProps = jwtDecode(savedToken);
-      settokenUserId(decoded.id);
-    }
-    if (tokenUserId) {
-      axiosPrivate
-        .get(`/user/${tokenUserId}`)
-        .then((response: AxiosResponse) => {
-          console.log(response.data, 'response.data');
-          setUserFound(response.data);
-        });
-    }
-  }, [onAuthChange, savedToken, tokenUserId]);
-  console.log(userFound, 'user trouvé dans profil');
+
   //--------------------------- pour déterminer si l'utilisateur est authentifié ou non. ------------------------//
 
   return (

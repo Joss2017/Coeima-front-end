@@ -1,35 +1,21 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Admin } from '../../components/userConnect/admin/Admin';
 import { UserHome } from '../../components/userConnect/userHome/UserHome';
 import { UserMessage } from '../../components/userConnect/userMessage/UserMessage';
 import { UserProfil } from '../../components/userConnect/userProfil/UserProfil';
-import { AuthContext } from '../../context/auth-context';
-import { PayLoadTokenProps } from '../../interface/Interface';
-import jwtDecode from 'jwt-decode';
 import './Account.css';
+import { AuthContext } from '../../context/AuthContext';
 
 export const Account = () => {
+  const { connectedUser } = useContext(AuthContext);
+  console.log('CONNECTED USER', connectedUser);
   //--contexte pour déterminer si l'utilisateur est authentifié ou non. Il récupère les propriétés onAuthChange et savedToken---//
-
-  const [tokenUserId, setTokenUserId] = useState<string | null>(null);
-  const { savedToken, onAuthChange } = useContext(AuthContext);
 
   //-- pour déterminer si l'utilisateur est authentifié ou non. Il récupère les propriétés onAuthChangeet savedToken---//
 
-  
   /** --------Si valeur de savedToken ou onAuthChange est modifiée,
    * le useEffect est appelé, ce qui permet d'exécuter la fonction onAuthChange(savedToken)
    * et de mettre à jour l'état de l'application en conséquence-------------*/
-  useEffect(() => {
-    onAuthChange(savedToken);
-    if (savedToken) {
-      const decoded: PayLoadTokenProps = jwtDecode(savedToken);
-      console.log('la valeur du Payload est', decoded.id);
-      setTokenUserId(decoded.id);
-    }
-  }, [onAuthChange, savedToken]);
-  
-  console.log('la valeur du tokenUserId est', tokenUserId);
 
   return (
     <div className='tabset'>
