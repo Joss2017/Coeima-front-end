@@ -26,6 +26,8 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
   //------------------------------------------à jour l'état de connection de notre utilisateur---------------------//
   //------------------------------------------et d'accéder au token via notre context------------------------------//
 
+  // fonction qui récupère l'accesToken dans le local storage, vérifie s'il est expiré ou non et met à jour le currentUser si tout est ok.
+
   let recupToken: string | null;
   recupToken = localStorage.getItem('token');
   const [token, SetToken] = useState<string | null>(
@@ -45,7 +47,7 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
       console.log('valeur du token avant tokenFunction');
 
       const decoded: PayLoadTokenProps = jwtDecode(token);
-      if (decoded.exp * 1000 <= Date.now()) {
+      if (decoded.exp - Date.now() / 1000 < 0) {
         setTokenExpired('token valide');
         return true;
       } else {
@@ -55,7 +57,7 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
     }
   };
 
-  console.log()
+  console.log();
 
   //--------------------------------Récupération d'une variable utilisable de token expiré-----------------------------------------//
 

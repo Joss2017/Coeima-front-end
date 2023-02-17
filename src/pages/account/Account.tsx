@@ -16,8 +16,10 @@ export const Account = () => {
 
   //-- pour déterminer si l'utilisateur est authentifié ou non. Il récupère les propriétés onAuthChangeet savedToken---//
 
-  console.log('la valeur du tokenUserId est', tokenUserId);
-
+  
+  /** --------Si valeur de savedToken ou onAuthChange est modifiée,
+   * le useEffect est appelé, ce qui permet d'exécuter la fonction onAuthChange(savedToken)
+   * et de mettre à jour l'état de l'application en conséquence-------------*/
   useEffect(() => {
     onAuthChange(savedToken);
     if (savedToken) {
@@ -26,10 +28,8 @@ export const Account = () => {
       setTokenUserId(decoded.id);
     }
   }, [onAuthChange, savedToken]);
-
-  /** --------Si valeur de savedToken ou onAuthChange est modifiée,
-   * le useEffect est appelé, ce qui permet d'exécuter la fonction onAuthChange(savedToken)
-   * et de mettre à jour l'état de l'application en conséquence-------------*/
+  
+  console.log('la valeur du tokenUserId est', tokenUserId);
 
   return (
     <div className='tabset'>
