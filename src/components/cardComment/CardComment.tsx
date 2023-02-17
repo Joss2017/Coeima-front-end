@@ -1,6 +1,6 @@
-import React from 'react';
+import './CardComment.css';
 
-const Comment = () => {
+const CardComment = () => {
   return (
     <div>
       <div className='mb-3'>

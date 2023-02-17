@@ -47,7 +47,8 @@ a,
 }
 
 .btn {
-  font-weight: bold;
+  color: #2a5360 !important;
+  font-weight: bold !important;
 }
 
 .title-login {

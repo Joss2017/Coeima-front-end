@@ -131,24 +131,16 @@ export const Login = () => {
                 Mot de Passe
               </label>
             </div>
-            <div className='mb-3 form-check'>
-              <input
-                type='checkbox'
-                className='form-check-input'
-                id='exampleCheck1'
-              />
-              <label className='form-check-label' htmlFor='exampleCheck1'>
-                Check me out
-              </label>
-            </div>
-            <div className='d-flex justify-content-center'>
-              <button type='submit' className='btn btn-danger btn-block '>
+
+            <div className='d-flex justify-content-center mt-3'>
+              <button type='submit' className='btn btn-warning '>
                 Se Connecter
               </button>
             </div>
-            <div className='alert alert-warning mt-5' role='alert'>
-              <Link to='/register' className='link-register'>
-                Pas encore inscrit ? cliquez ici
+            <div className='alert alert-warning  mt-5' role='alert'>
+              Pas encore inscrit ?
+              <Link to='/register' className='alert-link'>
+                cliquez ici
               </Link>
             </div>
           </form>

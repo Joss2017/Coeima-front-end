@@ -208,7 +208,7 @@ export const Register = () => {
             </div>
 
             <div className='d-flex justify-content-center'>
-              <button type='submit' className='btn btn-danger btn-block '>
+              <button type='submit' className='btn btn-warning btn-block '>
                 S'inscrire
               </button>
             </div>
