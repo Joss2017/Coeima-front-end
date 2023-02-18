@@ -1,4 +1,3 @@
-
 //---------------------------------------Interface Offer-------------------------------------//
 export interface OfferProps {
   id: string;
@@ -21,17 +20,17 @@ export interface TopicProps {
   title: string;
   body: string;
   url: string;
+  favorites: boolean;
 }
 
 //---------------------------------------Interface cardTopic-------------------------------//
 
-export interface CardTopicPtops {
+export interface CardTopicProps {
   cardTopic: TopicProps;
+  onClickFavorite:{(topicFavorite:boolean):void}
 }
 
 //---------------------------------------Interface PayloadToken-------------------------------//
-
-
 
 //---------------------------------------Interface User-------------------------------------//
 export interface UserTypeProps {

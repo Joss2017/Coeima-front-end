@@ -1,11 +1,14 @@
 import axios, { AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { axiosPrivate, axiosPublic } from '../../api/Axios';
 import { CardTopic } from '../../components/cardTopic/CardTopic';
+import { AuthContext } from '../../context/AuthContext';
 import { TopicProps } from '../../interface/Interface';
 import './Topic.css';
 
 export const Topic = () => {
+  const { connectedUser } = useContext(AuthContext);
+
   const [listCardTopics, setListCardTopics] = useState<TopicProps[] | null>(
     null
   );
@@ -23,12 +26,26 @@ export const Topic = () => {
       });
     console.log(listCardTopics);
   }, []);
+  // mettre à jour l'affichage de notre composant en fonction de la valeur de result
+  const handleClickFavorite = (topicFavorite: boolean) => {
+    if (topicFavorite === true) {
+      setListCardTopics(listCardTopics);
+      console.log('topicFavorite Topic', topicFavorite);
+    } else {
+    }
+  };
 
   return (
-    <div className='list-cardsTopics'>
-      {listCardTopics?.map((topic: TopicProps) => (
-        <CardTopic key={topic.id} cardTopic={topic} />
-      ))}
-    </div>
+    <>
+      <div className='list-cardsTopics'>
+        {listCardTopics?.map((topic: TopicProps) => (
+          <CardTopic
+            key={topic.id}
+            cardTopic={topic}
+            onClickFavorite={handleClickFavorite}
+          />
+        ))}
+      </div>
+    </>
   );
 };

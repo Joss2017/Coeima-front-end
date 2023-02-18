@@ -15,7 +15,7 @@ export const CardOffer = ({ cardOffer }: CardOfferProps) => {
         <li>{cardOffer.price}</li>
         <button
           type='button'
-          className='btn btn-primary'
+          className='btn btn-warning'
           data-bs-toggle='modal'
           data-bs-target='#exampleModal'
           data-bs-whatever='@getbootstrap'

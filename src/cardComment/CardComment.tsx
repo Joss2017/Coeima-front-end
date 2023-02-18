@@ -1,6 +1,6 @@
 import './CardComment.css';
 
-const CardComment = () => {
+export const CardComment = () => {
   return (
     <div>
       <div className='mb-3'>
@@ -26,5 +26,3 @@ const CardComment = () => {
     </div>
   );
 };
-
-export default Comment;

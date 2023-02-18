@@ -32,8 +32,8 @@ export const App = () => {
             }
           />
         </Routes>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </>
   );
 };
