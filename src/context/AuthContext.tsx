@@ -12,7 +12,7 @@ interface UserContextProps {
 //---------------------------------Définition de l'interface pour notre context-----------------------------------------------------------//
 
 export interface AuthContextInterface {
-  connectedUser: UserTypeProps | undefined | null; // récupérer le user connecté
+  connectedUser: UserTypeProps | undefined | null // récupérer le user connecté
   savedToken: string | null; // Token sauvegardé dans le context
   setAuthChange: (token: string | null) => void; // Fonction pour changer le token sauvegardé dans le context
 }
@@ -44,6 +44,8 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
       console.log('token///////////', token);
       console.log('tokenDecoded.id///////////', tokenDecoded.id);
       return tokenDecoded.id;
+    } else {
+      console.log('erreur dans la connexion');
     }
   };
 

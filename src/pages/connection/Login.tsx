@@ -83,26 +83,27 @@ export const Login = () => {
   return (
     <>
       <div className='login-wrapper'>
-        <div className='container-alert '>
-          {error && (
+        <div className='container-alert mt-5 '>
+          {error ? (
             <div className='alert alert-danger' role='alert' id='alert-danger'>
               {error}
             </div>
-          )}
-          {isUserLogged === true && (
-            <div
-              className='alert alert-success'
-              role='alert'
-              id='alert-success'
-            >
-              "Connexion réussie"
-            </div>
+          ) : (
+            isUserLogged === true && (
+              <div
+                className='alert alert-success'
+                role='alert'
+                id='alert-success'
+              >
+                "Connexion réussie"
+              </div>
+            )
           )}
         </div>
         <div className='container-form-login '>
           <form onSubmit={handleSubmitForm} className='form-login'>
             <h1 className='title-login'>Connecte-toi</h1>
-            <div className='form-outline mb-3'>
+            <div className='form-outline mt-' id='input-login'>
               <input
                 type='email'
                 className='form-control'
@@ -117,7 +118,7 @@ export const Login = () => {
               </label>
             </div>
 
-            <div className='form-outline mb-3'>
+            <div className='form-outline mt-3' id='input-login'>
               <input
                 type='password'
                 className='form-control'

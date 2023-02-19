@@ -2,21 +2,38 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ForumIcon from '@mui/icons-material/Forum';
 import HomeIcon from '@mui/icons-material/Home';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import { NavLink } from 'react-router-dom';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 import '../navbar/Navbar.css';
 
 export const Navbar = () => {
+  const { savedToken, setAuthChange } = useContext(AuthContext);
+  //---------------------------------------useNavigate permets de naviguer sur une autre page après condition---------------//
+  const navigate = useNavigate();
+
+  //---------------------------------------Fonction qui permets de changer l'état du button si user connecté ou non---------//
+  const handleLogout = () => {
+    setAuthChange(null);
+    localStorage.removeItem('token');
+
+    navigate('/login');
+  };
+
   return (
     <>
       <nav className='navbar sticky-top navbar-expand-lg '>
         <div className='container-fluid'>
-          <img
-            className='rounded-circle '
-            src='./assets/Photo-site.png'
-            alt='logo du site'
-          />
-
+          <div className='img-logo'>
+            <img
+              className='rounded-circle '
+              src='assets/Photo-site.png'
+              alt='logo du site'
+            />
+          </div>
           <button
             className='navbar-toggler'
             type='button'
@@ -30,6 +47,23 @@ export const Navbar = () => {
           </button>
           <div className='collapse navbar-collapse' id='navbarNav'>
             <ul className='navbar-nav ms-md-auto gap-2'>
+              <li className='nav-item-rounded'>
+                {savedToken ? (
+                  <button
+                    type='button'
+                    className='btn-connect'
+                    onClick={handleLogout}
+                  >
+                    <CheckCircleOutlineIcon />
+                    Connecté
+                  </button>
+                ) : (
+                  <button type='button' className=' btn-disconnected'>
+                    <HighlightOffIcon />
+                    Deconnecté
+                  </button>
+                )}
+              </li>
               <li className='nav-item rounded'>
                 <NavLink to='/' className='link-NB'>
                   <HomeIcon className='logo-NB' />

@@ -36,20 +36,20 @@ export const Register = () => {
     //--------------------------------------condition rattachée aux Inputs par useRef pour la gestion des erreurs------------------------//
 
     if (nicknameElement.current && nicknameElement.current.value.length < 4) {
-      setError("La taille du pseudo doit être d'au moins de 4 caractères");
+      setError(' taille du pseudo 4 caractères min');
       return;
     } else if (
       !emailElement.current?.value ||
       !passwordElement.current?.value
     ) {
-      setError('Veuillez renseigner les champs  email et  mot de passe');
+      setError('Renseigner les champs  email et  mot de passe');
       return;
     } else if (
       passwordElement.current &&
       passwordElement.current.value.length < 8
     ) {
       setError(
-        'Le mot de passe doit contenir au moins 8 caractères, une lettre minuscule, une lettre majuscule, et un chiffre ou un caractère spécial'
+        ' 8 caractères min, une lettre minuscule, une lettre majuscule, et un chiffre ou un caractère spécial'
       );
 
       return;
@@ -98,7 +98,7 @@ export const Register = () => {
   return (
     <>
       <div className='register-wrapper'>
-        <div className='container-alert'>
+        <div className='container-alert '>
           {isUserRegistered && (
             <div
               className='alert alert-success'
@@ -119,10 +119,10 @@ export const Register = () => {
             </div>
           )}
         </div>
-        <div className='container-form-register '>
-          <h1 className='title-register'>Inscription</h1>
-          <form onSubmit={handleSubmitForm}>
-            <div className='form-outline mb-1'>
+        <div className='container-form-register'>
+          <form onSubmit={handleSubmitForm} className='form-register '>
+            <h1 className='title-register'>INSCRIPTION</h1>
+            <div className='form-outline mt-2'>
               <input
                 type='text'
                 className='form-control'

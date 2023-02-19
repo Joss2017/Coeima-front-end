@@ -4,7 +4,9 @@
 }
 
 .container-alert {
+  display: flex;
   height: 100%;
+  width: 100%;
   justify-content: center;
   background-color: #f3f3f3;
 }
@@ -12,7 +14,7 @@
 #alert-success,
 #alert-danger {
   height: 100%;
-  width: 60%;
+  align-items: center;
   text-align: center;
   margin: 0;
 }
@@ -30,7 +32,10 @@
 }
 
 .title-login {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: end;
+  color: #a28b57;
 }
 
 .submit {
@@ -53,7 +58,38 @@ a,
 
 .title-login {
   text-align: center;
+  stroke: #f3f3f3;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
+  .title-login {
+    color: #a28b57;
+    font-size: 5vh;
+    margin-bottom: 5vh;
+  }
+  .form-login {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 5vh;
+    border: double;
+    border-radius: 2vh;
+    border-color: #a28b57;
+    background-image: linear-gradient(
+      312.25deg,
+      hwb(52 40% 52%) 0%,
+      rgba(55, 55, 53, 0) 50.19%
+    );
+  }
+
+  .form-outline {
+    font-size: 3vh;
+  }
+
+  #input-login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 }
