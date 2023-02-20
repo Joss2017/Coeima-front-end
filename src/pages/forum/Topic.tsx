@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { axiosPrivate, axiosPublic } from '../../api/Axios';
+import {  axiosPublic } from '../../api/Axios';
 import { CardTopic } from '../../components/cardTopic/CardTopic';
 import { AuthContext } from '../../context/AuthContext';
 import { TopicProps } from '../../interface/Interface';
@@ -25,7 +25,7 @@ export const Topic = () => {
         console.log(error);
       });
     console.log(listCardTopics);
-  }, []);
+  }, [listCardTopics]);
   // mettre à jour l'affichage de notre composant en fonction de la valeur de result
   const handleClickFavorite = (topicFavorite: boolean) => {
     if (topicFavorite === true) {
@@ -45,6 +45,7 @@ export const Topic = () => {
             onClickFavorite={handleClickFavorite}
           />
         ))}
+        <span>Possibilité de paiement en plusieurs fois (jusqu’à 3 fois)</span>
       </div>
     </>
   );

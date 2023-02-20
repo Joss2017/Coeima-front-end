@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
-import { axiosPrivate, axiosPublic } from '../../api/Axios';
+import { axiosPublic } from '../../api/Axios';
 import { CardOffer } from '../../components/cardOffer/CardOffer';
 import { OfferProps } from '../../interface/Interface';
 import './Offer.css';
