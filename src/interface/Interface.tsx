@@ -1,3 +1,22 @@
+//---------------------------------------Interface User-------------------------------------//
+export interface UserTypeProps {
+  role: string;
+  nickname: string;
+  email: string;
+  password: string;
+  phone: string;
+  files: string;
+  legendFiles?: string;
+}
+//---------------------------------------Interface PayloadToken-------------------------------//
+
+export interface PayLoadTokenProps {
+  exp: number;
+  iat: number;
+  id: string;
+  email: string;
+  role: string;
+}
 //---------------------------------------Interface Offer-------------------------------------//
 export interface OfferProps {
   id: string;
@@ -27,26 +46,17 @@ export interface TopicProps {
 
 export interface CardTopicProps {
   cardTopic: TopicProps;
-  onClickFavorite:{(topicFavorite:boolean):void}
+  onClickFavorite: { (topicFavorite: boolean): void };
 }
 
-//---------------------------------------Interface PayloadToken-------------------------------//
-
-//---------------------------------------Interface User-------------------------------------//
-export interface UserTypeProps {
-  role: string;
-  nickname: string;
-  email: string;
-  password: string;
-  phone: string;
-  files: string;
-  legendFiles?: string;
-}
-
-export interface PayLoadTokenProps {
-  exp: number;
-  iat: number;
+//---------------------------------------Interface Message-------------------------------//
+export interface MessageProps {
   id: string;
-  email: string;
-  role: string;
+  body: string;
+  url: string;
+  sender: string;
+  receiver: string;
+}
+export interface CardMessageProps {
+  cardMessage: MessageProps;
 }

@@ -1,5 +1,4 @@
-import React from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+import { Carousel } from 'react-bootstrap';
 import './Home.css';
 
 export const Home = () => {

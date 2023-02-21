@@ -125,7 +125,6 @@ export const Login = () => {
                 id='passwordUser'
                 placeholder='mot de passe'
                 autoComplete='new-password'
-                // onChange={handleChange}
                 ref={passwordElement}
               />
               <label className='form-label' htmlFor='passwordUser'>
