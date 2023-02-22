@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Admin } from '../../components/userConnect/admin/Admin';
 import { UserHome } from '../../components/userConnect/userHome/UserHome';
-import { Message } from '../../components/userConnect/userMessage/message/Message';
+import { CardMessage } from '../../components/userConnect/userMessage/message/CardMessage';
 import { UserProfil } from '../../components/userConnect/userProfil/UserProfil';
 import { AuthContext } from '../../context/AuthContext';
 import './Account.css';
@@ -63,7 +63,7 @@ export const Account = () => {
           </section>
           <section id='message' className='tab-panel'>
             <h2>Messages</h2>
-            <Message />
+            <CardMessage id={''} body={''} url={''} sender={''} receiver={''} />
           </section>
           <section id='profil' className='tab-panel'>
             <h2>Profil</h2>

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
-import './CreateMessage.css';
+import './CardCreateMessage.css';
 
-const CreateMessage = () => {
+export const CardCreateMessage = () => {
   const bodyElement = useRef<HTMLInputElement>(null);
   const urlElement = useRef<HTMLInputElement>(null);
 
@@ -34,5 +34,3 @@ const CreateMessage = () => {
     </div>
   );
 };
-
-export default CreateMessage;

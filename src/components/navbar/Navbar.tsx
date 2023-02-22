@@ -83,10 +83,17 @@ export const Navbar = () => {
                 </NavLink>
               </li>
               <li className='nav-item dropdown rounded'>
-                <NavLink to='/login' className='link-NB'>
-                  <AccountCircleIcon className='logo-NB' />
-                  Profil
-                </NavLink>
+                {savedToken ? (
+                  <NavLink to='/Account' className='link-NB'>
+                    <AccountCircleIcon className='logo-NB' />
+                    Profil
+                  </NavLink>
+                ) : (
+                  <NavLink to='/login' className='link-NB'>
+                    <AccountCircleIcon className='logo-NB' />
+                    Profil
+                  </NavLink>
+                )}
               </li>
             </ul>
           </div>
