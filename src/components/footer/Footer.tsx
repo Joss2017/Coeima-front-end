@@ -9,8 +9,11 @@ export const Footer = () => {
       <footer className='footer-container'>
         <div className='container-1'>
           <label>Contactez-moi</label>
-          <Link to='mailto:josselinbaptiste@live.fr' className='logo-footer'>
-            <MailOutlineIcon className='logo-footer'  />
+          <Link
+            to='mailto:camille.joaquim.coeima@gmail.com'
+            className='logo-footer'
+          >
+            <MailOutlineIcon className='logo-mail' />
           </Link>
         </div>
         <div className='container-2'>
@@ -19,7 +22,7 @@ export const Footer = () => {
         <div className='container-3'>
           <label>Mon actu </label>
           <Link to='https://www.instagram.com/cam_eha' className='logo-footer'>
-            <InstagramIcon className='logo-footer' />
+            <InstagramIcon className='logo-instagram' />
           </Link>
         </div>
       </footer>

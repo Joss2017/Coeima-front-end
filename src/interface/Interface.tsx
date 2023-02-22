@@ -1,6 +1,7 @@
 //---------------------------------------Interface User-------------------------------------//
 export interface UserTypeProps {
   role: string;
+  id: string;
   nickname: string;
   email: string;
   password: string;
@@ -52,11 +53,19 @@ export interface CardTopicProps {
 //---------------------------------------Interface Message-------------------------------//
 export interface MessageProps {
   id: string;
+  date_creation: string;
   body: string;
   url: string;
+  isRead: boolean;
   sender: string;
   receiver: string;
 }
 export interface CardMessageProps {
   cardMessage: MessageProps;
+}
+
+//---------------------------------------Interface SearchBar-------------------------------//
+
+export interface SearchBarProps {
+  onSearch: (userInput: string) => void;
 }

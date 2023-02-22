@@ -1,8 +1,10 @@
-.card {
-  width: 100%;
-  align-items: center;
+.container {
+  width: 2vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.card-offer {
+.card {
+  text-align: center;
   list-style: none;
 }

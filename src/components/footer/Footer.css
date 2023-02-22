@@ -4,7 +4,7 @@
   align-items: center;
   background-color: #2a5360;
   color: #ffc519;
-  height: 10vh;
+  height: 8vh;
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -16,7 +16,7 @@
   align-items: center;
   flex-direction: column;
   font-size: 1.9vh;
-  height: 10vh;
+  height: 12vh;
   width: 9em;
   font-weight: bold;
 }
@@ -37,13 +37,17 @@
   flex-direction: column;
   font-size: 1.9vh;
   height: 10vh;
-  width: 10em;
+  width: 8em;
   font-weight: bold;
 }
 
-.logo-footer {
+.logo-mail {
   color: #ffc519;
-  font-size: 1.7em !important;
+  font-size: 2.5em !important;
+}
+.logo-instagram {
+  color: #ffc519;
+  font-size: 2.5em !important;
 }
 
 .copyright {
@@ -52,7 +56,7 @@
 
 @media (min-width: 768px) {
   .footer-container {
-    height: 10vh;
+    height: 12vh;
     font-size: 2em;
   }
 
@@ -60,5 +64,11 @@
     margin-top: 50px;
     height: 100px;
     font-weight: lighter;
+  }
+
+  .logo-footer {
+    color: #ffc519;
+
+    font-size: 2em !important;
   }
 }

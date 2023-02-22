@@ -12,9 +12,10 @@ interface UserContextProps {
 //---------------------------------Définition de l'interface pour notre context-----------------------------------------------------------//
 
 export interface AuthContextInterface {
-  connectedUser: UserTypeProps | undefined | null // récupérer le user connecté
+  connectedUser: UserTypeProps | undefined | null; // récupérer le user connecté
   savedToken: string | null; // Token sauvegardé dans le context
   setAuthChange: (token: string | null) => void; // Fonction pour changer le token sauvegardé dans le context
+  tokenTime: (token: string | null) => void;
 }
 //--------------------------- Initialisation de notre context avec une première valeur (l'objet)-----------------------------------------//
 
@@ -22,6 +23,8 @@ export const AuthContext = createContext<AuthContextInterface>({
   connectedUser: null,
   savedToken: null,
   setAuthChange: (token: string | undefined | null) => {},
+    tokenTime: (token: string | null) => {}
+
 });
 
 /**
@@ -37,6 +40,19 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem('token') || null
   );
+
+  const tokenTime = () => {
+    if (token) {
+      let tokenDecoded: PayLoadTokenProps = jwtDecode(token);
+      if (Date.now() <= tokenDecoded.exp * 1000) {
+        return tokenDecoded.exp;
+      } else {
+        setToken(null);
+      }
+
+      console.log('token///////////', token);
+    }
+  };
 
   const searchUser = () => {
     if (token) {
@@ -69,7 +85,7 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
           localStorage.removeItem('token');
         }
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
   console.log('verification de user-------------', user);
 
@@ -79,6 +95,7 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
     connectedUser: user,
     setAuthChange: setToken,
     savedToken: token,
+    tokenTime: setToken,
   };
   console.log(
     "voici l'utilisateur connecté..........",

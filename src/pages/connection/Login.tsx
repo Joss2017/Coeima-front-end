@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { axiosPrivate, axiosPublic } from '../../api/Axios';
+import { axiosPublic } from '../../api/Axios';
 import { AuthContext } from '../../context/AuthContext';
 import './Login.css';
 

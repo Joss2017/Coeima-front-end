@@ -25,9 +25,12 @@ export const Offer = () => {
   console.log(listCardOffers);
 
   return (
-    <div>
+    <div className='container'>
+      <h5>Mes prestations :</h5>
       {listCardOffers.map((offer) => (
-        <CardOffer key={offer.id} cardOffer={offer} />
+        <ul key={offer.id}>
+          <CardOffer cardOffer={offer} />
+        </ul>
       ))}
     </div>
   );

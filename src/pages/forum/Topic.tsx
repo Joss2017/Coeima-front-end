@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { axiosPublic } from '../../api/Axios';
+import { CardComment } from '../../components/cardComment/CardComment';
 import { CardTopic } from '../../components/cardTopic/CardTopic';
 import { AuthContext } from '../../context/AuthContext';
 import { TopicProps } from '../../interface/Interface';
@@ -39,12 +40,16 @@ export const Topic = () => {
     <>
       <div className='list-cardsTopics'>
         {listCardTopics?.map((topic: TopicProps) => (
-          <CardTopic
-            key={topic.id}
-            cardTopic={topic}
-            onClickFavorite={handleClickFavorite}
-          />
+          <>
+            <CardTopic
+              key={topic.id}
+              cardTopic={topic}
+              onClickFavorite={handleClickFavorite}
+            />
+            <CardComment />
+          </>
         ))}
+
         <span>Possibilité de paiement en plusieurs fois (jusqu’à 3 fois)</span>
       </div>
     </>

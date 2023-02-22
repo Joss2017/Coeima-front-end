@@ -1,21 +1,55 @@
-import { useContext } from 'react';
+import { AxiosResponse } from 'axios';
+import { useContext, useEffect, useState } from 'react';
+import { axiosPrivate } from '../../api/Axios';
+import { SearchBar } from '../../components/SearchBar';
 import { Admin } from '../../components/userConnect/admin/Admin';
 import { UserHome } from '../../components/userConnect/userHome/UserHome';
-import { CardMessage } from '../../components/userConnect/userMessage/message/CardMessage';
+import { CardMessage } from '../../components/userConnect/userMessage/cardMessage/CardMessage';
 import { UserProfil } from '../../components/userConnect/userProfil/UserProfil';
 import { AuthContext } from '../../context/AuthContext';
+import { MessageProps } from '../../interface/Interface';
 import './Account.css';
 
+let tabCardMessages: MessageProps[] = [];
+let dataMess: MessageProps[] = [];
+
 export const Account = () => {
+  //---------------------------------------Contexte-----------------------------------------------------------//
+
   const { connectedUser } = useContext(AuthContext);
 
-  //--contexte pour déterminer si l'utilisateur est authentifié ou non. Il récupère les propriétés onAuthChange et savedToken---//
+  //---------------------------------------Section Message---------------------------------------------------//
 
-  //-- pour déterminer si l'utilisateur est authentifié ou non. Il récupère les propriétés onAuthChangeet savedToken---//
+  const [listCardMessages, setlistCardMessages] = useState<MessageProps[]>([]);
 
-  /** --------Si valeur de savedToken ou onAuthChange est modifiée,
-   * le useEffect est appelé, ce qui permet d'exécuter la fonction onAuthChange(savedToken)
-   * et de mettre à jour l'état de l'application en conséquence-------------*/
+  useEffect(() => {
+    axiosPrivate
+      .get('/message')
+      .then((response: AxiosResponse) => {
+        tabCardMessages = response.data;
+        setlistCardMessages(tabCardMessages);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleUserInput = (userInputText: string) => {
+    console.log("qu'a tapé mon user ? : ", userInputText);
+    let MessTemporaire = [...listCardMessages];
+    if (userInputText.length > 0) {
+      MessTemporaire = MessTemporaire.filter((e) =>
+        e.date_creation.includes(userInputText)
+      );
+      setlistCardMessages(MessTemporaire);
+      console.log('ma nouvelle listeState après search : ', listCardMessages);
+      console.log('ma nouvelle liste après search : ', MessTemporaire);
+    } else {
+      setlistCardMessages(dataMess);
+    }
+  };
+
+  //---------------------------------------Section Message---------------------------------------------------//
 
   return (
     <>
@@ -44,7 +78,6 @@ export const Account = () => {
         {/* <!-- Tab 4 --> */}
         {connectedUser?.role === 'admin' && (
           <>
-            {' '}
             <input
               type='radio'
               name='tabset'
@@ -62,8 +95,11 @@ export const Account = () => {
             <UserHome />
           </section>
           <section id='message' className='tab-panel'>
-            <h2>Messages</h2>
-            <CardMessage id={''} body={''} url={''} sender={''} receiver={''} />
+            <h2>Messages reçus</h2>
+            <SearchBar onSearch={handleUserInput} />
+            {listCardMessages.map((message) => (
+              <CardMessage key={message.id} cardMessage={message} />
+            ))}
           </section>
           <section id='profil' className='tab-panel'>
             <h2>Profil</h2>
