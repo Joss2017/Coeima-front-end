@@ -49,6 +49,21 @@ export interface CardTopicProps {
   cardTopic: TopicProps;
   onClickFavorite: { (topicFavorite: boolean): void };
 }
+//---------------------------------------Interface Comment-------------------------------------//
+
+export interface CommentProps {
+  id: string;
+  title: string;
+  body: string;
+  url: string;
+  favorites: boolean;
+}
+
+//---------------------------------------Interface card-------------------------------//
+
+export interface CardCommentProps {
+  cardComment: CommentProps;
+}
 
 //---------------------------------------Interface Message-------------------------------//
 export interface MessageProps {
@@ -57,11 +72,19 @@ export interface MessageProps {
   body: string;
   url: string;
   isRead: boolean;
-  sender: string;
-  receiver: string;
+  sender: UserTypeProps;
+  receiver: UserTypeProps;
 }
+//---------------------------------------Interface Message-------------------------------//
+
 export interface CardMessageProps {
-  cardMessage: MessageProps;
+  message: MessageProps;
+}
+//---------------------------------------Interface Message-------------------------------//
+
+export interface CardCreateMessageProps {
+  createMessage : MessageProps;
+  
 }
 
 //---------------------------------------Interface SearchBar-------------------------------//

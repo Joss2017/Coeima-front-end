@@ -4,7 +4,7 @@ import { axiosPublic } from '../../api/Axios';
 import { CardComment } from '../../components/cardComment/CardComment';
 import { CardTopic } from '../../components/cardTopic/CardTopic';
 import { AuthContext } from '../../context/AuthContext';
-import { TopicProps } from '../../interface/Interface';
+import { CommentProps, TopicProps } from '../../interface/Interface';
 import './Topic.css';
 
 export const Topic = () => {
@@ -13,6 +13,9 @@ export const Topic = () => {
   const [listCardTopics, setListCardTopics] = useState<TopicProps[] | null>(
     null
   );
+  const [listCardComments, setListCardComments] = useState<
+    CommentProps[] | null
+  >(null);
 
   useEffect(() => {
     axiosPublic

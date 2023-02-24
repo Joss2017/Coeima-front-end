@@ -1,4 +1,5 @@
-.button-messages{
-    display: flex;
-    justify-content: space-around;
+.button-messages {
+  height: auto;
+  display: flex;
+  justify-content: space-around;
 }

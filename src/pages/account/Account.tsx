@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { axiosPrivate } from '../../api/Axios';
-import { SearchBar } from '../../components/SearchBar';
 import { Admin } from '../../components/userConnect/admin/Admin';
 import { UserHome } from '../../components/userConnect/userHome/UserHome';
+import { CardCreateMessage } from '../../components/userConnect/userMessage/cardCreateMessage/CardCreateMessage';
 import { CardMessage } from '../../components/userConnect/userMessage/cardMessage/CardMessage';
 import { UserProfil } from '../../components/userConnect/userProfil/UserProfil';
 import { AuthContext } from '../../context/AuthContext';
@@ -11,10 +11,9 @@ import { MessageProps } from '../../interface/Interface';
 import './Account.css';
 
 let tabCardMessages: MessageProps[] = [];
-let dataMess: MessageProps[] = [];
 
 export const Account = () => {
-  //---------------------------------------Contexte-----------------------------------------------------------//
+  //---------------------------------------Contexte User Connecté-----------------------------------------------------------//
 
   const { connectedUser } = useContext(AuthContext);
 
@@ -24,7 +23,7 @@ export const Account = () => {
 
   useEffect(() => {
     axiosPrivate
-      .get('/message')
+      .get(`/message`)
       .then((response: AxiosResponse) => {
         tabCardMessages = response.data;
         setlistCardMessages(tabCardMessages);
@@ -34,21 +33,10 @@ export const Account = () => {
       });
   }, []);
 
-  const handleUserInput = (userInputText: string) => {
-    console.log("qu'a tapé mon user ? : ", userInputText);
-    let MessTemporaire = [...listCardMessages];
-    if (userInputText.length > 0) {
-      MessTemporaire = MessTemporaire.filter((e) =>
-        e.date_creation.includes(userInputText)
-      );
-      setlistCardMessages(MessTemporaire);
-      console.log('ma nouvelle listeState après search : ', listCardMessages);
-      console.log('ma nouvelle liste après search : ', MessTemporaire);
-    } else {
-      setlistCardMessages(dataMess);
-    }
-  };
-
+  console.log(
+    'Valeur de la réponse axios de la liste des messages',
+    listCardMessages
+  );
   //---------------------------------------Section Message---------------------------------------------------//
 
   return (
@@ -95,10 +83,12 @@ export const Account = () => {
             <UserHome />
           </section>
           <section id='message' className='tab-panel'>
-            <h2>Messages reçus</h2>
-            <SearchBar onSearch={handleUserInput} />
+            <h2>Messages</h2>
+
+            <CardCreateMessage />
+
             {listCardMessages.map((message) => (
-              <CardMessage key={message.id} cardMessage={message} />
+              <CardMessage key={message.id} message={message} />
             ))}
           </section>
           <section id='profil' className='tab-panel'>

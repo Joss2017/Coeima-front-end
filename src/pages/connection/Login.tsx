@@ -1,5 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { AxiosResponse } from 'axios';
+import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { axiosPublic } from '../../api/Axios';
@@ -7,25 +7,23 @@ import { AuthContext } from '../../context/AuthContext';
 import './Login.css';
 
 export const Login = () => {
+  //--contexte pour déterminer si l'utilisateur est authentifié ou non. Il récupère les propriétés par onAuthChange et savedToken---//
+
   const { setAuthChange } = useContext(AuthContext);
-  //---------------------------------------useRef permets de recupérer les valeurs des données entrantes---------------------//
+  //---------------------------------------useRef permets de recupérer les valeurs des données entrantes-----------------------------//
 
   const emailElement = useRef<HTMLInputElement>(null);
   const passwordElement = useRef<HTMLInputElement>(null);
 
-  //---------------------------------------useNavigate permets de naviguer sur une autre page après condition---------------//
+  //---------------------------------------useNavigate permets de naviguer sur une autre page après condition------------------------//
 
   const navigate = useNavigate();
-  //--------------------------------------AuthContext permets de gérer si token dans localstorage si user est connecté ou pas----------------------//
 
-  // const { onAuthChange } = useContext(AuthContext);
-  // const { savedToken } = useContext(AuthContext);
-
-  //--------------------------------------useState permets de gérer l'état si user est conecté ou pas----------------------//
+  //--------------------------------------useState permets de gérer l'état si user est conecté ou pas--------------------------------//
   const [error, setError] = useState<string>('');
   const [isUserLogged, setisUserLogged] = useState<boolean>(false);
 
-  //--------------------------------------Axios.post Auth avec les valeurs réxupérées par useRef------------------------//
+  //--------------------------------------Axios.post Auth avec les valeurs réxupérées par useRef--------------------------------------//
 
   const handleSubmitForm = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -110,7 +108,6 @@ export const Login = () => {
                 id='emailUser'
                 autoComplete='new-email'
                 placeholder='name@example.com'
-                // onChange={handleChange}
                 ref={emailElement}
               />
               <label className='form-label' htmlFor='emailUser'>

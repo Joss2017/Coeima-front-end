@@ -23,8 +23,7 @@ export const AuthContext = createContext<AuthContextInterface>({
   connectedUser: null,
   savedToken: null,
   setAuthChange: (token: string | undefined | null) => {},
-    tokenTime: (token: string | null) => {}
-
+  tokenTime: (token: string | null) => {},
 });
 
 /**
@@ -41,18 +40,23 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
     localStorage.getItem('token') || null
   );
 
+  //--------------------------------------- Fonction contextuelle permettant de vérifier l'expiration d'un token------------------------//
+
   const tokenTime = () => {
     if (token) {
       let tokenDecoded: PayLoadTokenProps = jwtDecode(token);
       if (Date.now() <= tokenDecoded.exp * 1000) {
         return tokenDecoded.exp;
       } else {
+        localStorage.removeItem('token');
         setToken(null);
       }
 
       console.log('token///////////', token);
     }
   };
+
+  //--------------------------------------- Permets de rechercher le user connecté depuis le token-----------------------------------//
 
   const searchUser = () => {
     if (token) {
@@ -95,7 +99,7 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
     connectedUser: user,
     setAuthChange: setToken,
     savedToken: token,
-    tokenTime: setToken,
+    tokenTime: tokenTime,
   };
   console.log(
     "voici l'utilisateur connecté..........",
