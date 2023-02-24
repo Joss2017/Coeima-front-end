@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { axiosPrivate } from '../../../../api/Axios';
 import { AuthContext } from '../../../../context/AuthContext';
@@ -55,14 +55,24 @@ export const CardCreateMessage = () => {
     console.log(bodyElement.current?.value);
     console.log(urlElement.current?.value);
 
+    const files = urlElement.current?.files;
+    let imageUploadedUrl = null
+    if (files && files.length) {
+      const formData = new FormData();
+      formData.append('upload_preset', 'gtfdh6ev');
+      formData.append('file', files[0]);
+      const uploadImageResponse = await axios.post('https://api.Cloudinary.com/v1_1/dkppi4iss/image/upload', formData);
+      imageUploadedUrl = uploadImageResponse.data.url;
+      console.log(imageUploadedUrl, uploadImageResponse.data)
+    }
+
     let userAdmin = users.filter((admin) => admin.role === 'admin');
 
     if (connectedUser?.role === 'admin') {
       axiosPrivate
-        .post('/message/', {
-          receiver: userSelectElement.current?.value,
+        .post('/message' + userSelectElement.current?.value, {
           body: bodyElement.current?.value,
-          url: urlElement.current?.value,
+          url: imageUploadedUrl,
         })
         .then((response: AxiosResponse) => {
           console.log("la réponse d'un post message", response);
@@ -73,10 +83,9 @@ export const CardCreateMessage = () => {
         });
     } else {
       axiosPrivate
-        .post('/message/', {
-          receiver: userAdmin,
+        .post('/message', {
           body: bodyElement.current?.value,
-          url: urlElement.current?.value,
+          url: imageUploadedUrl,
         })
         .then((response: AxiosResponse) => {
           console.log("la réponse d'un post message", response);
