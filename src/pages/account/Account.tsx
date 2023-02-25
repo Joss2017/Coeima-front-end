@@ -22,15 +22,39 @@ export const Account = () => {
   const [listCardMessages, setlistCardMessages] = useState<MessageProps[]>([]);
 
   useEffect(() => {
-    axiosPrivate
-      .get(`/message`)
-      .then((response: AxiosResponse) => {
-        tabCardMessages = response.data;
-        setlistCardMessages(tabCardMessages);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (connectedUser?.role === 'admin') {
+      axiosPrivate
+        .get(`/message`)
+        .then((response: AxiosResponse) => {
+          tabCardMessages = response.data;
+          console.log(
+            'repnse de axios pour liste de messages admin',
+            tabCardMessages
+          );
+          console.log(tabCardMessages);
+          setlistCardMessages(tabCardMessages);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      axiosPrivate
+        .get(`/message`, {
+          params: { receiver_id: connectedUser?.id },
+        })
+        .then((response: AxiosResponse) => {
+          tabCardMessages = response.data;
+          console.log(
+            'repnse de axios pour liste de messages admin',
+            tabCardMessages
+          );
+          console.log(tabCardMessages);
+          setlistCardMessages(tabCardMessages);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, []);
 
   console.log(
@@ -84,8 +108,9 @@ export const Account = () => {
           </section>
           <section id='message' className='tab-panel'>
             <h2>Messages</h2>
-
-            <CardCreateMessage />
+            <div>
+              <CardCreateMessage />
+            </div>
 
             {listCardMessages.map((message) => (
               <CardMessage key={message.id} message={message} />

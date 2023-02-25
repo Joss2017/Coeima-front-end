@@ -13,13 +13,23 @@ export const CardCreateMessage = () => {
 
   const userSelectElement = useRef<HTMLSelectElement>(null);
   const bodyElement = useRef<HTMLTextAreaElement>(null);
-  const urlElement = useRef<HTMLInputElement>(null);
 
   //--------------------------------------useState permets de gérer message crée +chois du user est conecté ou pas------------//
 
   const [messageCreated, setmessageCreated] = useState<string | null>();
+  const [error, setError] = useState<string | null>();
   const [users, setUsers] = useState<UserTypeProps[]>([]);
 
+  //--------------------------------------Permets  de Recuperer tout les Users dans l'input select---------------------------//
+
+  useEffect(() => {
+    if (connectedUser?.role === 'admin') {
+      axiosPrivate.get('/user').then((res) => {
+        console.log(res.data);
+        setUsers(res.data);
+      });
+    }
+  }, []);
   //--------------------------------------Permets  de selectionner la valeur du select---------------------------------------//
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -30,22 +40,12 @@ export const CardCreateMessage = () => {
   };
 
   const userSelectFiltered: UserTypeProps[] = users.filter(
-    (userSelect) =>
-      userSelect.id && userSelect.role === userSelectElement.current?.value
+    (userSelect) => userSelect.id === userSelectElement.current?.value
   );
   console.log(
     'user selectionnée dans le filtre du dropdown : ',
     userSelectFiltered
   );
-
-  //--------------------------------------Permets  de Recuperer tout les Users dans l'input select---------------------------//
-
-  useEffect(() => {
-    axiosPrivate.get('/user').then((res) => {
-      console.log(res.data);
-      setUsers(res.data);
-    });
-  }, []);
 
   //--------------------------------------Permets  de Gérer si le messagest lu ou non-----------------------------------------//
 
@@ -53,16 +53,15 @@ export const CardCreateMessage = () => {
     e.preventDefault();
 
     console.log(bodyElement.current?.value);
-    console.log(urlElement.current?.value);
+    let tabUsers = [...users];
 
-    let userAdmin = users.filter((admin) => admin.role === 'admin');
+    console.log('valeur de user admin', tabUsers);
 
     if (connectedUser?.role === 'admin') {
       axiosPrivate
-        .post('/message/', {
-          receiver: userSelectElement.current?.value,
+        .post(`/message/`, {
+          receiver_id: userSelectElement.current?.value,
           body: bodyElement.current?.value,
-          url: urlElement.current?.value,
         })
         .then((response: AxiosResponse) => {
           console.log("la réponse d'un post message", response);
@@ -74,15 +73,15 @@ export const CardCreateMessage = () => {
     } else {
       axiosPrivate
         .post('/message/', {
-          receiver: userAdmin,
+          role: connectedUser?.role === 'admin',
           body: bodyElement.current?.value,
-          url: urlElement.current?.value,
         })
         .then((response: AxiosResponse) => {
           console.log("la réponse d'un post message", response);
           setmessageCreated('Message envoyé !');
         })
         .catch((error) => {
+          setError('Message non transmis !');
           console.log(error);
         });
     }
@@ -90,10 +89,16 @@ export const CardCreateMessage = () => {
   return (
     <div className='createMessage-wrapper'>
       <div className='container-alert mt-5 '>
-        {messageCreated && (
+        {messageCreated ? (
           <div className='alert alert-success' role='alert'>
             {messageCreated}
           </div>
+        ) : (
+          error && (
+            <div className='alert alert-warning' role='alert'>
+              {error}
+            </div>
+          )
         )}
       </div>
       <div>
@@ -134,7 +139,6 @@ export const CardCreateMessage = () => {
             className='form-control'
             accept='image/*'
             id='image'
-            ref={urlElement}
           />
         </div>
         <div className='d-flex justify-content-center mt-3'>
