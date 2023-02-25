@@ -1,10 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { axiosPublic } from '../../api/Axios';
-import { CardComment } from '../../components/cardComment/CardComment';
-import { CardTopic } from '../../components/cardTopic/CardTopic';
+import { CardTopic } from '../../components/topic/cardTopic/CardTopic';
+import { CardComment } from '../../components/comment/cardComment/CardComment';
 import { AuthContext } from '../../context/AuthContext';
-import { CommentProps, TopicProps } from '../../interface/Interface';
+import { CommentProps } from '../../interface/Comment';
+import { TopicProps } from '../../interface/Topic';
 import './Topic.css';
 
 export const Topic = () => {

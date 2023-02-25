@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { useContext, useState } from 'react';
 import { axiosPrivate } from '../../../../api/Axios';
 import { AuthContext } from '../../../../context/AuthContext';
-import { CardMessageProps } from '../../../../interface/Interface';
+import { CardMessageProps } from '../../../../interface/Message';
 import './CardMessage.css';
 
 export const CardMessage = ({ message }: CardMessageProps) => {
@@ -62,66 +62,96 @@ export const CardMessage = ({ message }: CardMessageProps) => {
           <></>
         )}
       </div>
-      <table className='table'>
-        <tbody>
-          <tr className={isRead === false ? 'table-warning' : 'table-success'}>
-            <th scope='row'>{message.date_creation}</th>
-            <td className='button-messages '>
+      {connectedUser?.role === 'admin' ? (
+        <table className='table'>
+          <thead>
+            <tr
+              className={isRead === false ? 'table-warning' : 'table-success'}
+            >
+              <th scope='col'>#</th>
+              <th scope='col'>Envoyé par</th>
+              <th scope='col'>Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope='row'>1</th>
+              <td>{message.sender.nickname}</td>
+              <td>{message.date_creation}</td>
+            </tr>
+          </tbody>
+        </table>
+      ) : (
+        <table className='table'>
+          <thead>
+            <tr
+              className={isRead === false ? 'table-warning' : 'table-success'}
+            >
+              <th scope='col'>#</th>
+              <th scope='col'>Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope='row'>1</th>
+              <td>{message.date_creation}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
+      <button
+        type='button'
+        className='btn btn-warning'
+        data-bs-toggle='modal'
+        data-bs-target='#exampleModal'
+        onClick={handleClickRead}
+      >
+        Voir le message
+      </button>
+      <button
+        type='button'
+        className='btn btn-danger'
+        onClick={handleClickDelete}
+      >
+        supprimer le message
+      </button>
+      <div
+        className='modal fade'
+        id='exampleModal'
+        tabIndex={-1}
+        aria-labelledby='exampleModalLabel'
+        aria-hidden='true'
+      >
+        <div className='modal-dialog'>
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h1 className='modal-title fs-5' id='exampleModalLabel'>
+                Contenu du message
+              </h1>
               <button
                 type='button'
-                className='btn btn-warning'
-                data-bs-toggle='modal'
-                data-bs-target='#exampleModal'
-                onClick={handleClickRead}
-              >
-                Voir le message
-              </button>
+                className='btn-close'
+                data-bs-dismiss='modal'
+                aria-label='Close'
+              ></button>
+            </div>
+            <div className='modal-body' onChange={handleChange}>
+              {message.body}
+            </div>
+            <div className='modal-footer'>
               <button
                 type='button'
-                className='btn btn-danger'
-                onClick={handleClickDelete}
+                className='btn btn-secondary'
+                data-bs-dismiss='modal'
               >
-                supprimer le message
+                Close
               </button>
-              <div
-                className='modal fade'
-                id='exampleModal'
-                tabIndex={-1}
-                aria-labelledby='exampleModalLabel'
-                aria-hidden='true'
-              >
-                <div className='modal-dialog'>
-                  <div className='modal-content'>
-                    <div className='modal-header'>
-                      <h1 className='modal-title fs-5' id='exampleModalLabel'>
-                        Contenu du message
-                      </h1>
-                      <button
-                        type='button'
-                        className='btn-close'
-                        data-bs-dismiss='modal'
-                        aria-label='Close'
-                      ></button>
-                    </div>
-                    <div className='modal-body' onChange={handleChange}>
-                      {message.body}
-                    </div>
-                    <div className='modal-footer'>
-                      <button
-                        type='button'
-                        className='btn btn-secondary'
-                        data-bs-dismiss='modal'
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

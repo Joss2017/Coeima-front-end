@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchBarProps } from '../interface/Interface';
+import { SearchBarProps } from '../interface/Searbar';
 
 export const SearchBar = ({ onSearch }: SearchBarProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

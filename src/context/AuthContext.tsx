@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import { createContext, ReactElement, useEffect, useState } from 'react';
 import { axiosPublic } from '../api/Axios';
-import { PayLoadTokenProps, UserTypeProps } from '../interface/Interface';
+import { PayLoadTokenProps, UserTypeProps } from '../interface/User';
 
 //---------------------------------Définition de l'interface de nos props-----------------------------------------------------------------//
 

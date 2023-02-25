@@ -7,7 +7,7 @@ import { CardCreateMessage } from '../../components/userConnect/userMessage/card
 import { CardMessage } from '../../components/userConnect/userMessage/cardMessage/CardMessage';
 import { UserProfil } from '../../components/userConnect/userProfil/UserProfil';
 import { AuthContext } from '../../context/AuthContext';
-import { MessageProps } from '../../interface/Interface';
+import { MessageProps } from '../../interface/Message';
 import './Account.css';
 
 let tabCardMessages: MessageProps[] = [];

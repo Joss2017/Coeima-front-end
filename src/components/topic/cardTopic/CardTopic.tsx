@@ -1,7 +1,7 @@
-import { CardTopicProps } from '../../interface/Interface';
 import StarIcon from '@mui/icons-material/Star';
 import './CardTopic.css';
 import { useState } from 'react';
+import { CardTopicProps } from '../../../interface/Topic';
 
 export const CardTopic = ({ cardTopic, onClickFavorite }: CardTopicProps) => {
   const [topicFavorite, setTopicFavorite] = useState<boolean>(false);

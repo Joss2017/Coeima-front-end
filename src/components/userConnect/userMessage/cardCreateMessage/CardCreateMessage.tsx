@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { axiosPrivate } from '../../../../api/Axios';
 import { AuthContext } from '../../../../context/AuthContext';
-import { UserTypeProps } from '../../../../interface/Interface';
+import { UserTypeProps } from '../../../../interface/User';
 import './CardCreateMessage.css';
 
 export const CardCreateMessage = () => {
