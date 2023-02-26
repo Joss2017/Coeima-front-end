@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { async } from 'q';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { axiosPrivate } from '../../../../api/Axios';
 import { AuthContext } from '../../../../context/AuthContext';
@@ -29,10 +30,10 @@ export const CardCreateMessage = () => {
         setUsers(res.data);
       });
     }
-  }, []);
+  }, [connectedUser?.role]);
   //--------------------------------------Permets  de selectionner la valeur du select---------------------------------------//
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelect = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log(
       'handleselect : user sélectionnée : ',
       userSelectElement.current?.value
@@ -53,9 +54,6 @@ export const CardCreateMessage = () => {
     e.preventDefault();
 
     console.log(bodyElement.current?.value);
-    let tabUsers = [...users];
-
-    console.log('valeur de user admin', tabUsers);
 
     if (connectedUser?.role === 'admin') {
       axiosPrivate

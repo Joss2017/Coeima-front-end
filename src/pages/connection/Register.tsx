@@ -60,9 +60,6 @@ export const Register = () => {
         'La confirmation de mot de passe doit être identique au mot de passe'
       );
       return;
-    } else if (phoneElement.current && phoneElement.current.value.length < 10) {
-      setError('10 chiffres minimum');
-      return;
     }
 
     try {

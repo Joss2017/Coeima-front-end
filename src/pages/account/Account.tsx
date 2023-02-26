@@ -61,7 +61,6 @@ export const Account = () => {
     'Valeur de la réponse axios de la liste des messages',
     listCardMessages
   );
-  //---------------------------------------Section Message---------------------------------------------------//
 
   return (
     <>

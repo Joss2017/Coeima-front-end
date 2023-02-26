@@ -13,6 +13,7 @@ export const CardMessage = ({ message }: CardMessageProps) => {
   //--------------------------------------useState permets de gérer message crée +chois du user est conecté ou pas------------//
 
   const [isRead, setIsRead] = useState<boolean>(message.isRead);
+  const [isDelete, setisDelete] = useState<string>('');
 
   //--------------------------------------Permets  de Gérer si le messagest est lu ou non------------------------------------//
   const handleChange = (e: React.FormEvent) => {
@@ -21,11 +22,11 @@ export const CardMessage = ({ message }: CardMessageProps) => {
     axiosPrivate
       .get(`/message/${message?.id}`)
       .then((response: AxiosResponse) => {
-        console.log('valeur de les response pour un message lu', response);
+        console.log('valeur de les response pour un message lu', response.data);
       });
   };
 
-  const handleClickRead = (e: React.FormEvent) => {
+  const handleClickRead = async (e: React.FormEvent) => {
     e.preventDefault();
     axiosPrivate
       .patch(`/message/${message.id}`, {
@@ -43,12 +44,14 @@ export const CardMessage = ({ message }: CardMessageProps) => {
 
   //--------------------------------------Permets  de supprimer le message au click----------------------------------------//
 
-  const handleClickDelete = (e: React.FormEvent) => {
+  const handleClickDelete = async (e: React.FormEvent) => {
     e.preventDefault();
     axiosPrivate
       .delete(`/message/${message.id}`)
       .then((response: AxiosResponse) => {
         console.log("la réponse d'un delete message", response);
+        setisDelete(response.data);
+        // window.location = document.location;
       })
       .catch((error) => console.log(error));
   };
@@ -56,11 +59,12 @@ export const CardMessage = ({ message }: CardMessageProps) => {
   return (
     <div>
       <div className='container-alert mt-5 '>
-        {isRead === false ? (
+        {isRead === false && (
           <div className='alert alert-warning'>Nouveau message</div>
-        ) : (
-          <></>
         )}
+      </div>
+      <div>
+        {isDelete && <div className='alert alert-success'>{isDelete}</div>}
       </div>
       {connectedUser?.role === 'admin' ? (
         <table className='table'>
@@ -68,7 +72,6 @@ export const CardMessage = ({ message }: CardMessageProps) => {
             <tr
               className={isRead === false ? 'table-warning' : 'table-success'}
             >
-              <th scope='col'>#</th>
               <th scope='col'>Envoyé par</th>
               <th scope='col'>Date</th>
             </tr>
@@ -76,7 +79,6 @@ export const CardMessage = ({ message }: CardMessageProps) => {
 
           <tbody>
             <tr>
-              <th scope='row'>1</th>
               <td>{message.sender.nickname}</td>
               <td>{message.date_creation}</td>
             </tr>
@@ -88,14 +90,12 @@ export const CardMessage = ({ message }: CardMessageProps) => {
             <tr
               className={isRead === false ? 'table-warning' : 'table-success'}
             >
-              <th scope='col'>#</th>
               <th scope='col'>Date</th>
             </tr>
           </thead>
 
           <tbody>
             <tr>
-              <th scope='row'>1</th>
               <td>{message.date_creation}</td>
             </tr>
           </tbody>
@@ -105,7 +105,7 @@ export const CardMessage = ({ message }: CardMessageProps) => {
         type='button'
         className='btn btn-warning'
         data-bs-toggle='modal'
-        data-bs-target='#exampleModal'
+        data-bs-target={`#${message.id}`}
         onClick={handleClickRead}
       >
         Voir le message
@@ -119,7 +119,7 @@ export const CardMessage = ({ message }: CardMessageProps) => {
       </button>
       <div
         className='modal fade'
-        id='exampleModal'
+        id={`${message.id}`}
         tabIndex={-1}
         aria-labelledby='exampleModalLabel'
         aria-hidden='true'
