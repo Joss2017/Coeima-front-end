@@ -1,11 +1,12 @@
-import { UserTypeProps } from "./User";
+import { UserTypeProps } from './User';
 
 //---------------------------------------Interface Message-------------------------------//
 export interface MessageProps {
   id: string;
   date_creation: string;
   body: string;
-  url: string;
+  files: string;
+  legendFiles?: string;
   isRead: boolean;
   sender: UserTypeProps;
   receiver: UserTypeProps;

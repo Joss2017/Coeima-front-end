@@ -1,5 +1,4 @@
 import { AxiosResponse } from 'axios';
-import { async } from 'q';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { axiosPrivate } from '../../../../api/Axios';
 import { AuthContext } from '../../../../context/AuthContext';
@@ -131,14 +130,7 @@ export const CardCreateMessage = () => {
             ref={bodyElement}
           ></textarea>
         </div>
-        <div className='form-outline mt-3' id='input-login'>
-          <input
-            type='file'
-            className='form-control'
-            accept='image/*'
-            id='image'
-          />
-        </div>
+
         <div className='d-flex justify-content-center mt-3'>
           <button type='submit' className='btn btn-warning '>
             Envoyer le message

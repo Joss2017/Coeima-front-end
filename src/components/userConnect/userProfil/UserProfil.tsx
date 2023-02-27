@@ -3,13 +3,26 @@ import { useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { axiosPrivate } from '../../../api/Axios';
 import { AuthContext } from '../../../context/AuthContext';
+import { UserTypeProps } from '../../../interface/User';
 import './UserProfil.css';
+
+let userTampon: UserTypeProps = {
+  nickname: '',
+  email: '',
+  password: '',
+  phone: '',
+  role: '',
+  id: '',
+};
 
 export const UserProfil = () => {
   const navigate = useNavigate();
   //-------------------------------------Contexte User Connecté--------------------------------------------------------//
 
   const { connectedUser } = useContext(AuthContext);
+  if (connectedUser) {
+    userTampon = connectedUser;
+  }
 
   //---------------------------------------useRef permets de recupérer les valeurs des données entrantes---------------------//
 
@@ -20,6 +33,7 @@ export const UserProfil = () => {
 
   //--------------------------- Usestate pour set nouvelle valeur du User ---------------------------------------------------//
   const [userUpdate, setuserUpdate] = useState<string | null>(null);
+  const [user, setuser] = useState<UserTypeProps>(userTampon);
 
   //--------------------------- Requête Axios Update pour mise à jour du Nickname  User ---------------------------------------//
   const handleClickNickname = async (
@@ -35,6 +49,8 @@ export const UserProfil = () => {
       })
       .then((response: AxiosResponse) => {
         console.log("Réponse de la récupération valeur d'un user", response);
+        userTampon.nickname = response.data.nickname;
+        setuser(userTampon);
         setuserUpdate(`Mise à jour réussi `);
       })
       .catch((error) => console.log(error));
@@ -55,6 +71,8 @@ export const UserProfil = () => {
       })
       .then((response: AxiosResponse) => {
         console.log("la réponse d'un patch user pour  update email", response);
+        userTampon.email = response.data.email;
+        setuser(userTampon);
         setuserUpdate(`Mise à jour réussi `);
       })
       .catch((error) => console.log(error));
@@ -97,6 +115,8 @@ export const UserProfil = () => {
       })
       .then((response: AxiosResponse) => {
         console.log("la réponse d'un patch user pour update phone", response);
+        userTampon.phone = response.data.phone;
+        setuser(userTampon);
         setuserUpdate(`Mise à jour réussi `);
       })
       .catch((error) => console.log(error));
@@ -113,7 +133,6 @@ export const UserProfil = () => {
         console.log('response ', response.data);
         alert('Votre compte a été supprimé!');
         navigate('/login');
-        window.location.reload();
       });
   };
 
@@ -228,6 +247,7 @@ export const UserProfil = () => {
                 type='password'
                 className='form-control'
                 id='newPasswordUser'
+                name='newPasswordUser'
                 placeholder='Tapez votre nouveau mot de passe '
                 ref={newPasswordElement}
               />

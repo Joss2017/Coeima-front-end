@@ -89,7 +89,7 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
           localStorage.removeItem('token');
         }
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
   console.log('verification de user-------------', user);
 

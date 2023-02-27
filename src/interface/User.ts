@@ -6,8 +6,6 @@ export interface UserTypeProps {
   email: string;
   password: string;
   phone: string;
-  files: string;
-  legendFiles?: string;
 }
 //---------------------------------------Interface PayloadToken-------------------------------//
 

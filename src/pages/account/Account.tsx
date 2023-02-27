@@ -55,7 +55,7 @@ export const Account = () => {
           console.log(error);
         });
     }
-  }, []);
+  }, [connectedUser?.id, connectedUser?.role]);
 
   console.log(
     'Valeur de la réponse axios de la liste des messages',
