@@ -16,8 +16,8 @@ export const CardCreateMessage = () => {
 
   //--------------------------------------useState permets de gérer message crée +chois du user est conecté ou pas------------//
 
-  const [messageCreated, setmessageCreated] = useState<string | null>();
-  const [error, setError] = useState<string | null>();
+  const [messageCreated, setmessageCreated] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [users, setUsers] = useState<UserTypeProps[]>([]);
 
   //--------------------------------------Permets  de Recuperer tout les Users dans l'input select---------------------------//
@@ -47,12 +47,30 @@ export const CardCreateMessage = () => {
     userSelectFiltered
   );
 
+  useEffect(() => {
+    // On définit une fonction qui sera exécutée à intervalles réguliers
+    const intervalId = setInterval(() => {
+      // On met à jour l'état "messageCreated" à "null"
+      setmessageCreated(null);
+      // On supprime le message d'erreur
+      setError(null);
+    }, 2000);
+
+    // On retourne une fonction qui sera exécutée lorsque le composant sera démonté
+    // Cette fonction a pour but d'arrêter l'exécution de la fonction setInterval
+    return () => clearInterval(intervalId);
+  }, []); // On utilise un tableau vide comme deuxième argument pour s'assurer que la fonction useEffect ne sera exécutée qu'une seule fois au montage du composant.```
+
   //--------------------------------------Permets  de Gérer si le messagest lu ou non-----------------------------------------//
 
   const handleSubmitForm = async (e: React.FormEvent) => {
     e.preventDefault();
 
     console.log(bodyElement.current?.value);
+
+    if (bodyElement.current?.value === '') {
+      setError('ton message ne peut pas être vide');
+    }
 
     if (connectedUser?.role === 'admin') {
       axiosPrivate
@@ -86,12 +104,12 @@ export const CardCreateMessage = () => {
   return (
     <div className='createMessage-wrapper'>
       <div className='container-alert mt-5 '>
-        {messageCreated ? (
+        {messageCreated !== null ? (
           <div className='alert alert-success' role='alert'>
             {messageCreated}
           </div>
         ) : (
-          error && (
+          error !== null && (
             <div className='alert alert-warning' role='alert'>
               {error}
             </div>

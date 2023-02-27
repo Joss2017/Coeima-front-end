@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { axiosPrivate } from '../../../api/Axios';
 import { AuthContext } from '../../../context/AuthContext';
@@ -33,6 +33,7 @@ export const UserProfil = () => {
 
   //--------------------------- Usestate pour set nouvelle valeur du User ---------------------------------------------------//
   const [userUpdate, setuserUpdate] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [user, setuser] = useState<UserTypeProps>(userTampon);
 
   //--------------------------- Requête Axios Update pour mise à jour du Nickname  User ---------------------------------------//
@@ -54,6 +55,7 @@ export const UserProfil = () => {
         setuserUpdate(`Mise à jour réussi `);
       })
       .catch((error) => console.log(error));
+    setError('erreur dans la mise à jour du pseudo');
   };
 
   //--------------------------- Requête Axios Update pour mise à jour du Email  User ---------------------------------------//
@@ -76,6 +78,7 @@ export const UserProfil = () => {
         setuserUpdate(`Mise à jour réussi `);
       })
       .catch((error) => console.log(error));
+    setError("erreur dans la mise à jour de l'email");
   };
   //--------------------------- Requête Axios Update pour mise à jour du Mot de Passe  User ---------------------------------------//
 
@@ -98,6 +101,7 @@ export const UserProfil = () => {
         setuserUpdate(`Mise à jour réussi `);
       })
       .catch((error) => console.log(error));
+    setError('erreur dans la mise à jour du password');
   };
 
   //--------------------------- Requête Axios Update pour mise à jour du Téléphone  User ---------------------------------------//
@@ -120,6 +124,7 @@ export const UserProfil = () => {
         setuserUpdate(`Mise à jour réussi `);
       })
       .catch((error) => console.log(error));
+    setError('erreur dans la mise à jour du téléphone');
   };
 
   const deleteAccount = async () => {
@@ -136,18 +141,30 @@ export const UserProfil = () => {
       });
   };
 
+  useEffect(() => {
+    // Création d'un interval qui va appeler la fonction toutes les 2 secondes
+    const intervalId = setInterval(() => {
+      // On met à jour le state userUpdate en le remettant à null
+      setuserUpdate(null);
+      setError(null);
+    }, 2000);
+
+    // Nettoyage du setInterval lorsque le composant est démonté ou que le state change
+    // pour éviter des problèmes de fuites de mémoire
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div>
       <div>
-        {userUpdate === null ? (
-          <></>
-        ) : (
-          <div>
-            {userUpdate && (
-              <div className='alert alert-success' role='alert'>
-                {userUpdate}
-              </div>
-            )}
+        {userUpdate !== null && (
+          <div className='alert alert-success' role='alert'>
+            {userUpdate}
+          </div>
+        )}
+        {error !== null && (
+          <div className='alert alert-warning' role='alert'>
+            {error}
           </div>
         )}
       </div>

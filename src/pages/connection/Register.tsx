@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { axiosPrivate } from '../../api/Axios';
 import './Register.css';
@@ -92,11 +92,25 @@ export const Register = () => {
     }
   };
 
+  useEffect(() => {
+    //-------------------------------------------On définit une fonction qui sera exécutée à intervalles réguliers---------------------//
+    const intervalId = setInterval(() => {
+      //------------------------------------------- On met à jour l'état "isUserRegistered" à "null"------------------------------------//
+      setIsUserRegistered(null);
+      //--------------------------------------------- On supprime le message d'erreur---------------------------------------------------//
+      setError(null);
+    }, 3000);
+
+    //--------------------------------- On retourne une fonction qui sera exécutée lorsque le composant sera démonté----------------------//
+    //----------------------------------- Cette fonction a pour but d'arrêter l'exécution de la fonction setInterval----------------------//
+    return () => clearInterval(intervalId);
+  }, []); // On utilise un tableau vide comme deuxième argument pour s'assurer que la fonction useEffect ne sera exécutée qu'une seule fois au montage du composant.
+
   return (
     <>
       <div className='register-wrapper'>
         <div className='container-alert '>
-          {isUserRegistered && (
+          {isUserRegistered !== null && (
             <div
               className='alert alert-success'
               id='alert-success'
@@ -106,7 +120,7 @@ export const Register = () => {
             </div>
           )}
 
-          {error && (
+          {error !== null && (
             <div
               className='alert alert-warning'
               id='alert-warning'

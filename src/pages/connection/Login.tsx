@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { axiosPublic } from '../../api/Axios';
@@ -20,8 +20,8 @@ export const Login = () => {
   const navigate = useNavigate();
 
   //--------------------------------------useState permets de gérer l'état si user est conecté ou pas--------------------------------//
-  const [error, setError] = useState<string>('');
-  const [isUserLogged, setisUserLogged] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isUserLogged, setisUserLogged] = useState<string | null>(null);
 
   //--------------------------------------Axios.post Auth avec les valeurs réxupérées par useRef--------------------------------------//
 
@@ -60,8 +60,8 @@ export const Login = () => {
           if (token) {
             localStorage.setItem('token', token);
             setAuthChange(token);
-            setisUserLogged(true);
-            setTimeout(() => navigate('/account'), 1000);
+            setisUserLogged('Connexion réussie !');
+            setTimeout(() => navigate('/account'), 2000);
           } else {
             setError(response.data);
           }
@@ -78,22 +78,36 @@ export const Login = () => {
     }
   };
 
+  useEffect(() => {
+    // On définit une fonction qui sera exécutée à intervalles réguliers
+    const intervalId = setInterval(() => {
+      // On met à jour l'état "isUserLogged" à "false"
+      setisUserLogged(null);
+      // On supprime le message d'erreur
+      setError(null);
+    }, 2000);
+
+    // On retourne une fonction qui sera exécutée lorsque le composant sera démonté
+    // Cette fonction a pour but d'arrêter l'exécution de la fonction setInterval
+    return () => clearInterval(intervalId);
+  }, []); // On utilise un tableau vide comme deuxième argument pour s'assurer que la fonction useEffect ne sera exécutée qu'une seule fois au montage du composant.```
+
   return (
     <>
       <div className='login-wrapper'>
         <div className='container-alert mt-5 '>
-          {error ? (
+          {error !== null ? (
             <div className='alert alert-danger' role='alert' id='alert-danger'>
               {error}
             </div>
           ) : (
-            isUserLogged === true && (
+            isUserLogged !== null && (
               <div
                 className='alert alert-success'
                 role='alert'
                 id='alert-success'
               >
-                "Connexion réussie"
+                {isUserLogged}
               </div>
             )
           )}
@@ -146,3 +160,6 @@ export const Login = () => {
     </>
   );
 };
+function setuserUpdate(arg0: null) {
+  throw new Error('Function not implemented.');
+}
