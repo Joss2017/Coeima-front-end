@@ -57,15 +57,7 @@ export const CardMessage = ({ message }: CardMessageProps) => {
   };
 
   return (
-    <div>
-      <div className='container-alert mt-5 '>
-        {isRead === false && (
-          <div className='alert alert-warning'>Nouveau message</div>
-        )}
-      </div>
-      <div>
-        {isDelete && <div className='alert alert-success'>{isDelete}</div>}
-      </div>
+    <div className='message-wrapper'>
       {connectedUser?.role === 'admin' ? (
         <table className='table'>
           <thead>
@@ -73,7 +65,12 @@ export const CardMessage = ({ message }: CardMessageProps) => {
               className={isRead === false ? 'table-warning' : 'table-success'}
             >
               <th scope='col'>Envoyé par</th>
-              <th scope='col'>Date</th>
+              <th className='th-isRead' scope='col'>
+                Date{' '}
+                {isRead === false ? (
+                  <span className='span'>New message</span>
+                ) : null}{' '}
+              </th>
             </tr>
           </thead>
 

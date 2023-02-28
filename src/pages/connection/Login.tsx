@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { axiosPublic } from '../../api/Axios';
@@ -39,79 +39,72 @@ export const Login = () => {
       null
     ) {
       setError('Merci de remplir les champs');
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
       return;
-    } else if (
-      passwordElement.current &&
-      passwordElement.current?.value.length < 8
-    ) {
+    }
+    if (passwordElement.current && passwordElement.current?.value.length < 8) {
       setError('erreur de mot de passe');
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
       return;
     }
-    try {
-      await axiosPublic
-        .post('auth/login', {
-          email: emailElement.current?.value,
-          password: passwordElement.current?.value,
-        })
-        .then((response: AxiosResponse) => {
-          console.log('réponse de axios', response.data);
 
-          const token = response.data.accessToken;
-          if (token) {
-            localStorage.setItem('token', token);
-            setAuthChange(token);
-            setisUserLogged('Connexion réussie !');
-            setTimeout(() => navigate('/account'), 2000);
-          } else {
-            setError(response.data);
-          }
-        });
-    } catch (error: any) {
-      console.log('error valeur', error.response.data.message);
-      if (error.response) {
+    await axiosPublic
+      .post('auth/login', {
+        email: emailElement.current?.value,
+        password: passwordElement.current?.value,
+      })
+      .then((response: AxiosResponse) => {
+        console.log('réponse de axios', response.data);
+
+        const token = response.data.accessToken;
+        if (token) {
+          localStorage.setItem('token', token);
+          setAuthChange(token);
+          setisUserLogged('Connexion réussie !');
+          setTimeout(() => {
+            setisUserLogged(null);
+            navigate('/account');
+          }, 1000);
+        }
+      })
+      .catch((error) => {
         setError(error.response.data.message);
-        console.log(
-          'error.response.data.message valeur',
-          error.response.data.message
-        );
-      }
-    }
+        setTimeout(() => {
+          setError(null);
+        }, 2000);
+      });
   };
-
-  useEffect(() => {
-    // On définit une fonction qui sera exécutée à intervalles réguliers
-    const intervalId = setInterval(() => {
-      // On met à jour l'état "isUserLogged" à "false"
-      setisUserLogged(null);
-      // On supprime le message d'erreur
-      setError(null);
-    }, 2000);
-
-    // On retourne une fonction qui sera exécutée lorsque le composant sera démonté
-    // Cette fonction a pour but d'arrêter l'exécution de la fonction setInterval
-    return () => clearInterval(intervalId);
-  }, []); // On utilise un tableau vide comme deuxième argument pour s'assurer que la fonction useEffect ne sera exécutée qu'une seule fois au montage du composant.```
 
   return (
     <>
       <div className='login-wrapper'>
-        <div className='container-alert mt-5 '>
-          {error !== null ? (
-            <div className='alert alert-danger' role='alert' id='alert-danger'>
-              {error}
-            </div>
-          ) : (
-            isUserLogged !== null && (
+        {error || isUserLogged ? (
+          <div className='container-alert  '>
+            {error !== null ? (
               <div
-                className='alert alert-success'
+                className='alert alert-danger'
                 role='alert'
-                id='alert-success'
+                id='alert-danger'
               >
-                {isUserLogged}
+                {error}
               </div>
-            )
-          )}
-        </div>
+            ) : (
+              isUserLogged !== null && (
+                <div
+                  className='alert alert-success'
+                  role='alert'
+                  id='alert-success'
+                >
+                  {isUserLogged}
+                </div>
+              )
+            )}
+          </div>
+        ) : null}
         <div className='container-form-login '>
           <form onSubmit={handleSubmitForm} className='form-login'>
             <h1 className='title-login'>Connecte-toi</h1>
@@ -160,6 +153,3 @@ export const Login = () => {
     </>
   );
 };
-function setuserUpdate(arg0: null) {
-  throw new Error('Function not implemented.');
-}

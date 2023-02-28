@@ -13,7 +13,7 @@ interface UserContextProps {
 
 export interface AuthContextInterface {
   connectedUser: UserTypeProps | undefined | null; // récupérer le user connecté
-  savedToken: string | null; // Token sauvegardé dans le context
+  savedToken: string | null | undefined; // Token sauvegardé dans le context
   setAuthChange: (token: string | null) => void; // Fonction pour changer le token sauvegardé dans le context
   tokenTime: (token: string | null) => void;
 }
@@ -58,7 +58,7 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
 
   //--------------------------------------- Permets de rechercher le user connecté depuis le token-----------------------------------//
 
-  const searchUser = () => {
+  const currentUser = () => {
     if (token) {
       let tokenDecoded: PayLoadTokenProps = jwtDecode(token);
       console.log('token///////////', token);
@@ -72,7 +72,7 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
   //----Mise en place du useEffect + requete get  afin de ne pas perdre l'utilisateur connecté lors d'une reactualisation de la page----//
 
   useEffect(() => {
-    let userSearchId = searchUser();
+    let userSearchId = currentUser();
     axiosPublic
       .get(`/user/${userSearchId}`, {
         headers: {
@@ -89,7 +89,7 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
           localStorage.removeItem('token');
         }
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
   console.log('verification de user-------------', user);
 

@@ -1,28 +1,27 @@
 .register-wrapper {
+  background-color: #f3f3f3;
   text-align: center;
-  height: 6vh;
-}
-
-.container-alert {
-  display: flex;
-  height: 100%;
-  margin-top: 2vh;
-  margin-bottom: 1vh;
-  height: 100%;
-}
-
-#alert-success,
-#alert-warning {
-  height: 100%;
-  width: 100%;
-  text-align: center;
+  height: 100vh;
+  position: relative;
 }
 
 .container-form-register {
   display: flex;
+  border: #2a5360;
   justify-content: center;
-  background-color: #f3f3f3;
   color: #2a5360;
+  height: 100vh;
+  align-items: center;
+  padding-bottom: 15vh;
+}
+
+.container-alert {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  top: 3%;
+  right: 0;
 }
 
 .form-label {
@@ -33,7 +32,6 @@
 .title-register {
   display: flex;
   justify-content: center;
-
   color: #a28b57;
   text-align: center;
 }

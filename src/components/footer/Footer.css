@@ -56,19 +56,22 @@
 
 @media (min-width: 768px) {
   .footer-container {
-    height: 12vh;
+    height: 8vh;
     font-size: 2em;
   }
 
   .container-2 {
     margin-top: 50px;
-    height: 100px;
+    height: 5vh;
     font-weight: lighter;
   }
 
-  .logo-footer {
+  .logo-mail {
     color: #ffc519;
-
-    font-size: 2em !important;
+    font-size: 2.5em !important;
+  }
+  .logo-instagram {
+    color: #ffc519;
+    font-size: 2.5em !important;
   }
 }

@@ -28,10 +28,10 @@ export const Account = () => {
         .then((response: AxiosResponse) => {
           tabCardMessages = response.data;
           console.log(
-            'repnse de axios pour liste de messages admin',
+            'reponse de axios pour liste de messages admin',
             tabCardMessages
           );
-          console.log(tabCardMessages);
+          console.log('valeur de tabCardMessages ', tabCardMessages);
           setlistCardMessages(tabCardMessages);
         })
         .catch((error) => {
@@ -55,7 +55,7 @@ export const Account = () => {
           console.log(error);
         });
     }
-  }, [connectedUser?.id, connectedUser?.role]);
+  }, [connectedUser]);
 
   console.log(
     'Valeur de la réponse axios de la liste des messages',
@@ -102,13 +102,14 @@ export const Account = () => {
 
         <div className='tab-panels'>
           <section id='accueil' className='tab-panel'>
-            <h2>Accueil</h2>
             <UserHome />
           </section>
           <section id='message' className='tab-panel'>
-            <h2>Messages</h2>
             <div>
-              <CardCreateMessage />
+              <CardCreateMessage
+                listMessages={listCardMessages}
+                setListMessages={setlistCardMessages}
+              />
             </div>
 
             {listCardMessages.map((message) => (
@@ -116,11 +117,9 @@ export const Account = () => {
             ))}
           </section>
           <section id='profil' className='tab-panel'>
-            <h2>Profil</h2>
             <UserProfil />
           </section>
           <section id='admin' className='tab-panel'>
-            <h2>Paramètres</h2>
             <Admin />
           </section>
         </div>

@@ -2,10 +2,14 @@ import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { axiosPrivate } from '../../../../api/Axios';
 import { AuthContext } from '../../../../context/AuthContext';
+import { CardCreateMessageProps } from '../../../../interface/Message';
 import { UserTypeProps } from '../../../../interface/User';
 import './CardCreateMessage.css';
 
-export const CardCreateMessage = () => {
+export const CardCreateMessage = ({
+  setListMessages,
+  listMessages,
+}: CardCreateMessageProps) => {
   //-------------------------------------Contexte User Connecté--------------------------------------------------------//
 
   const { connectedUser } = useContext(AuthContext);
@@ -15,7 +19,6 @@ export const CardCreateMessage = () => {
   const bodyElement = useRef<HTMLTextAreaElement>(null);
 
   //--------------------------------------useState permets de gérer message crée +chois du user est conecté ou pas------------//
-
   const [messageCreated, setmessageCreated] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [users, setUsers] = useState<UserTypeProps[]>([]);
@@ -47,30 +50,12 @@ export const CardCreateMessage = () => {
     userSelectFiltered
   );
 
-  useEffect(() => {
-    // On définit une fonction qui sera exécutée à intervalles réguliers
-    const intervalId = setInterval(() => {
-      // On met à jour l'état "messageCreated" à "null"
-      setmessageCreated(null);
-      // On supprime le message d'erreur
-      setError(null);
-    }, 2000);
-
-    // On retourne une fonction qui sera exécutée lorsque le composant sera démonté
-    // Cette fonction a pour but d'arrêter l'exécution de la fonction setInterval
-    return () => clearInterval(intervalId);
-  }, []); // On utilise un tableau vide comme deuxième argument pour s'assurer que la fonction useEffect ne sera exécutée qu'une seule fois au montage du composant.```
-
   //--------------------------------------Permets  de Gérer si le messagest lu ou non-----------------------------------------//
 
   const handleSubmitForm = async (e: React.FormEvent) => {
     e.preventDefault();
 
     console.log(bodyElement.current?.value);
-
-    if (bodyElement.current?.value === '') {
-      setError('ton message ne peut pas être vide');
-    }
 
     if (connectedUser?.role === 'admin') {
       axiosPrivate
@@ -81,9 +66,17 @@ export const CardCreateMessage = () => {
         .then((response: AxiosResponse) => {
           console.log("la réponse d'un post message", response);
           setmessageCreated('Message envoyé !');
+          setListMessages([response.data, ...listMessages]);
+          setTimeout(() => {
+            setmessageCreated(null);
+          }, 2000);
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response.data.message);
+          setError(error.response.data.message);
+          setTimeout(() => {
+            setError(null);
+          }, 2000);
         });
     } else {
       axiosPrivate
@@ -94,29 +87,40 @@ export const CardCreateMessage = () => {
         .then((response: AxiosResponse) => {
           console.log("la réponse d'un post message", response);
           setmessageCreated('Message envoyé !');
+          setListMessages([response.data, ...listMessages]);
         })
         .catch((error) => {
-          setError('Message non transmis !');
-          console.log(error);
+          setError(error.response.data.message);
+          setTimeout(() => {
+            setError(null);
+          }, 2000);
         });
     }
   };
+
   return (
     <div className='createMessage-wrapper'>
-      <div className='container-alert mt-5 '>
-        {messageCreated !== null ? (
-          <div className='alert alert-success' role='alert'>
-            {messageCreated}
-          </div>
-        ) : (
-          error !== null && (
-            <div className='alert alert-warning' role='alert'>
+      <h2>Messages</h2>
+      {error || messageCreated ? (
+        <div className='container-alert  '>
+          {error !== null ? (
+            <div className='alert alert-danger' role='alert' id='alert-danger'>
               {error}
             </div>
-          )
-        )}
-      </div>
-      <div>
+          ) : (
+            messageCreated !== null && (
+              <div
+                className='alert alert-success'
+                role='alert'
+                id='alert-success'
+              >
+                {messageCreated}
+              </div>
+            )
+          )}
+        </div>
+      ) : null}
+      <div className='select'>
         {connectedUser?.role === 'admin' ? (
           <select
             className='form-select'
@@ -140,11 +144,11 @@ export const CardCreateMessage = () => {
       </div>
       <form onSubmit={handleSubmitForm} className='form-login'>
         <div className='form-group'>
-          <label htmlFor='comment'>Nouveau message</label>
+          <label htmlFor='message'>Nouveau message</label>
           <textarea
             className='form-control'
             rows={5}
-            id='comment'
+            id='message'
             ref={bodyElement}
           ></textarea>
         </div>

@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { AxiosResponse } from 'axios';
+import { FormEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { axiosPrivate } from '../../api/Axios';
+import { axiosPublic } from '../../api/Axios';
 import './Register.css';
 
 export const Register = () => {
@@ -33,107 +33,98 @@ export const Register = () => {
     console.log(confirmPasswordElement.current?.value);
     console.log(phoneElement.current?.value);
 
-    //--------------------------------------condition rattachée aux Inputs par useRef pour la gestion des erreurs------------------------//
+    // //--------------------------------------condition rattachée aux Inputs par useRef pour la gestion des erreurs------------------------//
 
     if (nicknameElement.current && nicknameElement.current.value.length < 4) {
       setError(' taille du pseudo 4 caractères min');
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
       return;
-    } else if (
-      !emailElement.current?.value ||
-      !passwordElement.current?.value
-    ) {
+    }
+    if (!emailElement.current?.value || !passwordElement.current?.value) {
       setError('Renseigner les champs  email et  mot de passe');
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
       return;
-    } else if (
-      passwordElement.current &&
-      passwordElement.current.value.length < 8
-    ) {
-      setError(
-        ' 8 caractères min, une lettre minuscule, une lettre majuscule, et un chiffre ou un caractère spécial'
-      );
-
+    }
+    if (passwordElement.current && passwordElement.current.value.length < 8) {
+      setError(' 8 caractères minimum');
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
       return;
-    } else if (
+    }
+    if (
       passwordElement.current?.value !== confirmPasswordElement.current?.value
     ) {
       setError(
         'La confirmation de mot de passe doit être identique au mot de passe'
       );
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
       return;
     }
 
-    try {
-      await axiosPrivate
-        .post('/auth/register', {
-          nickname: nicknameElement.current?.value,
-          email: emailElement.current?.value,
-          password: passwordElement.current?.value,
-          confirmPassword: confirmPasswordElement.current?.value,
-          phone: phoneElement.current?.value,
-        })
-        .then((response: AxiosResponse) => {
-          console.log('réponse de axios', response.data);
-          if (response.status === 201) {
-            setIsUserRegistered('Inscription réussie');
-            setTimeout(() => navigate('/login'), 1000);
-          } else {
-            setIsUserRegistered(response.data.message);
-          }
-        });
-    } catch (error: any) {
-      console.log('error valeur', error.response.data.message);
-      if (error.response) {
+    await axiosPublic
+      .post('/auth/register', {
+        nickname: nicknameElement.current?.value,
+        email: emailElement.current?.value,
+        password: passwordElement.current?.value,
+        confirmPassword: confirmPasswordElement.current?.value,
+        phone: phoneElement.current?.value,
+      })
+      .then((response: AxiosResponse) => {
+        console.log('réponse de axios', response.data);
+        if (response.status === 201) {
+          setIsUserRegistered('Inscription réussie !');
+
+          setTimeout(() => {
+            setIsUserRegistered(null);
+            navigate('/login');
+          }, 2000);
+        }
+      })
+      .catch((error) => {
         setError(error.response.data.message);
-        console.log(
-          'error.response.data.message valeur',
-          error.response.data.message
-        );
-      }
-    }
+        setTimeout(() => {
+          setError(null);
+        }, 2000);
+      });
   };
-
-  useEffect(() => {
-    //-------------------------------------------On définit une fonction qui sera exécutée à intervalles réguliers---------------------//
-    const intervalId = setInterval(() => {
-      //------------------------------------------- On met à jour l'état "isUserRegistered" à "null"------------------------------------//
-      setIsUserRegistered(null);
-      //--------------------------------------------- On supprime le message d'erreur---------------------------------------------------//
-      setError(null);
-    }, 3000);
-
-    //--------------------------------- On retourne une fonction qui sera exécutée lorsque le composant sera démonté----------------------//
-    //----------------------------------- Cette fonction a pour but d'arrêter l'exécution de la fonction setInterval----------------------//
-    return () => clearInterval(intervalId);
-  }, []); // On utilise un tableau vide comme deuxième argument pour s'assurer que la fonction useEffect ne sera exécutée qu'une seule fois au montage du composant.
 
   return (
     <>
       <div className='register-wrapper'>
-        <div className='container-alert '>
-          {isUserRegistered !== null && (
-            <div
-              className='alert alert-success'
-              id='alert-success'
-              role='alert'
-            >
-              {isUserRegistered}
-            </div>
-          )}
-
-          {error !== null && (
-            <div
-              className='alert alert-warning'
-              id='alert-warning'
-              role='alert'
-            >
-              {error}
-            </div>
-          )}
-        </div>
+        {error || isUserRegistered ? (
+          <div className='container-alert  '>
+            {error !== null ? (
+              <div
+                className='alert alert-danger'
+                role='alert'
+                id='alert-danger'
+              >
+                {error}
+              </div>
+            ) : (
+              isUserRegistered !== null && (
+                <div
+                  className='alert alert-success'
+                  role='alert'
+                  id='alert-success'
+                >
+                  {isUserRegistered}
+                </div>
+              )
+            )}
+          </div>
+        ) : null}
         <div className='container-form-register'>
           <form onSubmit={handleSubmitForm} className='form-register '>
             <h1 className='title-register'>INSCRIPTION</h1>
-            <div className='form-outline mt-2'>
+            <div className='form-outline '>
               <input
                 type='text'
                 className='form-control'
@@ -147,7 +138,7 @@ export const Register = () => {
               </label>
             </div>
 
-            <div className='form-outline mb-1'>
+            <div className='form-outline '>
               <input
                 type='email'
                 className='form-control'
@@ -161,7 +152,7 @@ export const Register = () => {
               </label>
             </div>
 
-            <div className='form-outline mb-1'>
+            <div className='form-outline '>
               <input
                 type='password'
                 className='form-control'
@@ -175,7 +166,7 @@ export const Register = () => {
               </label>
             </div>
 
-            <div className='form-outline mb-1'>
+            <div className='form-outline '>
               <input
                 type='password'
                 className='form-control'
@@ -189,7 +180,7 @@ export const Register = () => {
               </label>
             </div>
 
-            <div className='form-outline mb-1'>
+            <div className='form-outline '>
               <input
                 type='number'
                 id='typePhone'
@@ -200,21 +191,6 @@ export const Register = () => {
               />
               <label className='form-label' htmlFor='typePhone'>
                 Numéro de téléphone
-              </label>
-            </div>
-
-            <div className='form-check d-flex justify-content-center mb-5'>
-              <input
-                className='form-check-input me-2'
-                type='checkbox'
-                value=''
-                id='form2Example3cg'
-              />
-              <label className='form-check-label' htmlFor='form2Example3g'>
-                I agree all statements in{' '}
-                <a href='#!' className='text-body'>
-                  <u>Terms of service</u>
-                </a>
               </label>
             </div>
 

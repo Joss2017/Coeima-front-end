@@ -53,9 +53,15 @@ export const UserProfil = () => {
         userTampon.nickname = response.data.nickname;
         setuser(userTampon);
         setuserUpdate(`Mise à jour réussi `);
+        setTimeout(() => {
+          setuserUpdate(null);
+        }, 2000);
       })
       .catch((error) => console.log(error));
     setError('erreur dans la mise à jour du pseudo');
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
   };
 
   //--------------------------- Requête Axios Update pour mise à jour du Email  User ---------------------------------------//
@@ -76,9 +82,15 @@ export const UserProfil = () => {
         userTampon.email = response.data.email;
         setuser(userTampon);
         setuserUpdate(`Mise à jour réussi `);
+        setTimeout(() => {
+          setuserUpdate(null);
+        }, 2000);
       })
       .catch((error) => console.log(error));
     setError("erreur dans la mise à jour de l'email");
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
   };
   //--------------------------- Requête Axios Update pour mise à jour du Mot de Passe  User ---------------------------------------//
 
@@ -99,9 +111,15 @@ export const UserProfil = () => {
           response
         );
         setuserUpdate(`Mise à jour réussi `);
+        setTimeout(() => {
+          setuserUpdate(null);
+        }, 2000);
       })
       .catch((error) => console.log(error));
     setError('erreur dans la mise à jour du password');
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
   };
 
   //--------------------------- Requête Axios Update pour mise à jour du Téléphone  User ---------------------------------------//
@@ -122,18 +140,20 @@ export const UserProfil = () => {
         userTampon.phone = response.data.phone;
         setuser(userTampon);
         setuserUpdate(`Mise à jour réussi `);
+        setTimeout(() => {
+          setuserUpdate(null);
+        }, 2000);
       })
       .catch((error) => console.log(error));
     setError('erreur dans la mise à jour du téléphone');
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
   };
 
   const deleteAccount = async () => {
     axiosPrivate
-      .delete(`/user/${connectedUser?.id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
+      .delete(`/user/${connectedUser?.id}`)
       .then((response: AxiosResponse<{ data: any }>) => {
         console.log('response ', response.data);
         alert('Votre compte a été supprimé!');
@@ -141,35 +161,30 @@ export const UserProfil = () => {
       });
   };
 
-  useEffect(() => {
-    // Création d'un interval qui va appeler la fonction toutes les 2 secondes
-    const intervalId = setInterval(() => {
-      // On met à jour le state userUpdate en le remettant à null
-      setuserUpdate(null);
-      setError(null);
-    }, 2000);
-
-    // Nettoyage du setInterval lorsque le composant est démonté ou que le state change
-    // pour éviter des problèmes de fuites de mémoire
-    return () => clearInterval(intervalId);
-  }, []);
-
   return (
-    <div>
-      <div>
-        {userUpdate !== null && (
-          <div className='alert alert-success' role='alert'>
-            {userUpdate}
-          </div>
-        )}
-        {error !== null && (
-          <div className='alert alert-warning' role='alert'>
-            {error}
-          </div>
-        )}
-      </div>
-      <div className='accordion' id='accordionExample'>
-        <div className='accordion-item'>
+    <div className='profil-wrapper'>
+      {error || userUpdate ? (
+        <div className='container-alert  '>
+          {error !== null ? (
+            <div className='alert alert-danger' role='alert' id='alert-danger'>
+              {error}
+            </div>
+          ) : (
+            userUpdate !== null && (
+              <div
+                className='alert alert-success'
+                role='alert'
+                id='alert-success'
+              >
+                {userUpdate}
+              </div>
+            )
+          )}
+        </div>
+      ) : null}{' '}
+      <div className='accordion ' id='accordion-profil'>
+        <h2>Gérer mes données</h2>
+        <div className='accordion-item mt-5 '>
           <h2 className='accordion-header' id='headingOne'>
             <button
               className='accordion-button'
@@ -239,6 +254,7 @@ export const UserProfil = () => {
             </button>
           </div>
         </div>
+
         <div className='accordion-item'>
           <h2 className='accordion-header' id='headingThree'>
             <button
@@ -266,6 +282,7 @@ export const UserProfil = () => {
                 id='newPasswordUser'
                 name='newPasswordUser'
                 placeholder='Tapez votre nouveau mot de passe '
+                autoComplete='new-password'
                 ref={newPasswordElement}
               />
             </div>
@@ -312,7 +329,7 @@ export const UserProfil = () => {
         {/* <!-- Button trigger modal --> */}
         <button
           type='button'
-          className='btn btn-warning'
+          className='btn btn-warning mt-5'
           data-bs-toggle='modal'
           data-bs-target='#exampleModal'
         >

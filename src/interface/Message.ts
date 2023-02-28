@@ -5,8 +5,6 @@ export interface MessageProps {
   id: string;
   date_creation: string;
   body: string;
-  files: string;
-  legendFiles?: string;
   isRead: boolean;
   sender: UserTypeProps;
   receiver: UserTypeProps;
@@ -19,5 +17,6 @@ export interface CardMessageProps {
 //---------------------------------------Interface Message-------------------------------//
 
 export interface CardCreateMessageProps {
-  createMessage: MessageProps;
+  listMessages: MessageProps[];
+  setListMessages: (MessageProps: MessageProps[]) => void;
 }

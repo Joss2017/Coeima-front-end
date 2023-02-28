@@ -67,7 +67,8 @@ body {
 
 .tab-panel {
   width: 100%;
-  padding: 30px 0;
+  height: 100%;
+  padding: 0;
   border-top: 1px solid #ccc;
 }
 
@@ -81,8 +82,8 @@ body {
 }
 
 .tabset {
-  display: inline;
-  padding: 20px;
+  display: block;
+  text-align: center;
   background-color: #f3f3f3;
   max-width: 65em;
 }

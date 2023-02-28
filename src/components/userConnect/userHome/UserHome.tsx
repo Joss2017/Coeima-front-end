@@ -24,7 +24,8 @@ export const UserHome = () => {
   }, []);
 
   return (
-    <div>
+    <div className='home-wrapper'>
+      <h2>Accueil</h2>
       Hello faudra remplir tout sa =)
       {/* {listPhotos.map((file)=>} */}
     </div>

@@ -1,4 +1,26 @@
+.profil-wrapper {
+  background-color: #f3f3f3;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.container-alert {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  position: absolute;
+}
+
+#accordion-profil {
+  border: #2a5360;
+  color: #2a5360;
+  height: 100vh;
+  padding: 3vh;
+}
+
 #button-delete {
-  display: flex !important;
+  height: 100%;
   justify-content: center;
 }

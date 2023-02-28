@@ -1,7 +1,25 @@
-.container-alert {
+.message-wrapper {
+  background-color: #f3f3f3;
+  text-align: center;
+  position: relative;
 }
 
-.table-admin {
-  
+.container-alert-message {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  top: 10%;
+  right: 0;
 }
-
+.th-isRead {
+  display: flex;
+  justify-content: space-between;
+}
+.span {
+  display: inline;
+  padding: 0 2px;
+  color: greenyellow;
+  background-color: black;
+  border-radius: 5px;
+}
