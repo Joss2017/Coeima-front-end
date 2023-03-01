@@ -48,7 +48,7 @@ export const Navbar = () => {
           <div className='collapse navbar-collapse' id='navbarNav'>
             <ul className='navbar-nav ms-md-auto gap-2'>
               <li className='nav-item-rounded'>
-                {savedToken ? (
+                {savedToken !== null ? (
                   <button
                     type='button'
                     className='btn-connect'

@@ -1,11 +1,17 @@
-import { AxiosResponse } from 'axios';
 import { useContext, useState } from 'react';
 import { axiosPrivate } from '../../../../api/Axios';
 import { AuthContext } from '../../../../context/AuthContext';
 import { CardMessageProps } from '../../../../interface/Message';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import './CardMessage.css';
+import { AxiosResponse } from 'axios';
 
-export const CardMessage = ({ message }: CardMessageProps) => {
+export const CardMessage = ({
+  message,
+  setListMessages,
+  listMessages,
+}: CardMessageProps) => {
   //--------------------------------------Contexte User Connecté--------------------------------------------------------//
 
   const { connectedUser } = useContext(AuthContext);
@@ -13,12 +19,10 @@ export const CardMessage = ({ message }: CardMessageProps) => {
   //--------------------------------------useState permets de gérer message crée +chois du user est conecté ou pas------------//
 
   const [isRead, setIsRead] = useState<boolean>(message.isRead);
-  const [isDelete, setisDelete] = useState<string>('');
+  const [isDelete, setisDelete] = useState<string | null>(null);
 
   //--------------------------------------Permets  de Gérer si le messagest est lu ou non------------------------------------//
-  const handleChange = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleChange = () => {
     axiosPrivate
       .get(`/message/${message?.id}`)
       .then((response: AxiosResponse) => {
@@ -26,8 +30,7 @@ export const CardMessage = ({ message }: CardMessageProps) => {
       });
   };
 
-  const handleClickRead = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleClickRead = async () => {
     axiosPrivate
       .patch(`/message/${message.id}`, {
         isRead: true,
@@ -44,76 +47,104 @@ export const CardMessage = ({ message }: CardMessageProps) => {
 
   //--------------------------------------Permets  de supprimer le message au click----------------------------------------//
 
-  const handleClickDelete = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleClickDelete = async () => {
     axiosPrivate
       .delete(`/message/${message.id}`)
-      .then((response: AxiosResponse) => {
+      .then((response: AxiosResponse<string>) => {
         console.log("la réponse d'un delete message", response);
         setisDelete(response.data);
-        // window.location = document.location;
+        let newListMessages = [...listMessages].filter(
+          (messageFromList) => message.id !== messageFromList.id
+        );
+        setListMessages(newListMessages);
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <div className='message-wrapper'>
-      {connectedUser?.role === 'admin' ? (
-        <table className='table'>
-          <thead>
-            <tr
-              className={isRead === false ? 'table-warning' : 'table-success'}
-            >
-              <th scope='col'>Envoyé par</th>
-              <th className='th-isRead' scope='col'>
-                Date{' '}
-                {isRead === false ? (
-                  <span className='span'>New message</span>
-                ) : null}{' '}
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>{message.sender.nickname}</td>
-              <td>{message.date_creation}</td>
-            </tr>
-          </tbody>
-        </table>
-      ) : (
-        <table className='table'>
-          <thead>
-            <tr
-              className={isRead === false ? 'table-warning' : 'table-success'}
-            >
-              <th scope='col'>Date</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>{message.date_creation}</td>
-            </tr>
-          </tbody>
-        </table>
+    <>
+      {isDelete && (
+        <div className='container-alert  '>
+          {isDelete !== null && (
+            <div className='alert alert-success' role='alert' id='alert-danger'>
+              {isDelete}
+            </div>
+          )}
+        </div>
       )}
-      <button
-        type='button'
-        className='btn btn-warning'
-        data-bs-toggle='modal'
-        data-bs-target={`#${message.id}`}
-        onClick={handleClickRead}
-      >
-        Voir le message
-      </button>
-      <button
-        type='button'
-        className='btn btn-danger'
-        onClick={handleClickDelete}
-      >
-        supprimer le message
-      </button>
+      {connectedUser?.role === 'admin' ? (
+        <div className='row' style={{ alignItems: 'center', height: '10vh' }}>
+          <div className='col-3'>{message.sender.nickname}</div>
+          <div className='col-3'>
+            {new Date(message.date_creation).toLocaleDateString()}
+          </div>
+          <div className='col-2'>
+            {isRead === false ? (
+              <span className='span'>New</span>
+            ) : (
+              <span>lu</span>
+            )}
+          </div>
+          <div className='col-2'>
+            <button
+              type='button'
+              className='btn btn-warning'
+              id='button-message'
+              data-bs-toggle='modal'
+              data-bs-target={`#${message.id}`}
+              onClick={handleClickRead}
+            >
+              <VisibilityIcon />
+            </button>
+          </div>
+          <div className='col-2'>
+            <button
+              type='button'
+              className='btn btn-danger'
+              id='button-message'
+              onClick={handleClickDelete}
+            >
+              <DeleteOutlineIcon />
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className='row' style={{ alignItems: 'center', height: '10vh' }}>
+          <div className='col-4'>
+            {new Date(message.date_creation).toLocaleDateString()}
+          </div>
+          <div className='col-4'>
+            {isRead === false ? (
+              <span className='span'>New</span>
+            ) : (
+              <span>lu</span>
+            )}
+          </div>
+          <div className='col-2'>
+            <button
+              type='button'
+              className='btn btn-warning'
+              id='button-message'
+              data-bs-toggle='modal'
+              data-bs-target={`#${message.id}`}
+              onClick={handleClickRead}
+            >
+              <VisibilityIcon />
+            </button>
+          </div>
+          <div className='col-2'>
+            <button
+              type='button'
+              className='btn btn-danger'
+              id='button-message'
+              onClick={handleClickDelete}
+            >
+              <DeleteOutlineIcon />
+            </button>
+          </div>
+        </div>
+      )}
+
       <div
         className='modal fade'
         id={`${message.id}`}
@@ -149,6 +180,6 @@ export const CardMessage = ({ message }: CardMessageProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

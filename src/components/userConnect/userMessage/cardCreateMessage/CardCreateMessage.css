@@ -1,9 +1,10 @@
 .createMessage-wrapper {
   background-color: #f3f3f3;
   text-align: center;
-  height: 50vh;
+  /* height: 65vh; */
   position: relative;
   top: 30%;
+  padding-block: 20px;
 }
 
 .container-alert {

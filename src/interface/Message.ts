@@ -13,6 +13,8 @@ export interface MessageProps {
 
 export interface CardMessageProps {
   message: MessageProps;
+  listMessages: MessageProps[];
+  setListMessages: (MessageProps: MessageProps[]) => void;
 }
 //---------------------------------------Interface Message-------------------------------//
 

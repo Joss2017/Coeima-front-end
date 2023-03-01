@@ -55,7 +55,7 @@ export const Account = () => {
           console.log(error);
         });
     }
-  }, [connectedUser]);
+  }, []);
 
   console.log(
     'Valeur de la réponse axios de la liste des messages',
@@ -111,15 +111,48 @@ export const Account = () => {
                 setListMessages={setlistCardMessages}
               />
             </div>
-
-            {listCardMessages.map((message) => (
-              <CardMessage key={message.id} message={message} />
-            ))}
+            <div>
+              {connectedUser?.role === 'admin' ? (
+                <div className='grid pe-4'>
+                  <div className='row'>
+                    <div className='col-3'>Ecrit par</div>
+                    <div className='col-3'>Date</div>
+                    <div className='col-2'>statut</div>
+                    <div className='col-4 '>Actions</div>
+                  </div>
+                  {listCardMessages.map((message) => (
+                    <CardMessage
+                      listMessages={listCardMessages}
+                      setListMessages={setlistCardMessages}
+                      key={message.id}
+                      message={message}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className='grid pe-3'>
+                  <div className='row'>
+                    <div className='col-4'>Date</div>
+                    <div className='col-4'>statut</div>
+                    <div className='col-4'>Actions</div>
+                    {listCardMessages.map((message) => (
+                      <CardMessage
+                        listMessages={listCardMessages}
+                        setListMessages={setlistCardMessages}
+                        key={message.id}
+                        message={message}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </section>
           <section id='profil' className='tab-panel'>
             <UserProfil />
           </section>
           <section id='admin' className='tab-panel'>
+            {/* <CreateCardOffer cardOffer={}/> */}
             <Admin />
           </section>
         </div>
