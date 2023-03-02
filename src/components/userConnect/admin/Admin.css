@@ -1,3 +1,8 @@
-.admin-wrapper {
-  height: 100vh;
+.container-table {
+  padding: 12vh 3vh;
+}
+@media (min-width: 900px) {
+  .container-table{
+    padding: 10vh;
+  }
 }

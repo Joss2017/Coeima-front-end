@@ -33,6 +33,8 @@ export const AuthContext = createContext<AuthContextInterface>({
  * et d'accéder au token via notre context
  */
 
+//---------Hook personnalisé qui permets de lancer la fonction à l'appel de axios publique----------//
+
 export const AuthContextProvider = ({ children }: UserContextProps) => {
   //----------------------------Recuperation de l'utilisateur connecté et stockage de celui-ci dans un useState------------------------//
   const [user, setUser] = useState<UserTypeProps | null | undefined>(null);

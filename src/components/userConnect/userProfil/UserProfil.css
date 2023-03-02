@@ -14,13 +14,21 @@
 }
 
 #accordion-profil {
+  display: grid;
   border: #2a5360;
   color: #2a5360;
-  height: 100vh;
   padding: 3vh;
 }
 
+.accordion-button collapsed {
+  color: #2a5360;
+}
 #button-delete {
   height: 100%;
   justify-content: center;
+}
+
+.info-user {
+  color: #2a5360;
+  font-weight: bold;
 }

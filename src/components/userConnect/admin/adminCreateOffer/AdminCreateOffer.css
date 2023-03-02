@@ -1,0 +1,21 @@
+.offer-wrapper {
+  display: grid;
+}
+
+.container-card-offer {
+  display: grid;
+  text-align: center;
+}
+
+.form-offer {
+  padding: 5vh;
+}
+
+.form-control {
+  text-align: center;
+}
+@media (min-width: 900px) {
+  .form-offer {
+    padding: 0em 10em 0em 10em;
+  }
+}

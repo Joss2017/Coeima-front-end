@@ -1,9 +1,9 @@
 .createMessage-wrapper {
   background-color: #f3f3f3;
+  color: #2a5360;
   text-align: center;
-  /* height: 65vh; */
   position: relative;
-  top: 30%;
+
   padding-block: 20px;
 }
 
@@ -17,14 +17,36 @@
 }
 
 .select {
-  padding: 6vh;
+  padding: 7vh;
 }
 
 .form-login {
-  display: flex;
   border: #2a5360;
   width: 100%;
-  justify-content: center;
   color: #2a5360;
   align-items: center;
+  padding-left: 3vh;
+  padding-right: 3vh;
+}
+
+.span-message {
+  color: #2a5360;
+  font-weight: bold;
+}
+
+@media (min-width: 900px) {
+  .container-alert {
+    font-size: 1em;
+    padding: 3vh;
+  }
+  .form-login {
+    margin: auto;
+  }
+  .title-create {
+    padding-top: vh;
+  }
+  .select {
+    padding-left: 30%;
+    padding-right: 30%;
+  }
 }

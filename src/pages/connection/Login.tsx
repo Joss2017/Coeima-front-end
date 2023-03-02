@@ -108,7 +108,11 @@ export const Login = () => {
         <div className='container-form-login '>
           <form onSubmit={handleSubmitForm} className='form-login'>
             <h1 className='title-login'>Connecte-toi</h1>
+
             <div className='form-outline mt-' id='input-login'>
+              <label className='form-label' htmlFor='emailUser'>
+                Email
+              </label>
               <input
                 type='email'
                 className='form-control'
@@ -117,12 +121,12 @@ export const Login = () => {
                 placeholder='name@example.com'
                 ref={emailElement}
               />
-              <label className='form-label' htmlFor='emailUser'>
-                Email
-              </label>
             </div>
 
             <div className='form-outline mt-3' id='input-login'>
+              <label className='form-label' htmlFor='passwordUser'>
+                Mot de Passe
+              </label>
               <input
                 type='password'
                 className='form-control'
@@ -131,9 +135,6 @@ export const Login = () => {
                 autoComplete='new-password'
                 ref={passwordElement}
               />
-              <label className='form-label' htmlFor='passwordUser'>
-                Mot de Passe
-              </label>
             </div>
 
             <div className='d-flex justify-content-center mt-3'>
@@ -141,11 +142,13 @@ export const Login = () => {
                 Se Connecter
               </button>
             </div>
-            <div className='alert alert-warning  mt-5' role='alert'>
-              Pas encore inscrit ?
-              <Link to='/register' className='alert-link'>
-                cliquez ici
-              </Link>
+            <div className='card-footer'>
+              <div className='alert alert-warning  mt-5' role='alert'>
+                Pas encore inscrit ?
+                <Link to='/register' className='alert-link'>
+                  cliquez ici
+                </Link>
+              </div>
             </div>
           </form>
         </div>

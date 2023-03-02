@@ -1,10 +1,29 @@
 .container {
-  width: 2vh;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  justify-content: center;
+  padding: 3vh;
 }
 
 .card {
+  display: grid;
+  justify-content: center;
   text-align: center;
-  list-style: none;
+}
+
+.card-header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (min-width: 900px) {
+  .offer-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .card {
+    display: grid;
+    justify-content: flex-start;
+    text-align: center;
+  }
 }

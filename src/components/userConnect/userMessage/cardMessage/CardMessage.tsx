@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
-import { axiosPrivate } from '../../../../api/Axios';
 import { AuthContext } from '../../../../context/AuthContext';
 import { CardMessageProps } from '../../../../interface/Message';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import './CardMessage.css';
 import { AxiosResponse } from 'axios';
+import { useAxios } from '../../../../hooks/Use-Axios';
 
 export const CardMessage = ({
   message,
@@ -21,7 +21,10 @@ export const CardMessage = ({
   const [isRead, setIsRead] = useState<boolean>(message.isRead);
   const [isDelete, setisDelete] = useState<string | null>(null);
 
-  //--------------------------------------Permets  de Gérer si le messagest est lu ou non------------------------------------//
+  //---------Hook personnalisé qui permets de lancer la fonction à l'appel de axios private----------//
+
+  const { axiosPrivate } = useAxios();
+
   const handleChange = () => {
     axiosPrivate
       .get(`/message/${message?.id}`)

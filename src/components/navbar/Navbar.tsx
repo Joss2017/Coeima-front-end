@@ -30,7 +30,7 @@ export const Navbar = () => {
           <div className='img-logo'>
             <img
               className='rounded-circle '
-              src='assets/Photo-site.png'
+              src='assets/Coeima.jpg'
               alt='logo du site'
             />
           </div>

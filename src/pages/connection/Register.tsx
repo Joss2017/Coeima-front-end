@@ -35,6 +35,8 @@ export const Register = () => {
 
     // //--------------------------------------condition rattachée aux Inputs par useRef pour la gestion des erreurs------------------------//
 
+    //---------Hook personnalisé qui permets de lancer la fonction à l'appel de axios private----------//
+
     if (nicknameElement.current && nicknameElement.current.value.length < 4) {
       setError(' taille du pseudo 4 caractères min');
       setTimeout(() => {
@@ -124,77 +126,77 @@ export const Register = () => {
         <div className='container-form-register'>
           <form onSubmit={handleSubmitForm} className='form-register '>
             <h1 className='title-register'>INSCRIPTION</h1>
-            <div className='form-outline '>
+            <div className='form-outline mb-3 '>
+              <label className='form-label' htmlFor='nicknameUser'>
+                Ton Pseudo *
+              </label>
               <input
                 type='text'
-                className='form-control'
+                className='form-control '
                 id='nicknameUser'
                 placeholder='4 caractères mini'
                 autoComplete='new nickname'
                 ref={nicknameElement}
               />
-              <label className='form-label' htmlFor='nicknameUser'>
-                Ton Pseudo *
-              </label>
             </div>
 
-            <div className='form-outline '>
+            <div className='form-outline mb-3'>
+              <label className='form-label' htmlFor='emailUser'>
+                Ton Email *
+              </label>
               <input
                 type='email'
-                className='form-control'
+                className='form-control '
                 id='emailUser'
                 autoComplete='new-email'
                 placeholder='name@example.com'
                 ref={emailElement}
               />
-              <label className='form-label' htmlFor='emailUser'>
-                Ton Email *
-              </label>
             </div>
 
-            <div className='form-outline '>
+            <div className='form-outline mb-3 '>
+              <label className='form-label' htmlFor='passwordUser'>
+                Mot de Passe *
+              </label>
               <input
                 type='password'
-                className='form-control'
+                className='form-control '
                 id='passwordUser'
                 placeholder='8 caractères mini,une maj et un caractère'
                 autoComplete='new-password'
                 ref={passwordElement}
               />
-              <label className='form-label' htmlFor='passwordUser'>
-                Mot de Passe *
-              </label>
             </div>
 
-            <div className='form-outline '>
+            <div className='form-outline mb-3 '>
+              <label className='form-label' htmlFor='confirmPasswordUser'>
+                Confirmation Mot de Passe *
+              </label>
               <input
                 type='password'
-                className='form-control'
+                className='form-control mb-1'
                 id='confirmPasswordUser'
                 placeholder='Password'
                 autoComplete='new-password'
                 ref={confirmPasswordElement}
               />
-              <label className='form-label' htmlFor='confirmPasswordUser'>
-                Confirmation Mot de Passe *
-              </label>
             </div>
 
-            <div className='form-outline '>
+            <div className='form-outline mb-3 '>
+              <label className='form-label' htmlFor='typePhone'>
+                Numéro de téléphone
+              </label>
               <input
                 type='number'
                 id='typePhone'
-                className='form-control form-control-lg'
+                className='form-control form-control '
                 placeholder='téléphone'
                 autoComplete='new-phone'
                 ref={phoneElement}
               />
-              <label className='form-label' htmlFor='typePhone'>
-                Numéro de téléphone
-              </label>
             </div>
 
-            <div className='d-flex justify-content-center'>
+            <div className='d-flex justify-content-center mt-3'>
               <button type='submit' className='btn btn-warning btn-block '>
                 S'inscrire
               </button>

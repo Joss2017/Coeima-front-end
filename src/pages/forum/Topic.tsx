@@ -1,12 +1,12 @@
 import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { axiosPublic } from '../../api/Axios';
 import { CardTopic } from '../../components/topic/cardTopic/CardTopic';
 import { CardComment } from '../../components/comment/cardComment/CardComment';
 import { AuthContext } from '../../context/AuthContext';
 import { CommentProps } from '../../interface/Comment';
 import { TopicProps } from '../../interface/Topic';
 import './Topic.css';
+import { axiosPublic } from '../../api/Axios';
 
 export const Topic = () => {
   const { connectedUser } = useContext(AuthContext);
@@ -17,6 +17,8 @@ export const Topic = () => {
   const [listCardComments, setListCardComments] = useState<
     CommentProps[] | null
   >(null);
+
+
 
   useEffect(() => {
     axiosPublic

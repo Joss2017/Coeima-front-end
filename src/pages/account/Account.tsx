@@ -1,16 +1,15 @@
 import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { axiosPrivate } from '../../api/Axios';
 import { Admin } from '../../components/userConnect/admin/Admin';
+import { AdminCreateOffer } from '../../components/userConnect/admin/adminCreateOffer/AdminCreateCardOffer';
 import { UserHome } from '../../components/userConnect/userHome/UserHome';
 import { CardCreateMessage } from '../../components/userConnect/userMessage/cardCreateMessage/CardCreateMessage';
 import { CardMessage } from '../../components/userConnect/userMessage/cardMessage/CardMessage';
 import { UserProfil } from '../../components/userConnect/userProfil/UserProfil';
 import { AuthContext } from '../../context/AuthContext';
+import { useAxios } from '../../hooks/Use-Axios';
 import { MessageProps } from '../../interface/Message';
 import './Account.css';
-
-let tabCardMessages: MessageProps[] = [];
 
 export const Account = () => {
   //---------------------------------------Contexte User Connecté-----------------------------------------------------------//
@@ -21,18 +20,16 @@ export const Account = () => {
 
   const [listCardMessages, setlistCardMessages] = useState<MessageProps[]>([]);
 
+  //---------Hook personnalisé qui permets de lancer la fonction à l'appel de axios private----------//
+
+  const { axiosPrivate } = useAxios();
+
   useEffect(() => {
     if (connectedUser?.role === 'admin') {
       axiosPrivate
         .get(`/message`)
         .then((response: AxiosResponse) => {
-          tabCardMessages = response.data;
-          console.log(
-            'reponse de axios pour liste de messages admin',
-            tabCardMessages
-          );
-          console.log('valeur de tabCardMessages ', tabCardMessages);
-          setlistCardMessages(tabCardMessages);
+          setlistCardMessages(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -43,18 +40,13 @@ export const Account = () => {
           params: { receiver_id: connectedUser?.id },
         })
         .then((response: AxiosResponse) => {
-          tabCardMessages = response.data;
-          console.log(
-            'repnse de axios pour liste de messages admin',
-            tabCardMessages
-          );
-          console.log(tabCardMessages);
-          setlistCardMessages(tabCardMessages);
+          setlistCardMessages(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(
@@ -65,9 +57,8 @@ export const Account = () => {
   return (
     <>
       <div className='tabset'>
-        {/* <!-- Tab 1 --> */}
-        <input type='radio' name='tabset' id='tab1' aria-controls='accueil' />
-        <label htmlFor='tab1'>Accueil</label>
+        <input type='radio' name='tabset' id='tab1' aria-controls='forum' />
+        <label htmlFor='tab1'>Forum</label>
         {/* <!-- Tab 2 --> */}
         <input
           type='radio'
@@ -101,7 +92,7 @@ export const Account = () => {
         )}
 
         <div className='tab-panels'>
-          <section id='accueil' className='tab-panel'>
+          <section id='forum' className='tab-panel'>
             <UserHome />
           </section>
           <section id='message' className='tab-panel'>
@@ -154,6 +145,7 @@ export const Account = () => {
           <section id='admin' className='tab-panel'>
             {/* <CreateCardOffer cardOffer={}/> */}
             <Admin />
+            <AdminCreateOffer />
           </section>
         </div>
       </div>

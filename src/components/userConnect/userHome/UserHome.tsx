@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { axiosPrivate } from '../../../api/Axios';
 import { AuthContext } from '../../../context/AuthContext';
+import { useAxios } from '../../../hooks/Use-Axios';
 import { MessageProps } from '../../../interface/Message';
 import './UserHome.css';
 export const UserHome = () => {
@@ -10,6 +10,10 @@ export const UserHome = () => {
   const { connectedUser } = useContext(AuthContext);
 
   const [listPhotos, setListPhotos] = useState<MessageProps[]>([]);
+
+  //---------Hook personnalisé qui permets de lancer la fonction à l'appel de axios private----------//
+
+  const { axiosPrivate } = useAxios();
 
   useEffect(() => {
     axiosPrivate

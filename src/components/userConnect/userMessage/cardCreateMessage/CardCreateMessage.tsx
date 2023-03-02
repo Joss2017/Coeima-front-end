@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { axiosPrivate } from '../../../../api/Axios';
 import { AuthContext } from '../../../../context/AuthContext';
+import { useAxios } from '../../../../hooks/Use-Axios';
 import { CardCreateMessageProps } from '../../../../interface/Message';
 import { UserTypeProps } from '../../../../interface/User';
 import './CardCreateMessage.css';
@@ -18,7 +18,8 @@ export const CardCreateMessage = ({
   const userSelectElement = useRef<HTMLSelectElement>(null);
   const bodyElement = useRef<HTMLTextAreaElement>(null);
 
-  //--------------------------------------useState permets de gérer message crée +chois du user est conecté ou pas------------//
+  //------------------------ Utilisation de useState pour gérer les messages créés et la sélection de l'utilisateur co---//
+
   const [messageCreated, setmessageCreated] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [users, setUsers] = useState<UserTypeProps[]>([]);
@@ -32,7 +33,9 @@ export const CardCreateMessage = ({
         setUsers(res.data);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connectedUser?.role]);
+
   //--------------------------------------Permets  de selectionner la valeur du select---------------------------------------//
 
   const handleSelect = async (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -41,6 +44,7 @@ export const CardCreateMessage = ({
       userSelectElement.current?.value
     );
   };
+  //--------------------------------------Filtre pour sélectionner l'utilisateur dans le select-----------------------------//
 
   const userSelectFiltered: UserTypeProps[] = users.filter(
     (userSelect) => userSelect.id === userSelectElement.current?.value
@@ -50,7 +54,9 @@ export const CardCreateMessage = ({
     userSelectFiltered
   );
 
-  //--------------------------------------Permets  de Gérer si le messagest lu ou non-----------------------------------------//
+  //---------Hook personnalisé qui permets de lancer la fonction à l'appel de axios private----------//
+
+  const { axiosPrivate } = useAxios();
 
   const handleSubmitForm = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,6 +64,7 @@ export const CardCreateMessage = ({
     console.log(bodyElement.current?.value);
 
     if (connectedUser?.role === 'admin') {
+      //--------------------------------------Si l'utilisateur est admin, il peut envoyer un message à un utilisateur spécifique----------------//
       axiosPrivate
         .post(`/message/`, {
           receiver_id: userSelectElement.current?.value,
@@ -80,6 +87,8 @@ export const CardCreateMessage = ({
         });
     } else {
       axiosPrivate
+        //--------------------------------------Si l'utilisateur est user, il  envoyer un message à un utilisateur admin----------------//
+
         .post('/message/', {
           role: connectedUser?.role === 'admin',
           body: bodyElement.current?.value,
@@ -100,26 +109,24 @@ export const CardCreateMessage = ({
 
   return (
     <div className='createMessage-wrapper'>
-      <h2>Messages</h2>
-      {error || messageCreated ? (
-        <div className='container-alert  '>
-          {error !== null ? (
-            <div className='alert alert-danger' role='alert' id='alert-danger'>
-              {error}
+      <div className='container-alert  '>
+        {error !== null ? (
+          <div className='alert alert-danger' role='alert' id='alert-danger'>
+            {error}
+          </div>
+        ) : (
+          messageCreated !== null && (
+            <div
+              className='alert alert-success'
+              role='alert'
+              id='alert-success'
+            >
+              {messageCreated}
             </div>
-          ) : (
-            messageCreated !== null && (
-              <div
-                className='alert alert-success'
-                role='alert'
-                id='alert-success'
-              >
-                {messageCreated}
-              </div>
-            )
-          )}
-        </div>
-      ) : null}
+          )
+        )}
+      </div>
+
       <div className='select'>
         {connectedUser?.role === 'admin' ? (
           <select
@@ -144,7 +151,14 @@ export const CardCreateMessage = ({
       </div>
       <form onSubmit={handleSubmitForm} className='form-login'>
         <div className='form-group'>
-          <label htmlFor='message'>Nouveau message</label>
+          <label htmlFor='message'>
+            <span
+              className='span-message'
+              style={{ color: '#2a5360', fontWeight: 'bold' }}
+            >
+              Nouveau message
+            </span>
+          </label>
           <textarea
             className='form-control'
             rows={5}
@@ -155,7 +169,7 @@ export const CardCreateMessage = ({
 
         <div className='d-flex justify-content-center mt-3'>
           <button type='submit' className='btn btn-warning '>
-            Envoyer le message
+            <span style={{ color: '#f3f3f3' }}>Envoyer le message</span>
           </button>
         </div>
       </form>

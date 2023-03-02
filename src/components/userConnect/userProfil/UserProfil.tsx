@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios';
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router';
-import { axiosPrivate } from '../../../api/Axios';
 import { AuthContext } from '../../../context/AuthContext';
+import { useAxios } from '../../../hooks/Use-Axios';
 import { UserTypeProps } from '../../../interface/User';
 import './UserProfil.css';
 
@@ -34,8 +34,11 @@ export const UserProfil = () => {
   //--------------------------- Usestate pour set nouvelle valeur du User ---------------------------------------------------//
   const [userUpdate, setuserUpdate] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [user, setuser] = useState<UserTypeProps>(userTampon);
 
+  //---------Hook personnalisé qui permets de lancer la fonction à l'appel de axios private----------//
+  const { axiosPrivate } = useAxios();
   //--------------------------- Requête Axios Update pour mise à jour du Nickname  User ---------------------------------------//
   const handleClickNickname = async (
     e: React.SyntheticEvent<HTMLButtonElement>
@@ -156,7 +159,6 @@ export const UserProfil = () => {
       .delete(`/user/${connectedUser?.id}`)
       .then((response: AxiosResponse<{ data: any }>) => {
         console.log('response ', response.data);
-        alert('Votre compte a été supprimé!');
         navigate('/login');
       });
   };
@@ -181,7 +183,7 @@ export const UserProfil = () => {
             )
           )}
         </div>
-      ) : null}{' '}
+      ) : null}
       <div className='accordion ' id='accordion-profil'>
         <h2>Gérer mes données</h2>
         <div className='accordion-item mt-5 '>
@@ -204,7 +206,9 @@ export const UserProfil = () => {
             data-bs-parent='#accordionExample'
           >
             <div className='accordion-body'>
-              <label htmlFor='nicknameUser'> Nouveau Pseudo</label>
+              <label htmlFor='nicknameUser'>
+                <span className='info-user'> Nouveau Pseudo</span>
+              </label>
               <input
                 type='text'
                 className='form-control'
@@ -214,7 +218,10 @@ export const UserProfil = () => {
                 ref={nicknameElement}
               />
             </div>
-            <button onClick={handleClickNickname} className='btn btn-warning '>
+            <button
+              onClick={handleClickNickname}
+              className='btn btn-warning mb-3 '
+            >
               changer
             </button>
           </div>
@@ -239,7 +246,9 @@ export const UserProfil = () => {
             data-bs-parent='#accordionExample'
           >
             <div className='accordion-body'>
-              <label htmlFor='emailUser'> Nouvel E-mail</label>
+              <label htmlFor='emailUser'>
+                <span className='info-user'>Nouvel E-mail</span>
+              </label>
               <input
                 type='email'
                 className='form-control'
@@ -249,7 +258,10 @@ export const UserProfil = () => {
                 ref={emailElement}
               />
             </div>
-            <button onClick={handleClickEmail} className='btn btn-warning '>
+            <button
+              onClick={handleClickEmail}
+              className='btn btn-warning mb-3 '
+            >
               changer
             </button>
           </div>
@@ -275,7 +287,10 @@ export const UserProfil = () => {
             data-bs-parent='#accordionExample'
           >
             <div className='accordion-body'>
-              <label htmlFor='newPasswordUser'>Password</label>
+              <label htmlFor='newPasswordUser'>
+                {' '}
+                <span className='info-user'> Nouveau mot de passe</span>
+              </label>
               <input
                 type='password'
                 className='form-control'
@@ -286,7 +301,10 @@ export const UserProfil = () => {
                 ref={newPasswordElement}
               />
             </div>
-            <button onClick={handleClickPassword} className='btn btn-warning '>
+            <button
+              onClick={handleClickPassword}
+              className='btn btn-warning mb-3 '
+            >
               changer
             </button>
           </div>
@@ -311,7 +329,10 @@ export const UserProfil = () => {
             data-bs-parent='#accordionExample'
           >
             <div className='accordion-body'>
-              <label htmlFor='typePhone'>Téléphone</label>
+              <label htmlFor='typePhone'>
+                {' '}
+                <span className='info-user'> Nouveau numéro de téléphone</span>
+              </label>
               <input
                 type='text'
                 id='typePhone'
@@ -321,7 +342,10 @@ export const UserProfil = () => {
                 ref={phoneElement}
               />
             </div>
-            <button onClick={handleClickPhone} className='btn btn-warning '>
+            <button
+              onClick={handleClickPhone}
+              className='btn btn-warning mb-3 '
+            >
               changer
             </button>
           </div>
@@ -329,11 +353,11 @@ export const UserProfil = () => {
         {/* <!-- Button trigger modal --> */}
         <button
           type='button'
-          className='btn btn-warning mt-5'
+          className='btn btn-danger mt-5'
           data-bs-toggle='modal'
           data-bs-target='#exampleModal'
         >
-          supprimer mon compte
+          <span style={{ color: '#f3f3f3' }}>supprimer mon compte</span>
         </button>
 
         {/* <!-- Modal --> */}
@@ -365,15 +389,16 @@ export const UserProfil = () => {
                   type='button'
                   className='btn btn-success'
                   data-bs-dismiss='modal'
+                  style={{ color: 'white' }}
                 >
-                  Non
+                  <span style={{ color: 'white' }}>Non</span>
                 </button>
                 <button
                   type='button'
                   className='btn btn-danger'
                   onClick={deleteAccount}
                 >
-                  Oui je confirme
+                  <span style={{ color: 'white' }}>Oui je confirme</span>
                 </button>
               </div>
             </div>
