@@ -61,10 +61,10 @@ a,
 
 @media (min-width: 900px) {
   .login-wrapper {
-    padding-block: 3vh;
+    padding-block: 8vh;
   }
   .container-alert {
-    margin: auto;
+    padding: 4vh;
   }
   .form-outline {
     font-size: 3vh;

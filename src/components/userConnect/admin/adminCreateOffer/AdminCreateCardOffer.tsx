@@ -113,7 +113,7 @@ export const AdminCreateOffer = () => {
                 <input
                   type='text'
                   className='form-control'
-                  id='title'
+                  id='title-offer'
                   placeholder="Titre de l'offre"
                   autoComplete='new nickname'
                   ref={titleElement}
@@ -123,7 +123,7 @@ export const AdminCreateOffer = () => {
                 <textarea
                   className='form-control'
                   rows={5}
-                  id='body'
+                  id='body-offer'
                   placeholder="descriptif de l'offre"
                   ref={bodyElement}
                 ></textarea>
@@ -132,7 +132,7 @@ export const AdminCreateOffer = () => {
                 <input
                   type='text'
                   className='form-control'
-                  id='price'
+                  id='price-offer'
                   placeholder="prix de l'offre"
                   autoComplete='price'
                   ref={priceElement}
@@ -143,7 +143,7 @@ export const AdminCreateOffer = () => {
                   type='file'
                   className='form-control'
                   accept='image/*'
-                  id='image'
+                  id='image-offer'
                   onChange={pictureUploader}
                 />
               </div>

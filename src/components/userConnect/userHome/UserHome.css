@@ -1,5 +1,5 @@
-.home-wrapper {
-  background-color: #f3f3f3;
-  width: 100vh;
-  height: 100vh;
+.container-card-topic {
+  display: flex;
+  justify-content: center;
+  padding-block: 10vh;
 }

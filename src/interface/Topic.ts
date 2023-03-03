@@ -2,6 +2,7 @@
 
 export interface TopicProps {
   id: string;
+  date_creation: string;
   title: string;
   body: string;
   url: string;

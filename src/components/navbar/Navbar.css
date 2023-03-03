@@ -52,7 +52,7 @@
   border-radius: 10px;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 900px) {
   .navbar {
     font-size: 1.2em;
   }

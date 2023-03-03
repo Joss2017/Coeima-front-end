@@ -186,7 +186,15 @@ export const UserProfil = () => {
       ) : null}
       <div className='card'>
         <div className='accordion ' id='accordion-profil'>
-          <div className='card-title'>Mes données</div>
+          <div className='card-title'>
+            {' '}
+            <span
+              className='span-message'
+              style={{ color: '#2a5360', fontWeight: 'bold' }}
+            >
+              Mes données
+            </span>
+          </div>
 
           <div className='accordion-item mt-5 '>
             <h2 className='accordion-header' id='headingOne'>

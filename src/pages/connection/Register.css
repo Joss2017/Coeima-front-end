@@ -2,7 +2,7 @@
   background-color: #f3f3f3;
   text-align: center;
   position: relative;
-  padding-block: 10vh;
+  padding-block: 12vh;
 }
 
 .container-alert {
@@ -32,6 +32,9 @@
   }
   #card-register {
     width: 30rem;
+  }
+  .container-form-register {
+    padding-block: 8vh;
   }
   .form-label {
     font-size: 0.9em;
