@@ -143,7 +143,6 @@ export const Account = () => {
             <UserProfil />
           </section>
           <section id='admin' className='tab-panel'>
-            {/* <CreateCardOffer cardOffer={}/> */}
             <Admin />
             <AdminCreateOffer />
           </section>

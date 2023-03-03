@@ -98,54 +98,63 @@ export const AdminCreateOffer = () => {
         </div>
       ) : null}
       <div className='container-card-offer'>
-        <h2>Créer une nouvelle offre</h2>
-        <form onSubmit={handleSubmitForm} className='form-offer'>
-          <div className='card-body'>
-            <h5 className='card-title'>
-              <input
-                type='text'
-                className='form-control'
-                id='title'
-                placeholder="Titre de l'offre"
-                autoComplete='new nickname'
-                ref={titleElement}
-              />
-            </h5>
-            <p className='card-text'>
-              <textarea
-                className='form-control'
-                rows={5}
-                id='body'
-                placeholder="descriptif de l'offre"
-                ref={bodyElement}
-              ></textarea>
-            </p>
-            <p>
-              <input
-                type='text'
-                className='form-control'
-                id='price'
-                placeholder="prix de l'offre"
-                autoComplete='price'
-                ref={priceElement}
-              />
-            </p>
-            <div className='form-outline mt-3' id='input-offer'>
-              <input
-                type='file'
-                className='form-control'
-                accept='image/*'
-                id='image'
-                onChange={pictureUploader}
-              />
+        <div className='card' id='card-offer'>
+          <form onSubmit={handleSubmitForm} className='form-offer'>
+            <div className='card-title'>
+              <span
+                className='span-message'
+                style={{ color: '#2a5360', fontWeight: 'bold' }}
+              >
+                Nouvelle offre
+              </span>
             </div>
-            <div className='d-flex justify-content-center pt-3'>
-              <button type='submit' className='btn btn-warning btn-block '>
-                créer
-              </button>
+            <div className='card-body'>
+              <h5 className='card-title'>
+                <input
+                  type='text'
+                  className='form-control'
+                  id='title'
+                  placeholder="Titre de l'offre"
+                  autoComplete='new nickname'
+                  ref={titleElement}
+                />
+              </h5>
+              <p className='card-text'>
+                <textarea
+                  className='form-control'
+                  rows={5}
+                  id='body'
+                  placeholder="descriptif de l'offre"
+                  ref={bodyElement}
+                ></textarea>
+              </p>
+              <p>
+                <input
+                  type='text'
+                  className='form-control'
+                  id='price'
+                  placeholder="prix de l'offre"
+                  autoComplete='price'
+                  ref={priceElement}
+                />
+              </p>
+              <div className='form-outline mt-3' id='input-offer'>
+                <input
+                  type='file'
+                  className='form-control'
+                  accept='image/*'
+                  id='image'
+                  onChange={pictureUploader}
+                />
+              </div>
+              <div className='card-footer' style={{ display: 'grid' }}>
+                <button type='submit' className='btn btn-warning btn-block '>
+                  créer
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );

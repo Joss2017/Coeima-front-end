@@ -1,54 +1,38 @@
 .register-wrapper {
   background-color: #f3f3f3;
   text-align: center;
-  height: 100vh;
   position: relative;
+  padding-block: 10vh;
 }
 
 .container-alert {
-  display: flex;
-  width: 100%;
-  justify-content: center;
   position: absolute;
-
-  right: 0;
 }
 .container-form-register {
-  display: flex;
-  border: #2a5360;
+  display: grid;
   justify-content: center;
-  color: #2a5360;
-  height: 100vh;
-  align-items: center;
-  padding-bottom: 15vh;
+}
+
+.form-register {
+  background-color: #2a5360;
+  color: #ffc519;
+  border-radius: 1vh;
 }
 
 .form-label {
+  font-size: 0.6em;
   font-weight: 500;
   font-style: italic;
 }
 
-.title-register {
-  display: flex;
-  justify-content: center;
-  color: #a28b57;
-  text-align: center;
-}
-
 @media (min-width: 900px) {
-  .form-register {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding: 5vh;
-    border: double;
-    border-radius: 2vh;
-    border-color: #a28b57;
-    background-image: linear-gradient(
-      312.25deg,
-      hwb(52 40% 52%) 0%,
-      rgba(55, 55, 53, 0) 50.19%
-    );
+  .register-wrapper {
+    padding-block: 15vh;
+  }
+  #card-register {
+    width: 30rem;
+  }
+  .form-label {
+    font-size: 0.9em;
   }
 }

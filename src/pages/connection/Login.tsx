@@ -106,51 +106,57 @@ export const Login = () => {
           </div>
         ) : null}
         <div className='container-form-login '>
-          <form onSubmit={handleSubmitForm} className='form-login'>
-            <h1 className='title-login'>Connecte-toi</h1>
-
-            <div className='form-outline mt-' id='input-login'>
-              <label className='form-label' htmlFor='emailUser'>
-                Email
-              </label>
-              <input
-                type='email'
-                className='form-control'
-                id='emailUser'
-                autoComplete='new-email'
-                placeholder='name@example.com'
-                ref={emailElement}
-              />
-            </div>
-
-            <div className='form-outline mt-3' id='input-login'>
-              <label className='form-label' htmlFor='passwordUser'>
-                Mot de Passe
-              </label>
-              <input
-                type='password'
-                className='form-control'
-                id='passwordUser'
-                placeholder='mot de passe'
-                autoComplete='new-password'
-                ref={passwordElement}
-              />
-            </div>
-
-            <div className='d-flex justify-content-center mt-3'>
-              <button type='submit' className='btn btn-warning '>
-                Se Connecter
-              </button>
-            </div>
-            <div className='card-footer'>
-              <div className='alert alert-warning  mt-5' role='alert'>
-                Pas encore inscrit ?
-                <Link to='/register' className='alert-link'>
-                  cliquez ici
-                </Link>
+          <div className='card' id='card-login'>
+            <form onSubmit={handleSubmitForm} className='form-login'>
+              <div className='card-header' style={{ justifyContent: 'center' }}>
+                <span style={{ color: '#ffc519' }}>Connecte-toi</span>
               </div>
-            </div>
-          </form>
+              <div className='body'>
+                <div className='form-outline mt-' id='input-login'>
+                  <label className='form-label' htmlFor='emailUser'>
+                    Email
+                  </label>
+                  <input
+                    type='email'
+                    className='form-control'
+                    id='emailUser'
+                    autoComplete='new-email'
+                    placeholder='name@example.com'
+                    ref={emailElement}
+                  />
+                </div>
+
+                <div className='form-outline mt-3' id='input-login'>
+                  <label className='form-label' htmlFor='passwordUser'>
+                    Mot de Passe
+                  </label>
+                  <input
+                    type='password'
+                    className='form-control'
+                    id='passwordUser'
+                    placeholder='mot de passe'
+                    autoComplete='new-password'
+                    ref={passwordElement}
+                  />
+                </div>
+                <div className='card-footer'>
+                  <button type='submit' className='btn btn-warning '>
+                    Se Connecter
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div
+          className='alert alert-warning  mt-5'
+          id='link-register'
+          role='alert'
+        >
+          Pas encore inscrit ?
+          <Link to='/register' className='alert-link'>
+            clique ici
+          </Link>
         </div>
       </div>
     </>

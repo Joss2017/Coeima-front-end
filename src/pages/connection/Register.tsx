@@ -101,7 +101,7 @@ export const Register = () => {
     <>
       <div className='register-wrapper'>
         {error || isUserRegistered ? (
-          <div className='container-alert  '>
+          <div className='container-alert '>
             {error !== null ? (
               <div
                 className='alert alert-danger'
@@ -124,84 +124,88 @@ export const Register = () => {
           </div>
         ) : null}
         <div className='container-form-register'>
-          <form onSubmit={handleSubmitForm} className='form-register '>
-            <h1 className='title-register'>INSCRIPTION</h1>
-            <div className='form-outline mb-3 '>
-              <label className='form-label' htmlFor='nicknameUser'>
-                Ton Pseudo *
-              </label>
-              <input
-                type='text'
-                className='form-control '
-                id='nicknameUser'
-                placeholder='4 caractères mini'
-                autoComplete='new nickname'
-                ref={nicknameElement}
-              />
-            </div>
+          <div className='card' id='card-register'>
+            <form onSubmit={handleSubmitForm} className='form-register '>
+              <div className='card-title'>INSCRIPTION</div>
+              <div className='card-body'>
+                <div className='form-outline  '>
+                  <label className='form-label' htmlFor='nicknameUser'>
+                    Ton Pseudo *
+                  </label>
+                  <input
+                    type='text'
+                    className='form-control '
+                    id='nicknameUser'
+                    placeholder='4 caractères mini'
+                    autoComplete='new nickname'
+                    ref={nicknameElement}
+                  />
+                </div>
 
-            <div className='form-outline mb-3'>
-              <label className='form-label' htmlFor='emailUser'>
-                Ton Email *
-              </label>
-              <input
-                type='email'
-                className='form-control '
-                id='emailUser'
-                autoComplete='new-email'
-                placeholder='name@example.com'
-                ref={emailElement}
-              />
-            </div>
+                <div className='form-outline '>
+                  <label className='form-label' htmlFor='emailUser'>
+                    Ton Email *
+                  </label>
+                  <input
+                    type='email'
+                    className='form-control '
+                    id='emailUser'
+                    autoComplete='new-email'
+                    placeholder='name@example.com'
+                    ref={emailElement}
+                  />
+                </div>
 
-            <div className='form-outline mb-3 '>
-              <label className='form-label' htmlFor='passwordUser'>
-                Mot de Passe *
-              </label>
-              <input
-                type='password'
-                className='form-control '
-                id='passwordUser'
-                placeholder='8 caractères mini,une maj et un caractère'
-                autoComplete='new-password'
-                ref={passwordElement}
-              />
-            </div>
+                <div className='form-outline  '>
+                  <label className='form-label' htmlFor='passwordUser'>
+                    Mot de Passe *
+                  </label>
+                  <input
+                    type='password'
+                    className='form-control '
+                    id='passwordUser'
+                    placeholder='8 caractères min 1 maj 1caract spé'
+                    autoComplete='new-password'
+                    ref={passwordElement}
+                  />
+                </div>
 
-            <div className='form-outline mb-3 '>
-              <label className='form-label' htmlFor='confirmPasswordUser'>
-                Confirmation Mot de Passe *
-              </label>
-              <input
-                type='password'
-                className='form-control mb-1'
-                id='confirmPasswordUser'
-                placeholder='Password'
-                autoComplete='new-password'
-                ref={confirmPasswordElement}
-              />
-            </div>
+                <div className='form-outline  '>
+                  <label className='form-label' htmlFor='confirmPasswordUser'>
+                    Confirmation Mot de Passe *
+                  </label>
+                  <input
+                    type='password'
+                    className='form-control '
+                    id='confirmPasswordUser'
+                    placeholder='Password'
+                    autoComplete='new-password'
+                    ref={confirmPasswordElement}
+                  />
+                </div>
 
-            <div className='form-outline mb-3 '>
-              <label className='form-label' htmlFor='typePhone'>
-                Numéro de téléphone
-              </label>
-              <input
-                type='number'
-                id='typePhone'
-                className='form-control form-control '
-                placeholder='téléphone'
-                autoComplete='new-phone'
-                ref={phoneElement}
-              />
-            </div>
+                <div className='form-outline '>
+                  <label className='form-label' htmlFor='typePhone'>
+                    Numéro de téléphone
+                  </label>
+                  <input
+                    type='number'
+                    id='typePhone'
+                    className='form-control form-control '
+                    placeholder='téléphone'
+                    autoComplete='new-phone'
+                    ref={phoneElement}
+                  />
+                </div>
 
-            <div className='d-flex justify-content-center mt-3'>
-              <button type='submit' className='btn btn-warning btn-block '>
-                S'inscrire
-              </button>
-            </div>
-          </form>
+                <div className='card-footer'>
+                  <button type='submit' className='btn btn-warning btn-block '>
+                    S'inscrire
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </>

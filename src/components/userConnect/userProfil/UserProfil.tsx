@@ -330,7 +330,6 @@ export const UserProfil = () => {
           >
             <div className='accordion-body'>
               <label htmlFor='typePhone'>
-                {' '}
                 <span className='info-user'> Nouveau numéro de téléphone</span>
               </label>
               <input

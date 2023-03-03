@@ -127,52 +127,57 @@ export const CardCreateMessage = ({
         )}
       </div>
 
-      <div className='select'>
-        {connectedUser?.role === 'admin' ? (
-          <select
-            className='form-select'
-            id='floatingSelect'
-            aria-label='Floating label select example'
-            onChange={handleSelect}
-            ref={userSelectElement}
-          >
-            <option value=''>Sélectionner un Utilisateur</option>
-            {users.map((user) => {
-              return (
-                <option id='floatingSelect' value={user.id} key={user.id}>
-                  {user.email}
-                </option>
-              );
-            })}
-          </select>
-        ) : (
-          <></>
-        )}
-      </div>
-      <form onSubmit={handleSubmitForm} className='form-login'>
-        <div className='form-group'>
-          <label htmlFor='message'>
-            <span
-              className='span-message'
-              style={{ color: '#2a5360', fontWeight: 'bold' }}
-            >
-              Nouveau message
-            </span>
-          </label>
-          <textarea
-            className='form-control'
-            rows={5}
-            id='message'
-            ref={bodyElement}
-          ></textarea>
-        </div>
+      <div className='card '>
+        <form onSubmit={handleSubmitForm} className='form-message'>
+          <div className='title'>
+            <label htmlFor='message'>
+              <span
+                className='span-message'
+                style={{ color: '#2a5360', fontWeight: 'bold' }}
+              >
+                Nouveau message
+              </span>
+            </label>
+          </div>
 
-        <div className='d-flex justify-content-center mt-3'>
-          <button type='submit' className='btn btn-warning '>
-            <span style={{ color: '#f3f3f3' }}>Envoyer le message</span>
-          </button>
-        </div>
-      </form>
+          {connectedUser?.role === 'admin' ? (
+            <div className='select'>
+              <select
+                className='form-select'
+                id='floatingSelect'
+                aria-label='Floating label select example'
+                onChange={handleSelect}
+                ref={userSelectElement}
+              >
+                <option value=''>Sélectionner un Utilisateur</option>
+                {users.map((user) => {
+                  return (
+                    <option id='floatingSelect' value={user.id} key={user.id}>
+                      {user.email}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          ) : (
+            <></>
+          )}
+          <div className='card-body'>
+            <textarea
+              className='form-control'
+              rows={5}
+              id='message'
+              ref={bodyElement}
+            ></textarea>
+          </div>
+
+          <div className='card-footer' style={{ display: 'grid' }}>
+            <button type='submit' className='btn btn-warning '>
+              Envoyer le message
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

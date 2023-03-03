@@ -63,6 +63,7 @@ export const Offer = () => {
     console.log(priceElement.current?.value);
 
     const title = titleElement.current?.value;
+    console.log('Valeur de title', title);
     const body = bodyElement.current?.value;
     const price = priceElement.current?.value;
 
@@ -73,6 +74,7 @@ export const Offer = () => {
     formData.append('title', title !== undefined ? title : '');
     formData.append('body', body !== undefined ? body : '');
     formData.append('price', price !== undefined ? price : '');
+    console.log('Valeur de formdata entries', formData.entries());
 
     //---------------------On envoie la requête POST au serveur pour créer une nouvelle offre---------------------------//
 
@@ -82,9 +84,16 @@ export const Offer = () => {
       data: formData,
       headers: { 'Content-Type': 'multipart/form-data' },
     })
-      .then((response: AxiosResponse) => {
+      .then((response: AxiosResponse<OfferProps>) => {
         console.log('réponse de axios', response);
-        setListCardOffers([...listCardOffers, response.data]);
+        // je veux dabord virer l'ancienne cardoffer qui a l'id du truc que j'ai modifié de mon state (filter)
+        // je veux ensuite rajouter la reponse.data dans ce nouveau tableau
+        // je mets à jour mon state avec ce nouveau tableau
+        let newListCardOffers = [...listCardOffers].filter(
+          (offer) => offer.id !== cardUpdateId
+        );
+        newListCardOffers = [response.data, ...newListCardOffers];
+        setListCardOffers([...newListCardOffers]);
       })
 
       .catch(() => {
@@ -252,7 +261,7 @@ export const Offer = () => {
               src={`http://localhost:8087/api/offer/${cardOffer.picture}`}
               className='card-img-top'
               alt={cardOffer.title}
-              style={{ padding: '0.5vh' }}
+              style={{ padding: '0.5vh', borderRadius: '3vh' }}
             />
             <div className='card-body'>
               <h5 className='card-title'>{cardOffer.title}</h5>

@@ -1,37 +1,28 @@
 .createMessage-wrapper {
+  display: grid;
+  justify-content: center;
   background-color: #f3f3f3;
-  color: #2a5360;
-  text-align: center;
   position: relative;
-
-  padding-block: 20px;
+  padding-block: 9vh;
 }
 
 .container-alert {
-  display: flex;
-  width: 100%;
-  justify-content: center;
   position: absolute;
   top: 3%;
-  right: 0;
+}
+
+.form-message {
+  border-radius: 1vh;
+  align-items: center;
 }
 
 .select {
-  padding: 7vh;
+  padding: 1vh;
 }
-
-.form-login {
-  border: #2a5360;
-  width: 100%;
-  color: #2a5360;
-  align-items: center;
-  padding-left: 3vh;
-  padding-right: 3vh;
-}
-
 .span-message {
   color: #2a5360;
   font-weight: bold;
+  padding: 1vh;
 }
 
 @media (min-width: 900px) {
@@ -39,14 +30,7 @@
     font-size: 1em;
     padding: 3vh;
   }
-  .form-login {
+  .form-message {
     margin: auto;
-  }
-  .title-create {
-    padding-top: vh;
-  }
-  .select {
-    padding-left: 30%;
-    padding-right: 30%;
   }
 }

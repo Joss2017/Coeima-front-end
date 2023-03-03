@@ -19,7 +19,7 @@ export const Admin = () => {
     axiosPrivate.get('/user').then((Response: AxiosResponse) => {
       setListUsersDisplayed(Response.data);
     });
-  }, []);
+  }, [axiosPrivate]);
 
   //---------Fonction permettant de supprimer un user en recupérant son id au button----------------//
 
@@ -48,9 +48,9 @@ export const Admin = () => {
         </div>
       )}
       <div className='container-table'>
-        <h2>Gestion des utilisateurs</h2>
-        <table className='table table-striped'>
-          <thead className='thead-dark'>
+        <h2 style={{ fontWeight: 'bold' }}>Liste utilisateurs</h2>
+        <table className='table table-bordered'>
+          <thead>
             <tr>
               <th>Email</th>
               <th> supprimer</th>
@@ -64,12 +64,13 @@ export const Admin = () => {
                   <div>
                     <button
                       type='button'
-                      className='btn btn-warning'
+                      className='btn btn-danger'
                       data-bs-toggle='modal'
                       data-bs-target='#exampleModal'
+                      style={{ color: '#f3f3f3f3' }}
                       onClick={() => deleteAccount(user.id)}
                     >
-                      confirmer
+                      <span style={{ color: '#f3f3f3' }}>confirmer</span>
                     </button>
                   </div>
                 </td>
