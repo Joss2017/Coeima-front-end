@@ -1,12 +1,14 @@
 .profil-wrapper {
+  display: flex;
+  justify-content: center;
   background-color: #f3f3f3;
   align-items: center;
   text-align: center;
   position: relative;
+  padding: 20vh;
 }
 
 .container-alert {
-  display: flex;
   width: 100%;
   justify-content: center;
   align-items: flex-end;
@@ -14,10 +16,13 @@
 }
 
 #accordion-profil {
-  display: grid;
   border: #2a5360;
   color: #2a5360;
   padding: 3vh;
+}
+
+.accordion-button {
+  color: #2a5360;
 }
 
 .accordion-button collapsed {
@@ -31,4 +36,13 @@
 .info-user {
   color: #2a5360;
   font-weight: bold;
+}
+
+@media (min-width: 900px) {
+  .profil-wrapper {
+    padding-block: 20vh;
+  }
+  .info-user {
+    font-size: 0.5em;
+  }
 }

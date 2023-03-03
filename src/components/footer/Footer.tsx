@@ -8,7 +8,7 @@ export const Footer = () => {
     <>
       <footer className='footer-container'>
         <div className='container-1'>
-          <label>Contactez-moi</label>
+          <label>Me contacter</label>
           <Link
             to='mailto:camille.joaquim.coeima@gmail.com'
             className='logo-footer'

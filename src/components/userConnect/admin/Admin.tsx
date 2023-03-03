@@ -19,7 +19,7 @@ export const Admin = () => {
     axiosPrivate.get('/user').then((Response: AxiosResponse) => {
       setListUsersDisplayed(Response.data);
     });
-  }, [axiosPrivate]);
+  }, []);
 
   //---------Fonction permettant de supprimer un user en recupérant son id au button----------------//
 
