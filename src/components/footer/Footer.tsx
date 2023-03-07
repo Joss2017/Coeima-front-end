@@ -7,10 +7,10 @@ export const Footer = () => {
   const location = useLocation();
   return (
     <>
-      {location.pathname === '/account' ? (
+      {/* {location.pathname === '/account' ? (
         <></>
-      ) : (
-        <nav className='footer   fixed-bottom' id='footer-container'>
+      ) : ( */}
+        <nav className='footer sticky-bottom' id='footer-container'>
           <div className='container-1'>
             <label className='mb-0'>Me contacter</label>
             <Link
@@ -32,7 +32,7 @@ export const Footer = () => {
             </Link>
           </div>
         </nav>
-      )}
+      {/* )} */}
     </>
   );
 };

@@ -56,7 +56,7 @@ export const Account = () => {
   );
 
   return (
-    <>
+    <div className='tabset-wrapper'>
       <div className='tabset'>
         <input type='radio' name='tabset' id='tab1' aria-controls='forum' />
         <label htmlFor='tab1'>Forum</label>
@@ -151,6 +151,6 @@ export const Account = () => {
           </section>
         </div>
       </div>
-    </>
+    </div>
   );
 };

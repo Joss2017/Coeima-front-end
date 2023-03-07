@@ -1,21 +1,28 @@
 .offer-wrapper {
   display: flex;
- 
 }
 
 .container-alert-create-offer {
   position: absolute;
+  padding: 3vh;
+  top: 45%;
+  left: 20%;
 }
 
 .container-card-offer {
   display: flex;
   justify-content: center;
   text-align: center;
-  padding-bottom: 7vh;
 }
 
 .form-control {
   text-align: center;
 }
 @media (min-width: 900px) {
+  .container-alert-create-offer {
+    position: absolute;
+    padding: 3vh;
+    top: 55%;
+    left: 40%;
+  }
 }

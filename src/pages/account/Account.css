@@ -1,3 +1,7 @@
+.tabset-wrapper {
+  height: 100vh;
+}
+
 /*
  CSS for the main interaction
 */
@@ -85,6 +89,7 @@ body {
   /* display: block; */
   text-align: center;
   background-color: #f3f3f3;
+
   max-width: 65em;
 }
 

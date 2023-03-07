@@ -2,12 +2,13 @@
   background-color: #f3f3f3;
   text-align: center;
   position: relative;
+  height: 100vh;
   padding-block: 12vh;
 }
 
 .container-alert-register {
   position: absolute;
-    top: 5%;
+  top: 5%;
   left: 15%;
 }
 .container-form-register {
@@ -37,10 +38,10 @@
   }
 
   .container-alert-register {
-  position: absolute;
+    position: absolute;
     top: 8%;
-  left: 42%;
-}
+    left: 44%;
+  }
 
   .form-label {
     font-size: 0.9em;

@@ -58,7 +58,7 @@ export const Topic = () => {
   // ------------- mettre à jour l'affichage de notre composant en fonction de la valeur de result-------//
 
   return (
-    <>
+    <div className='topic-wrapper'>
       {listCardTopics?.map((topic) => (
         <div className='container-card-topic' key={topic.id}>
           <div className='card' style={{ width: '22rem' }}>
@@ -98,6 +98,6 @@ export const Topic = () => {
       <div>
         <span>Possibilité de paiement en plusieurs fois (jusqu’à 3 fois)</span>
       </div>
-    </>
+    </div>
   );
 };
