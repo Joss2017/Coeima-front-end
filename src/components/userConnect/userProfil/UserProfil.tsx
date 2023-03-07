@@ -165,32 +165,30 @@ export const UserProfil = () => {
 
   return (
     <div className='profil-wrapper'>
-      {error || userUpdate ? (
-        <div className='container-alert  '>
-          {error !== null ? (
-            <div className='alert alert-danger' role='alert' id='alert-danger'>
-              {error}
+      <div className='container-alert-profil  '>
+        {error !== null ? (
+          <div className='alert alert-danger' role='alert' id='alert-danger'>
+            {error}
+          </div>
+        ) : (
+          userUpdate !== null && (
+            <div
+              className='alert alert-success'
+              role='alert'
+              id='alert-success'
+            >
+              {userUpdate}
             </div>
-          ) : (
-            userUpdate !== null && (
-              <div
-                className='alert alert-success'
-                role='alert'
-                id='alert-success'
-              >
-                {userUpdate}
-              </div>
-            )
-          )}
-        </div>
-      ) : null}
+          )
+        )}
+      </div>
+
       <div className='card'>
         <div className='accordion ' id='accordion-profil'>
           <div className='card-title'>
-            {' '}
             <span
               className='span-message'
-              style={{ color: '#2a5360', fontWeight: 'bold' }}
+              style={{ color: '#2a5360', fontWeight: 'bold', fontSize: '2em' }}
             >
               Mes données
             </span>

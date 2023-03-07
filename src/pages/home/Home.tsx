@@ -6,17 +6,19 @@ export const Home = () => {
     <div>
       <div className='home-wrapper'>
         <div className='container-image  '>
-          <img
-            className='picture-presentation'
-            src='assets/homeApropos.jpg'
-            alt='First slide'
-          />
+          <picture>
+            <img
+              src='assets/homeApropos.jpg'
+              className='img-fluid img-thumbnail'
+              alt='Accueil du site'
+            />
+          </picture>
         </div>
 
         <section>
           <h5>A propos de moi:</h5>
           <br />
-          <p>
+          <p className='text-lowercase'>
             Passionnée par les relations humaines et la conduite du changement,
             j’accompagne depuis de nombreuses années différents profils dans
             l’appropriation et la valorisation de leur image.
@@ -76,7 +78,7 @@ export const Home = () => {
         <section>
           <h5>Mon Parcours :</h5>
           <br />
-          <p>
+          <p className='text-lowercase'>
             <strong>J’ai eu mille vies dans une vie!</strong>
             <br /> Coach en transition professionnelle et consultante en
             communication par la Valorisation de l’Image (certifiée AFIPP),

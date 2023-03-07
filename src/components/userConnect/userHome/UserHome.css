@@ -1,5 +1,19 @@
 .container-card-topic {
   display: flex;
   justify-content: center;
-  padding-block: 10vh;
+  padding-block: 17vh;
+}
+
+.container-alert-create-topic {
+  position: absolute;
+  left: 20%;
+  padding: 2vh;
+}
+
+@media (min-width: 900px) {
+  .container-alert-create-topic {
+  position: absolute;
+  left: 33%;
+  padding: 2vh;
+}
 }

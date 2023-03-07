@@ -100,29 +100,24 @@ export const Register = () => {
   return (
     <>
       <div className='register-wrapper'>
-        {error || isUserRegistered ? (
-          <div className='container-alert '>
-            {error !== null ? (
+        <div className='container-alert-register '>
+          {error !== null ? (
+            <div className='alert alert-danger' role='alert' id='alert-danger'>
+              {error}
+            </div>
+          ) : (
+            isUserRegistered !== null && (
               <div
-                className='alert alert-danger'
+                className='alert alert-success'
                 role='alert'
-                id='alert-danger'
+                id='alert-success'
               >
-                {error}
+                {isUserRegistered}
               </div>
-            ) : (
-              isUserRegistered !== null && (
-                <div
-                  className='alert alert-success'
-                  role='alert'
-                  id='alert-success'
-                >
-                  {isUserRegistered}
-                </div>
-              )
-            )}
-          </div>
-        ) : null}
+            )
+          )}
+        </div>
+
         <div className='container-form-register'>
           <div className='card' id='card-register'>
             <form onSubmit={handleSubmitForm} className='form-register '>
@@ -137,7 +132,6 @@ export const Register = () => {
                     className='form-control '
                     id='nicknameUser'
                     placeholder='4 caractères mini'
-                    autoComplete='new nickname'
                     ref={nicknameElement}
                   />
                 </div>
@@ -150,7 +144,6 @@ export const Register = () => {
                     type='email'
                     className='form-control '
                     id='emailUser'
-                    autoComplete='new-email'
                     placeholder='name@example.com'
                     ref={emailElement}
                   />
@@ -165,7 +158,6 @@ export const Register = () => {
                     className='form-control '
                     id='passwordUser'
                     placeholder='8 caractères min 1 maj 1caract spé'
-                    autoComplete='new-password'
                     ref={passwordElement}
                   />
                 </div>
@@ -179,7 +171,6 @@ export const Register = () => {
                     className='form-control '
                     id='confirmPasswordUser'
                     placeholder='Password'
-                    autoComplete='new-password'
                     ref={confirmPasswordElement}
                   />
                 </div>
@@ -193,7 +184,6 @@ export const Register = () => {
                     id='typePhone'
                     className='form-control form-control '
                     placeholder='téléphone'
-                    autoComplete='new-phone'
                     ref={phoneElement}
                   />
                 </div>

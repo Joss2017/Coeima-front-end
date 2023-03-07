@@ -1,12 +1,12 @@
 .login-wrapper {
-  justify-content: center;
   background-color: #f3f3f3;
-  text-align: center;
-  position: relative;
+text-align: center;
 }
 
-.container-alert {
+.container-alert-login {
   position: absolute;
+  top: 15%;
+  left: 25%;
 }
 
 .container-form-login {
@@ -72,4 +72,9 @@ a,
   #card-login {
     width: 30rem;
   }
+  .container-alert-login {
+  position: absolute;
+  top: 20%;
+  left: 45%;
+}
 }

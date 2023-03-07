@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useLocation } from 'react-router-dom';
 import { Footer } from '../components/footer/Footer';
 import { Navbar } from '../components/navbar/Navbar';
 import { Account } from '../pages/account/Account';
@@ -16,11 +16,13 @@ import './App.css';
 
 export const App = () => {
   const { savedToken } = useContext(AuthContext);
+
   return (
     <>
       <div className='app-container'>
         <BrowserRouter>
           <Navbar />
+
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/offer' element={<Offer />} />

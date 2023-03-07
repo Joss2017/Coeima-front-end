@@ -78,25 +78,24 @@ export const AdminCreateOffer = () => {
 
   return (
     <>
-      {error || createdOffer ? (
-        <div className='container-alert  '>
-          {error !== null ? (
-            <div className='alert alert-danger' role='alert' id='alert-danger'>
-              {error}
+      <div className='container-alert-create-offer  '>
+        {error !== null ? (
+          <div className='alert alert-danger' role='alert' id='alert-danger'>
+            {error}
+          </div>
+        ) : (
+          createdOffer !== null && (
+            <div
+              className='alert alert-success'
+              role='alert'
+              id='alert-success'
+            >
+              {createdOffer}
             </div>
-          ) : (
-            createdOffer !== null && (
-              <div
-                className='alert alert-success'
-                role='alert'
-                id='alert-success'
-              >
-                {createdOffer}
-              </div>
-            )
-          )}
-        </div>
-      ) : null}
+          )
+        )}
+      </div>
+
       <div className='container-card-offer'>
         <div className='card' id='card-offer'>
           <form onSubmit={handleSubmitForm} className='form-offer'>

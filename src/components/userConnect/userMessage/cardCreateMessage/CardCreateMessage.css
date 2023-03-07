@@ -1,14 +1,19 @@
 .createMessage-wrapper {
-  display: grid;
+  display: flex;
   justify-content: center;
   background-color: #f3f3f3;
   position: relative;
   padding-block: 9vh;
 }
 
-.container-alert {
+.container-alert-create-message {
   position: absolute;
+  width: 80%;
   top: 3%;
+}
+
+#card-create-message {
+  width: 18rem;
 }
 
 .form-message {
@@ -26,11 +31,13 @@
 }
 
 @media (min-width: 900px) {
-  .container-alert {
-    font-size: 1em;
-    padding: 3vh;
+  .container-alert-create-message {
+    position: absolute;
+    width: 80%;
+    top: 1%;
   }
-  .form-message {
-    margin: auto;
+
+  #card-create-message {
+    width: 35rem;
   }
 }

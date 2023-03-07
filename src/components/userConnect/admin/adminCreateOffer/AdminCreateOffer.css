@@ -1,12 +1,17 @@
 .offer-wrapper {
-  display: grid;
+  display: flex;
+ 
+}
+
+.container-alert-create-offer {
+  position: absolute;
 }
 
 .container-card-offer {
-  display: grid;
+  display: flex;
   justify-content: center;
   text-align: center;
-  padding: 3vh;
+  padding-bottom: 7vh;
 }
 
 .form-control {

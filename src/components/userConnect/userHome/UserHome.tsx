@@ -16,7 +16,7 @@ export const UserHome = () => {
   const { axiosPrivate } = useAxios();
 
   //-------------------------On utilise useState pour gérer l'état du formulaire-----------------------------------//
-  const [createdTopic, setCreatedTopic] = useState<string | null>();
+  const [createdTopic, setCreatedTopic] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   //---------------Cette fonction est appelée lorsqu'un utilisateur soumet le formulaire de création d'offre-----------//
@@ -58,26 +58,21 @@ export const UserHome = () => {
   };
 
   return (
-    <>
-      {error || createdTopic ? (
-        <div className='container-alert  '>
-          {error !== null ? (
-            <div className='alert alert-danger' role='alert' id='alert-danger'>
-              {error}
-            </div>
-          ) : (
-            createdTopic !== null && (
-              <div
-                className='alert alert-success'
-                role='alert'
-                id='alert-success'
-              >
-                {createdTopic}
-              </div>
-            )
-          )}
-        </div>
-      ) : null}
+    <div className='topic-wrapper'>
+      <div className='container-alert-create-topic  '>
+        {error !== null ? (
+          <div className='alert alert-danger' role='alert' id='alert-danger'>
+            {error}
+          </div>
+        ) : createdTopic !== null ? (
+          <div className='alert alert-success' role='alert' id='alert-success'>
+            {createdTopic}
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+
       <div className='container-card-topic'>
         <div className='card' id='card-topic' style={{ width: '20rem' }}>
           <form onSubmit={handleSubmitForm} className='form-offer'>
@@ -129,6 +124,6 @@ export const UserHome = () => {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };

@@ -5,8 +5,10 @@
   padding-block: 12vh;
 }
 
-.container-alert {
+.container-alert-register {
   position: absolute;
+    top: 5%;
+  left: 15%;
 }
 .container-form-register {
   display: grid;
@@ -33,9 +35,13 @@
   #card-register {
     width: 30rem;
   }
-  .container-form-register {
-    padding-block: 8vh;
-  }
+
+  .container-alert-register {
+  position: absolute;
+    top: 8%;
+  left: 42%;
+}
+
   .form-label {
     font-size: 0.9em;
   }

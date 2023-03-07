@@ -2,14 +2,10 @@ import { AxiosResponse } from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../../../context/AuthContext';
 import { useAxios } from '../../../../hooks/Use-Axios';
-import { CardCreateMessageProps } from '../../../../interface/Message';
 import { UserTypeProps } from '../../../../interface/User';
 import './CardCreateMessage.css';
 
-export const CardCreateMessage = ({
-  setListMessages,
-  listMessages,
-}: CardCreateMessageProps) => {
+export const CardCreateMessage = () => {
   //-------------------------------------Contexte User Connecté--------------------------------------------------------//
 
   const { connectedUser } = useContext(AuthContext);
@@ -27,7 +23,7 @@ export const CardCreateMessage = ({
   //--------------------------------------Permets  de Recuperer tout les Users dans l'input select---------------------------//
 
   useEffect(() => {
-    if (connectedUser?.role === 'admin') {
+    if (connectedUser && connectedUser.role === 'admin') {
       axiosPrivate.get('/user').then((res) => {
         console.log(res.data);
         setUsers(res.data);
@@ -72,7 +68,6 @@ export const CardCreateMessage = ({
         .then((response: AxiosResponse) => {
           console.log("la réponse d'un post message", response);
           setmessageCreated('Message envoyé !');
-          setListMessages([response.data, ...listMessages]);
           setTimeout(() => {
             setmessageCreated(null);
           }, 2000);
@@ -95,7 +90,9 @@ export const CardCreateMessage = ({
         .then((response: AxiosResponse) => {
           console.log("la réponse d'un post message", response);
           setmessageCreated('Message envoyé !');
-          setListMessages([response.data, ...listMessages]);
+          setTimeout(() => {
+            setmessageCreated(null);
+          }, 2000);
         })
         .catch((error) => {
           setError(error.response.data.message);
@@ -108,7 +105,7 @@ export const CardCreateMessage = ({
 
   return (
     <div className='createMessage-wrapper'>
-      <div className='container-alert  '>
+      <div className='container-alert-create-message  '>
         {error !== null ? (
           <div className='alert alert-danger' role='alert' id='alert-danger'>
             {error}
@@ -126,7 +123,7 @@ export const CardCreateMessage = ({
         )}
       </div>
 
-      <div className='card '>
+      <div className='card' id='card-create-message'>
         <form onSubmit={handleSubmitForm} className='form-message'>
           <div className='title'>
             <label htmlFor='message'>
@@ -139,7 +136,7 @@ export const CardCreateMessage = ({
             </label>
           </div>
 
-          {connectedUser?.role === 'admin' ? (
+          {connectedUser?.role === 'admin' && (
             <div className='select'>
               <select
                 className='form-select'
@@ -158,8 +155,6 @@ export const CardCreateMessage = ({
                 })}
               </select>
             </div>
-          ) : (
-            <></>
           )}
           <div className='card-body'>
             <textarea

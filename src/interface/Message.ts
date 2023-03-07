@@ -17,8 +17,3 @@ export interface CardMessageProps {
   setListMessages: (MessageProps: MessageProps[]) => void;
 }
 //---------------------------------------Interface Message-------------------------------//
-
-export interface CardCreateMessageProps {
-  listMessages: MessageProps[];
-  setListMessages: (MessageProps: MessageProps[]) => void;
-}

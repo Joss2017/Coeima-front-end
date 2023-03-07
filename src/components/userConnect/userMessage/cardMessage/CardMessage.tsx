@@ -112,7 +112,7 @@ export const CardMessage = ({
           </div>
         </div>
       ) : (
-        <div className='row' style={{ alignItems: 'center', height: '10vh' }}>
+        <div className='row' style={{ alignItems: 'center', height: '10vh',paddingBottom:'3vh' }}>
           <div className='col-4'>
             {new Date(message.date_creation).toLocaleDateString()}
           </div>

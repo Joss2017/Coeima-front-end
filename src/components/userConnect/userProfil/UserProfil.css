@@ -1,23 +1,22 @@
 .profil-wrapper {
-  display: flex;
-  justify-content: center;
   background-color: #f3f3f3;
   align-items: center;
   text-align: center;
   position: relative;
+  padding: 3vh;
+  padding-top: 9vh;
 }
 
-.container-alert {
-  width: 100%;
-  justify-content: center;
-  align-items: flex-end;
+.container-alert-profil {
+  width: 80%;
   position: absolute;
+  top: 1%;
+  left: 12%;
 }
 
 #accordion-profil {
   border: #2a5360;
   color: #2a5360;
-  padding: 3vh;
 }
 
 .accordion-button {
@@ -39,7 +38,7 @@
 
 @media (min-width: 900px) {
   .profil-wrapper {
-    padding-block: 20vh;
+   padding-top: 12vh;
   }
   .info-user {
     font-size: 0.5em;

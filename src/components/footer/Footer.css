@@ -1,13 +1,13 @@
-.footer-container {
+#footer-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: #2a5360;
   color: #ffc519;
-  height: 8vh;
   width: 100%;
+  /* height: 8vh;
   position: fixed;
-  bottom: 0;
+  bottom: 0; */
 }
 
 .container-1 {
@@ -15,9 +15,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 1.9vh;
-  height: 12vh;
-  width: 9em;
   font-weight: bold;
 }
 
@@ -25,9 +22,12 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  width: 12vh;
-  height: 100px;
+  height: 50px;
   font-weight: lighter;
+}
+
+#container-2 {
+  font-size: 0.8em;
 }
 
 .container-3 {
@@ -35,9 +35,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 1.9vh;
-  height: 10vh;
-  width: 8em;
   font-weight: bold;
 }
 
@@ -55,23 +52,28 @@
 }
 
 @media (min-width: 768px) {
-  .footer-container {
-    height: 8vh;
-    font-size: 2em;
+  #footer-container {
+    font-size: 1.5em;
   }
 
   .container-2 {
-    margin-top: 50px;
-    height: 5vh;
+    margin-top: 1em;
+    font-size: 1em !important;
     font-weight: lighter;
+  }
+
+  #container-2 {
+    font-size: 0.5em;
   }
 
   .logo-mail {
     color: #ffc519;
-    font-size: 2.5em !important;
+    margin-bottom: 0.5vh;
+    font-size: 1.8em !important;
   }
   .logo-instagram {
     color: #ffc519;
-    font-size: 2.5em !important;
+    margin-bottom: 0.5vh;
+    font-size: 1.8em !important;
   }
 }

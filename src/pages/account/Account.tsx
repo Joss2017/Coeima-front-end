@@ -27,7 +27,9 @@ export const Account = () => {
   useEffect(() => {
     if (connectedUser?.role === 'admin') {
       axiosPrivate
-        .get(`/message`)
+        .get(`/message`, {
+          params: { receiver: { role: connectedUser?.role === 'admin' } },
+        })
         .then((response: AxiosResponse) => {
           setlistCardMessages(response.data);
         })
@@ -37,17 +39,16 @@ export const Account = () => {
     } else {
       axiosPrivate
         .get(`/message`, {
-          params: { receiver_id: connectedUser?.id },
+          params: { receiver: { id: connectedUser?.id } },
         })
         .then((response: AxiosResponse) => {
-          setlistCardMessages(response.data);
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [connectedUser?.id]);
 
   console.log(
     'Valeur de la réponse axios de la liste des messages',
@@ -97,14 +98,11 @@ export const Account = () => {
           </section>
           <section id='message' className='tab-panel'>
             <div>
-              <CardCreateMessage
-                listMessages={listCardMessages}
-                setListMessages={setlistCardMessages}
-              />
+              <CardCreateMessage />
             </div>
             <div>
               {connectedUser?.role === 'admin' ? (
-                <div className='grid pe-4'>
+                <div className='grid pe-4' id='list-message'>
                   <div className='row'>
                     <div className='col-3'>Ecrit par</div>
                     <div className='col-3'>Date</div>
@@ -122,7 +120,12 @@ export const Account = () => {
                 </div>
               ) : (
                 <div className='grid pe-3'>
-                  <div className='row'>
+                  <div
+                    className='row'
+                    style={{
+                      paddingBottom: '2vh',
+                    }}
+                  >
                     <div className='col-4'>Date</div>
                     <div className='col-4'>statut</div>
                     <div className='col-4'>Actions</div>

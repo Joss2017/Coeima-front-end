@@ -82,29 +82,24 @@ export const Login = () => {
   return (
     <>
       <div className='login-wrapper'>
-        {error || isUserLogged ? (
-          <div className='container-alert  '>
-            {error !== null ? (
+        <div className='container-alert-login  '>
+          {error !== null ? (
+            <div className='alert alert-danger' role='alert' id='alert-danger'>
+              {error}
+            </div>
+          ) : (
+            isUserLogged !== null && (
               <div
-                className='alert alert-danger'
+                className='alert alert-success'
                 role='alert'
-                id='alert-danger'
+                id='alert-success'
               >
-                {error}
+                {isUserLogged}
               </div>
-            ) : (
-              isUserLogged !== null && (
-                <div
-                  className='alert alert-success'
-                  role='alert'
-                  id='alert-success'
-                >
-                  {isUserLogged}
-                </div>
-              )
-            )}
-          </div>
-        ) : null}
+            )
+          )}
+        </div>
+
         <div className='container-form-login '>
           <div className='card' id='card-login'>
             <form onSubmit={handleSubmitForm} className='form-login'>
