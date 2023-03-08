@@ -51,7 +51,7 @@ export const UserProfil = () => {
       .patch(`/user/${connectedUser?.id}`, {
         nickname: nicknameElement.current?.value,
       })
-      .then((response: AxiosResponse) => {
+      .then((response: AxiosResponse<UserTypeProps>) => {
         console.log("Réponse de la récupération valeur d'un user", response);
         userTampon.nickname = response.data.nickname;
         setuser(userTampon);
@@ -60,11 +60,13 @@ export const UserProfil = () => {
           setuserUpdate(null);
         }, 2000);
       })
-      .catch((error) => console.log(error));
-    setError('erreur dans la mise à jour du pseudo');
-    setTimeout(() => {
-      setError(null);
-    }, 2000);
+      .catch((error) => {
+        console.log(error);
+        setError('erreur dans la mise à jour du pseudo');
+        setTimeout(() => {
+          setError(null);
+        }, 2000);
+      });
   };
 
   //--------------------------- Requête Axios Update pour mise à jour du Email  User ---------------------------------------//
@@ -89,11 +91,13 @@ export const UserProfil = () => {
           setuserUpdate(null);
         }, 2000);
       })
-      .catch((error) => console.log(error));
-    setError("erreur dans la mise à jour de l'email");
-    setTimeout(() => {
-      setError(null);
-    }, 2000);
+      .catch((error) => {
+        console.log(error);
+        setError("erreur dans la mise à jour de l'email");
+        setTimeout(() => {
+          setError(null);
+        }, 2000);
+      });
   };
   //--------------------------- Requête Axios Update pour mise à jour du Mot de Passe  User ---------------------------------------//
 
@@ -118,11 +122,13 @@ export const UserProfil = () => {
           setuserUpdate(null);
         }, 2000);
       })
-      .catch((error) => console.log(error));
-    setError('erreur dans la mise à jour du password');
-    setTimeout(() => {
-      setError(null);
-    }, 2000);
+      .catch((error) => {
+        console.log(error);
+        setError('erreur dans la mise à jour du mot de passe');
+        setTimeout(() => {
+          setError(null);
+        }, 2000);
+      });
   };
 
   //--------------------------- Requête Axios Update pour mise à jour du Téléphone  User ---------------------------------------//
@@ -147,11 +153,13 @@ export const UserProfil = () => {
           setuserUpdate(null);
         }, 2000);
       })
-      .catch((error) => console.log(error));
-    setError('erreur dans la mise à jour du téléphone');
-    setTimeout(() => {
-      setError(null);
-    }, 2000);
+      .catch((error) => {
+        console.log(error);
+        setError("erreur dans la mise à jour du téléphone");
+        setTimeout(() => {
+          setError(null);
+        }, 2000);
+      });
   };
 
   const deleteAccount = async () => {
@@ -170,16 +178,12 @@ export const UserProfil = () => {
           <div className='alert alert-danger' role='alert' id='alert-danger'>
             {error}
           </div>
+        ) : userUpdate !== null ? (
+          <div className='alert alert-success' role='alert' id='alert-success'>
+            {userUpdate}
+          </div>
         ) : (
-          userUpdate !== null && (
-            <div
-              className='alert alert-success'
-              role='alert'
-              id='alert-success'
-            >
-              {userUpdate}
-            </div>
-          )
+          <></>
         )}
       </div>
 
@@ -305,7 +309,6 @@ export const UserProfil = () => {
                   id='newPasswordUser'
                   name='newPasswordUser'
                   placeholder='Tapez votre nouveau mot de passe '
-                  autoComplete='new-password'
                   ref={newPasswordElement}
                 />
               </div>

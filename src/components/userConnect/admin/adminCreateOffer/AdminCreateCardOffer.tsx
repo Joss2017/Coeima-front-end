@@ -60,7 +60,7 @@ export const AdminCreateOffer = () => {
       .then((response: AxiosResponse) => {
         console.log('réponse de axios', response);
         //------------------------On met à jour l'état pour indiquer que l'offre a été créée avec succès--------------------//
-        setCreatedOffer('>Nouvelle offre crée !');
+        setCreatedOffer('Nouvelle offre crée !');
         //------------ On réinitialise l'état après 2 secondes pour effacer le message de confirmation----------------------//
         setTimeout(() => {
           setCreatedOffer(null);

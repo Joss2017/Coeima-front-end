@@ -2,7 +2,6 @@
   display: flex;
   background-color: #f3f3f3;
   text-align: center;
-  position: relative;
 }
 
 .container-alert-message {
@@ -18,20 +17,33 @@
 }
 
 .span {
-  font-size: 15px;
+  font-size: 11px;
   padding: 0 10px;
   color: #f3f3f3;
   background-color: #2a5360;
   border-radius: 5px;
 }
 
+#container-button {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 #button-message {
-  align-items: center;
+  font-size: 0.3vh;
   color: #f3f3f3 !important;
 }
 
 @media (min-width: 900px) {
+  #button-message {
+    font-size: 3vh;
+    color: #f3f3f3 !important;
+  }
   .span {
-    font-size: 0.9em;
+    font-size: 30px;
+    padding: 0 10px;
+    color: #f3f3f3;
+    background-color: #2a5360;
+    border-radius: 5px;
   }
 }

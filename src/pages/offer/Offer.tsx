@@ -120,9 +120,15 @@ export const Offer = () => {
         );
         setListCardOffers(newListCardOffers);
         setDeletedOffer('Offre supprimée !');
+        setTimeout(() => {
+          setDeletedOffer(null);
+        }, 2000);
       })
       .catch((error) => {
         setError('offre non supprimée');
+        setTimeout(() => {
+          setDeletedOffer(null);
+        }, 2000);
       });
   };
 
@@ -149,7 +155,7 @@ export const Offer = () => {
       ) : null}
       {listCardOffers.map((cardOffer) => (
         <div className='container' key={cardOffer.id}>
-          <div className='card' style={{ width: '15rem' }}>
+          <div className='card'>
             {/* Si l'utilisateur connecté est un admin, afficher les boutons de modification et suppression */}
             {connectedUser?.role === 'admin' && (
               <>
@@ -261,14 +267,31 @@ export const Offer = () => {
               src={`http://localhost:8087/api/offer/${cardOffer.picture}`}
               className='card-img-top'
               alt={cardOffer.title}
-              style={{ padding: '0.5vh', borderRadius: '3vh' }}
+              style={{ padding: '3vh', borderRadius: '3vh' }}
             />
             <div className='card-body'>
-              <h5 className='card-title'>{cardOffer.title}</h5>
-              <p className='card-text' style={{ fontSize: '2vh' }}>
+              <h5
+                className='card-title'
+                style={{ fontSize: '3vh', color: '#a28b57' }}
+              >
+                {cardOffer.title}
+              </h5>
+              <p
+                className='card-text'
+                style={{ fontSize: '2vh', color: '#2a5360' }}
+              >
                 {cardOffer.body}
               </p>
-              <div className='card-footer'>{cardOffer.price}</div>
+              <div
+                className='card-footer'
+                style={{
+                  fontSize: '2vh',
+                  color: '#2a5360',
+                  fontWeight: 'bold',
+                }}
+              >
+                {cardOffer.price}
+              </div>
             </div>
           </div>
         </div>

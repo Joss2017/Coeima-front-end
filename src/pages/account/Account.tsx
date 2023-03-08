@@ -42,6 +42,8 @@ export const Account = () => {
           params: { receiver: { id: connectedUser?.id } },
         })
         .then((response: AxiosResponse) => {
+          setlistCardMessages(response.data);
+
           console.log(response.data);
         })
         .catch((error) => {

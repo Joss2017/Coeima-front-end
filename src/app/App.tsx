@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import  { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
-import { BrowserRouter, useLocation } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Footer } from '../components/footer/Footer';
 import { Navbar } from '../components/navbar/Navbar';
 import { Account } from '../pages/account/Account';

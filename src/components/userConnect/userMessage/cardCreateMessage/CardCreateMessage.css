@@ -38,6 +38,7 @@
   }
 
   #card-create-message {
-    width: 35rem;
+    height: 28rem;
+    width: 60rem;
   }
 }

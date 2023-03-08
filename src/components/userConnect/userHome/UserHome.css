@@ -1,3 +1,4 @@
+
 .container-card-topic {
   display: flex;
   justify-content: center;
@@ -12,8 +13,11 @@
 
 @media (min-width: 900px) {
   .container-alert-create-topic {
-  position: absolute;
-  left: 33%;
-  padding: 2vh;
-}
+    position: relative;
+    left: 41%;
+    padding: 2vh;
+  }
+  #card-topic{
+    width: 50rem;
+  }
 }

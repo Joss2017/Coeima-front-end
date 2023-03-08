@@ -121,7 +121,7 @@ export const Register = () => {
         <div className='container-form-register'>
           <div className='card' id='card-register'>
             <form onSubmit={handleSubmitForm} className='form-register '>
-              <div className='card-title'>INSCRIPTION</div>
+              <div className='card-title ' style={{fontSize:'3vh'}}>INSCRIPTION</div>
               <div className='card-body'>
                 <div className='form-outline  '>
                   <label className='form-label' htmlFor='nicknameUser'>
@@ -157,7 +157,7 @@ export const Register = () => {
                     type='password'
                     className='form-control '
                     id='passwordUser'
-                    placeholder='8 caractères min 1 maj 1caract spé'
+                    placeholder='8 caractères MIN 1 MAJ 1caractère spécial'
                     ref={passwordElement}
                   />
                 </div>
@@ -170,7 +170,7 @@ export const Register = () => {
                     type='password'
                     className='form-control '
                     id='confirmPasswordUser'
-                    placeholder='Password'
+                    placeholder='mot de passe'
                     ref={confirmPasswordElement}
                   />
                 </div>

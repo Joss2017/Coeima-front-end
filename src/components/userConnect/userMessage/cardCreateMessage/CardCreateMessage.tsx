@@ -24,10 +24,14 @@ export const CardCreateMessage = () => {
 
   useEffect(() => {
     if (connectedUser && connectedUser.role === 'admin') {
-      axiosPrivate.get('/user').then((res) => {
-        console.log(res.data);
-        setUsers(res.data);
-      });
+      axiosPrivate
+        .get('/user')
+        .then((response: AxiosResponse<UserTypeProps[]>) => {
+          console.log(response.data);
+          let listUser = response.data;
+          let newListUser = listUser.filter((user) => user.role !== 'admin');
+          setUsers(newListUser);
+        });
     }
   }, [connectedUser?.role]);
 
@@ -39,15 +43,6 @@ export const CardCreateMessage = () => {
       userSelectElement.current?.value
     );
   };
-  //--------------------------------------Filtre pour sélectionner l'utilisateur dans le select-----------------------------//
-
-  const userSelectFiltered: UserTypeProps[] = users.filter(
-    (userSelect) => userSelect.id === userSelectElement.current?.value
-  );
-  console.log(
-    'user selectionnée dans le filtre du dropdown : ',
-    userSelectFiltered
-  );
 
   //---------Hook personnalisé qui permets de lancer la fonction à l'appel de axios private----------//
 
@@ -161,6 +156,7 @@ export const CardCreateMessage = () => {
               className='form-control'
               rows={5}
               id='message'
+              placeholder='tape ton message'
               ref={bodyElement}
             ></textarea>
           </div>

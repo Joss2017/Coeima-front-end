@@ -99,11 +99,10 @@ export const Login = () => {
             )
           )}
         </div>
-
         <div className='container-form-login '>
           <div className='card' id='card-login'>
             <form onSubmit={handleSubmitForm} className='form-login'>
-              <div className='card-header' style={{ justifyContent: 'center' }}>
+              <div className='card-header' style={{ justifyContent: 'center',fontSize:'3vh' }}>
                 <span style={{ color: '#ffc519' }}>Connecte-toi</span>
               </div>
               <div className='body'>

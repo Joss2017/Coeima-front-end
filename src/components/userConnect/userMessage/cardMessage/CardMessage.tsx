@@ -12,7 +12,7 @@ export const CardMessage = ({
   setListMessages,
   listMessages,
 }: CardMessageProps) => {
-  //--------------------------------------Contexte User Connecté--------------------------------------------------------//
+  //--------------------------------------Context User Connecté--------------------------------------------------------//
 
   const { connectedUser } = useContext(AuthContext);
 
@@ -76,7 +76,7 @@ export const CardMessage = ({
         </div>
       )}
       {connectedUser?.role === 'admin' ? (
-        <div className='row' style={{ alignItems: 'center', height: '10vh' }}>
+        <div className='row'>
           <div className='col-3'>{message.sender.nickname}</div>
           <div className='col-3'>
             {new Date(message.date_creation).toLocaleDateString()}
@@ -88,7 +88,7 @@ export const CardMessage = ({
               <span>lu</span>
             )}
           </div>
-          <div className='col-2'>
+          <div className='col-4' id='container-button'>
             <button
               type='button'
               className='btn btn-warning'
@@ -99,8 +99,7 @@ export const CardMessage = ({
             >
               <VisibilityIcon />
             </button>
-          </div>
-          <div className='col-2'>
+
             <button
               type='button'
               className='btn btn-danger'
@@ -112,7 +111,10 @@ export const CardMessage = ({
           </div>
         </div>
       ) : (
-        <div className='row' style={{ alignItems: 'center', height: '10vh',paddingBottom:'3vh' }}>
+        <div
+          className='row'
+          style={{ alignItems: 'center', height: '10vh', paddingBottom: '3vh' }}
+        >
           <div className='col-4'>
             {new Date(message.date_creation).toLocaleDateString()}
           </div>

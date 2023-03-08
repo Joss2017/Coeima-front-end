@@ -34,16 +34,16 @@
     padding-block: 15vh;
   }
   #card-register {
-    width: 30rem;
+    width: 35rem;
   }
 
   .container-alert-register {
     position: absolute;
     top: 8%;
-    left: 44%;
+    left: 45%;
   }
 
   .form-label {
-    font-size: 0.9em;
+    font-size: 0.5em;
   }
 }

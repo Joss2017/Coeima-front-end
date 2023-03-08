@@ -16,7 +16,9 @@ export const Home = () => {
         </div>
 
         <section>
-          <h5>A propos de moi:</h5>
+          <h5 style={{ fontWeight: 'bold', fontSize: '3vh' }}>
+            A propos de moi:
+          </h5>
           <br />
           <p className='text-lowercase'>
             Passionnée par les relations humaines et la conduite du changement,
@@ -76,7 +78,9 @@ export const Home = () => {
         </div>
 
         <section>
-          <h5>Mon Parcours :</h5>
+          <h5 style={{ fontWeight: 'bold', fontSize: '3vh' }}>
+            Mon Parcours :
+          </h5>
           <br />
           <p className='text-lowercase'>
             <strong>J’ai eu mille vies dans une vie!</strong>

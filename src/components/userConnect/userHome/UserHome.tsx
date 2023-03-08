@@ -58,8 +58,8 @@ export const UserHome = () => {
   };
 
   return (
-    <div className='topic-wrapper'>
-      <div className='container-alert-create-topic  '>
+    <>
+      <div className='container-alert  '>
         {error !== null ? (
           <div className='alert alert-danger' role='alert' id='alert-danger'>
             {error}
@@ -74,7 +74,7 @@ export const UserHome = () => {
       </div>
 
       <div className='container-card-topic'>
-        <div className='card' id='card-topic' style={{ width: '20rem' }}>
+        <div className='card' id='card-topic'>
           <form onSubmit={handleSubmitForm} className='form-offer'>
             <div className='card-title'>
               <span
@@ -124,6 +124,6 @@ export const UserHome = () => {
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 };

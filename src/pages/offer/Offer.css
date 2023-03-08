@@ -1,11 +1,14 @@
+.offer-wrapper {
+  display: grid;
+  flex-wrap: nowrap;
+}
+
 .container {
-  height: 100vh;
-  justify-content: center;
+  flex-wrap: wrap;
   padding: 3vh;
 }
 
 .card {
-  display: grid;
   justify-content: center;
   text-align: center;
 }
@@ -18,6 +21,7 @@
 
 @media (min-width: 900px) {
   .offer-wrapper {
+    height: 100vh;
     display: flex;
     flex-wrap: nowrap;
   }
