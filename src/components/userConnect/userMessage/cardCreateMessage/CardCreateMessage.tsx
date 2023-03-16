@@ -37,7 +37,7 @@ export const CardCreateMessage = () => {
 
   //--------------------------------------Permets  de selectionner la valeur du select---------------------------------------//
 
-  const handleSelect = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelect =  (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log(
       'handleselect : user sélectionnée : ',
       userSelectElement.current?.value
@@ -48,7 +48,7 @@ export const CardCreateMessage = () => {
 
   const { axiosPrivate } = useAxios();
 
-  const handleSubmitForm = async (e: React.FormEvent) => {
+  const handleSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
 
     console.log(bodyElement.current?.value);

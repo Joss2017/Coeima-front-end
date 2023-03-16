@@ -9,7 +9,7 @@ export const Home = () => {
           <picture>
             <img
               src='assets/homeApropos.jpg'
-              className='img-fluid img-thumbnail'
+              className='img-fluid '
               alt='Accueil du site'
             />
           </picture>
@@ -20,7 +20,7 @@ export const Home = () => {
             A propos de moi:
           </h5>
           <br />
-          <p className='text-lowercase'>
+          <p>
             Passionnée par les relations humaines et la conduite du changement,
             j’accompagne depuis de nombreuses années différents profils dans
             l’appropriation et la valorisation de leur image.
@@ -49,28 +49,16 @@ export const Home = () => {
         <div className='container-carrousel'>
           <Carousel>
             <Carousel.Item>
-              <img
-                className='d-block w-100'
-                src='assets/Material.jpg'
-                alt='First slide'
-              />
+              <img src='assets/Material.jpg' alt='First slide' />
               <Carousel.Caption></Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                className='d-block w-100'
-                src='assets/Material-2.jpg'
-                alt='Second slide'
-              />
+              <img src='assets/Material-2.jpg' alt='Second slide' />
 
               <Carousel.Caption></Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                className='d-block w-100'
-                src='assets/Material-3.jpg'
-                alt='Third slide'
-              />
+              <img src='assets/Material-3.jpg' alt='Third slide' />
 
               <Carousel.Caption></Carousel.Caption>
             </Carousel.Item>
@@ -82,7 +70,7 @@ export const Home = () => {
             Mon Parcours :
           </h5>
           <br />
-          <p className='text-lowercase'>
+          <p>
             <strong>J’ai eu mille vies dans une vie!</strong>
             <br /> Coach en transition professionnelle et consultante en
             communication par la Valorisation de l’Image (certifiée AFIPP),

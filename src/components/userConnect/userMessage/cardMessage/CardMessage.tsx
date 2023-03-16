@@ -33,7 +33,7 @@ export const CardMessage = ({
       });
   };
 
-  const handleClickRead = async () => {
+  const handleClickRead = () => {
     axiosPrivate
       .patch(`/message/${message.id}`, {
         isRead: true,
@@ -50,7 +50,7 @@ export const CardMessage = ({
 
   //--------------------------------------Permets  de supprimer le message au click----------------------------------------//
 
-  const handleClickDelete = async () => {
+  const handleClickDelete = () => {
     axiosPrivate
       .delete(`/message/${message.id}`)
       .then((response: AxiosResponse<string>) => {

@@ -74,23 +74,24 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
   //----Mise en place du useEffect + requete get  afin de ne pas perdre l'utilisateur connecté lors d'une reactualisation de la page----//
 
   useEffect(() => {
-    let userSearchId = currentUser();
-    axiosPublic
-      .get(`/user/${userSearchId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log('response*', response);
-        setUser(response.data);
-      })
-      .catch((error) => {
-        console.log('error', error.response.data.statusCode);
-        if (error.response.data.statusCode === 401) {
-          localStorage.removeItem('token');
-        }
-      });
+    if (token) {
+      let userSearchId = currentUser();
+      axiosPublic
+        .get(`/user/${userSearchId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log('response*', response);
+          setUser(response.data);
+        })
+        .catch((error) => {
+          if (error.response.data.statusCode === 401) {
+            localStorage.removeItem('token');
+          }
+        });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
   console.log('verification de user-------------', user);
@@ -103,10 +104,7 @@ export const AuthContextProvider = ({ children }: UserContextProps) => {
     savedToken: token,
     tokenTime: tokenTime,
   };
-  console.log(
-    "voici l'utilisateur connecté..........",
-    userContextValue.connectedUser
-  );
+ 
 
   //--Dans le return nous declarons quelle sera la valeur retourné a nos enfants grace a notre provider via la synthaxe suivante---- ------//
   return (
