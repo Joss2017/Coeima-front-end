@@ -37,7 +37,7 @@ export const CardCreateMessage = () => {
 
   //--------------------------------------Permets  de selectionner la valeur du select---------------------------------------//
 
-  const handleSelect =  (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log(
       'handleselect : user sélectionnée : ',
       userSelectElement.current?.value
@@ -76,10 +76,8 @@ export const CardCreateMessage = () => {
         });
     } else {
       axiosPrivate
-        //--------------------------------------Si l'utilisateur est user, il  envoyer un message à un utilisateur admin----------------//
-
-        .post('/message/', {
-          role: connectedUser?.role === 'admin',
+        //--------------------------------------Si l'utilisateur est user, il  envoie un message à un utilisateur admin----------------//
+        .post('/message/admin', {
           body: bodyElement.current?.value,
         })
         .then((response: AxiosResponse) => {

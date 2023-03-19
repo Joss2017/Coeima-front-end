@@ -19,7 +19,6 @@ export const CardMessage = ({
   //--------------------------------------useState permets de gérer message crée +chois du user est conecté ou pas------------//
 
   const [isRead, setIsRead] = useState<boolean>(message.isRead);
-  const [isDelete, setisDelete] = useState<string | null>(null);
 
   //---------Hook personnalisé qui permets de lancer la fonction à l'appel de axios private----------//
 
@@ -55,7 +54,6 @@ export const CardMessage = ({
       .delete(`/message/${message.id}`)
       .then((response: AxiosResponse<string>) => {
         console.log("la réponse d'un delete message", response);
-        setisDelete(response.data);
         let newListMessages = [...listMessages].filter(
           (messageFromList) => message.id !== messageFromList.id
         );
@@ -66,15 +64,6 @@ export const CardMessage = ({
 
   return (
     <>
-      {isDelete && (
-        <div className='container-alert  '>
-          {isDelete !== null && (
-            <div className='alert alert-success' role='alert' id='alert-danger'>
-              {isDelete}
-            </div>
-          )}
-        </div>
-      )}
       {connectedUser?.role === 'admin' ? (
         <div className='row'>
           <div className='col-3'>{message.sender.nickname}</div>
